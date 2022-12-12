@@ -8,13 +8,3 @@
   height: 15vh;
   font-size: 3vw;
 }
-.ancors {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  margin: 2rem;
-  font-size: 1rem;
-  padding: 0.5rem;
-  height: 4rem;
-  align-items: center;
-}

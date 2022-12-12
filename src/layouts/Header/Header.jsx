@@ -5,8 +5,6 @@ function Header() {
     return (
         <>
             <header className="header">
-                <div className="ancors">
-                </div>
             </header>
         </>
     )
