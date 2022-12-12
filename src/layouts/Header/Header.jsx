@@ -1,10 +1,13 @@
 import React from "react"
 import './Header.css'
+import NavbarBS from "./Navbar-BS/NavbarBS"
+
 
 function Header() {
     return (
         <>
-            <header className="header">
+            <header>
+                <NavbarBS/>
             </header>
         </>
     )

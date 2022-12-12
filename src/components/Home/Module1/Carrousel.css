@@ -1,0 +1,14 @@
+.home-module-carrousel{
+    height: 100vh;
+    width: 100%;
+    object-fit: contain;
+}
+.home-module-carrousel-image{
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    object-position: center;
+}
