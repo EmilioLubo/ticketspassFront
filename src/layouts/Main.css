@@ -1,0 +1,12 @@
+.Home{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.Div{
+    background-color: rgb(26, 26, 26);
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
