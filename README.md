@@ -1,4 +1,4 @@
-# TicketPass+! 🔖
+# TicketsPass 🔖
 
 TicketPass es una aplicación web y mobile que permite a los usuarios acceder a eventos de todo el mundo, de distintos artistas y/o compositores musicales. Entre sus funcionalidades, permite a los usuarios crear una cuenta personal. Los artistas verificados pueden crear shows y actualizarlos. Los administradores cuentan con un panel de administrador que les permite ver el flujo completo de la web, así como todos los usuarios registrados y un audit log de todos los cambios importantes realizados.
 
