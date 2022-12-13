@@ -1,7 +1,9 @@
 import artistsReducer from "./artistReducer"
+import concertsReducer from './concertsReducer';
 
 const rootReducer = {
-    artistsReducer
+    artistsReducer,
+    concerts: concertsReducer,
 }
 
 export default rootReducer
