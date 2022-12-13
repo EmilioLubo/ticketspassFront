@@ -11,25 +11,25 @@ import './Carrousel.css';
 // Export the module
 export default function M1_Carrousel() {
     return (
-            <Carousel fade>
-              <Carousel.Item className='home-module-carrousel'>
+            <Carousel fade className='sssdcontainer'>
+              <Carousel.Item className='carrousel-container'>
                 <img
-                  className=" w-100 home-module-carrousel-image"
-                  src="https://images.pagina12.com.ar/styles/focal_16_9_960x540/public/2022-10/659173-11-10-2022-a-tres-anios-de-su.jpg?itok=izbJu13_"
+                  className="home-module-carrousel "
+                  src="https://festivalvillamaria.com/imagenes/festivales-y-fiestas/cosquin-rock/banner-festival-cosquin-rock-2023-001.jpg"
                   alt="First slide"
                 />
               </Carousel.Item>
-              <Carousel.Item className='home-module-carrousel'>
+              <Carousel.Item className='carrousel-container'>
                 <img
-                  className=" w-100"
+                  className="home-module-carrousel "
                   src="https://2023-ubbidubbifestival-com.imgix.net/2022/11/314916f5-horizontal.jpg"
                   alt="Second slide"
                 />
         
               </Carousel.Item>
-              <Carousel.Item className='home-module-carrousel'>
+              <Carousel.Item className='carrousel-container'>
                 <img
-                  className=" w-100"
+                  className="home-module-carrousel"
                   src="https://umfworldwide.com/wp-content/uploads/2022/10/2023-phase-1-thumb.png"
                   alt="Third slide"
                 />

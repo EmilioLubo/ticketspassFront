@@ -4,9 +4,8 @@ import React from 'react'
 
 //Styles
 import './TopArtist.css'
-const axios = require('axios');
 
-export default function M2_TOP_ARTIST() {
+export default function TopArtist() {
     return (
         <>
             <div className='module2-artist-container'>

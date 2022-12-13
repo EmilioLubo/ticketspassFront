@@ -4,9 +4,8 @@ import React from 'react'
 
 //Styles
 import './PopularArtist.css'
-const axios = require('axios');
 
-export default function M3_POPULAR_ARTIST() {
+export default function PopularArtist() {
     return (
         <>
             <div className='module2-artist-container'>
