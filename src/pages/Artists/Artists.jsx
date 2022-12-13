@@ -5,7 +5,7 @@ import artistsActions from '../../redux/actions/artistsactions'
 
 export const Artists = () => {
 
-  let {artists} = useSelector(state => state.artistsReducer)
+  let {artists, loading} = useSelector(state => state.artistsReducer)
   let dispatch = useDispatch()
   let {getArtists} = artistsActions
 
@@ -17,9 +17,11 @@ export const Artists = () => {
   return (
     <div className='d-flex justify-content-center align-items-center gap-3 flex-wrap'>
       {
+        loading ?
+        <Spinner/> :
         artists.length > 0 ?
-        artists.map(el => <div key={el._id}><h2>{el.name}</h2><img src={el.photo} alt={el.name} width='200'/></div>):
-        <Spinner/>
+        artists.map(el => <div key={el._id}><h2>{el.name}</h2><img src={el.photo} alt={el.name} width='200'/></div>) :
+        <h2>No artist found</h2>
       }
     </div>
   )
