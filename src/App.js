@@ -1,5 +1,5 @@
 // Dependencies
-import { json, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 // Layout (Header/Footer)
 import Main from "./layouts/Main.jsx";
