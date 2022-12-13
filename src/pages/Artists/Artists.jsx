@@ -11,6 +11,7 @@ export const Artists = () => {
 
     useEffect(() => {
         dispatch(getArtists())
+        // eslint-disable-next-line
     }, [])
 
   return (
