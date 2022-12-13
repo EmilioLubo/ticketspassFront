@@ -2,8 +2,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Times New Roman', Times, serif;
 }
+
+:root {
+  --main-color: rgb(159, 0, 255);
+}
+.text-main {
+  color: var(--main-color);
+}
+.bg-main {
+  background-color: var(--main-color)
+}
+
 ::-webkit-scrollbar {
   width: 4px;
   border: 1px solid #d5d5d5;
