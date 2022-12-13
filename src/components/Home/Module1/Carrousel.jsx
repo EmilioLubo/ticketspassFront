@@ -9,7 +9,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import './Carrousel.css';
 
 // Export the module
-export default function M1_Carrousel() {
+export default function M1Carrousel() {
     return (
             <Carousel fade className='sssdcontainer'>
               <Carousel.Item className='carrousel-container'>
