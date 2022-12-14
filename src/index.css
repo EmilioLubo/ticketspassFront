@@ -6,13 +6,24 @@
 
 :root {
   --main-color: rgb(159, 0, 255);
+  --main-color-dark: hsl(277, 100%, 35%);
 }
 .text-main {
   color: var(--main-color);
 }
 .bg-main {
-  background-color: var(--main-color)
+  background: var(--main-color)
 }
+
+.btn-main {
+  background-color: var(--main-color);
+  color: white;
+}
+.btn-main:hover {
+  background-color: var(--main-color-dark);
+  color: white;
+}
+
 
 ::-webkit-scrollbar {
   width: 4px;
