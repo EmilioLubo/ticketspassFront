@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { Spinner } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import ArtistsCard from '../../components/Artists/ArtistsCard'
 import artistsActions from '../../redux/actions/artistsactions'
 
 export const Artists = () => {
@@ -15,12 +16,12 @@ export const Artists = () => {
     }, [])
 
   return (
-    <div className='d-flex justify-content-center align-items-center gap-3 flex-wrap'>
+    <div className='d-flex w-100 justify-content-around gap-3 align-items-center p-3 flex-wrap'>
       {
         loading ?
         <Spinner/> :
         artists.length > 0 ?
-        artists.map(el => <div key={el._id}><h2>{el.name}</h2><img src={el.photo} alt={el.name} width='200'/></div>) :
+        artists.map(el => <ArtistsCard key={el._id} id={el._id} name={el.name} photo={el.photo}/>) :
         <h2>No artist found</h2>
       }
     </div>
