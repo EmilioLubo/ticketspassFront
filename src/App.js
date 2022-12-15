@@ -42,9 +42,9 @@ let isLoading = async() => {
 }
 
   return (
-      <Routes>
-        {!loading && 
-        <>
+      
+    !loading && 
+      <Routes>    
         <Route element={<ProtectedRoute isAllowed={!!online && role === 'admin'} reDirect={'/'}/> }>
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="home" replace />} />
@@ -71,8 +71,6 @@ let isLoading = async() => {
           </Route>
           <Route path="concerts/:id" element={<Concert />} />
         </Route>
-        </>
-      }
       </Routes>
   );
 }
