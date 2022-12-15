@@ -20,7 +20,6 @@ const concertsReducer = createReducer(initialState, builder => {
       }
     })
     .addCase(getQuery.fulfilled, (state, action) => {
-      console.log(action);
       if (action.payload.success) {
         return { ...state, concerts: action.payload.response, name: action.payload.query.name };
       } else {

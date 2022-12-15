@@ -1,5 +1,5 @@
 // Dependencies
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 // Layout (Header/Footer)
 import Main from "./layouts/Main";
@@ -9,10 +9,10 @@ import Concerts from "./pages/Concerts/Concerts";
 import Concert from "./pages/Concert/Concert"
 import AdminLayout from "./layouts/Admin/AdminLayout/AdminLayout";
 import AdminHome from "./pages/AdminHome/AdminHome";
-import { Redirect } from "react-router-dom";
 import AdminConcerts from "./pages/AdminConcerts/AdminConcerts";
 import AdminArtists from "./pages/AdminArtists/AdminArtists";
 import AdminVenues from "./pages/Adminvenues/AdminVenues";
+import NewConcert from "./pages/NewConcert/NewConcert";
 
 // Export to Index.js
 export default function App() {
@@ -24,6 +24,7 @@ export default function App() {
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<AdminHome />}/>
           <Route path="concerts" element={<AdminConcerts />}/>
+          <Route path="concerts/new" element={<NewConcert />}/>
           <Route path="artists" element={<AdminArtists />}/>
           <Route path="venues" element={<AdminVenues />}/>
         </Route>
