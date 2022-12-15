@@ -3,7 +3,7 @@ import "./Search.css";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Search({ placeholder, onChange, defaultValue = "" }) {
+export default function Search({ placeholder, onChange, defaultValue = ''}) {
   return (
     <label className="d-flex border">
       <input

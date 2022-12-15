@@ -3,7 +3,7 @@ import React, {useRef} from 'react'
 const NewArtist = () => {
 
     const formRef = useRef()
-    const genres = ['Ambient', 'Blues', 'Country', 'Electronic', 'Funk', 'Hip hop', 'Jazz', 'Latin', 'Metal', 'Pop', 'Punk', 'R&B and Soul', 'Rap', 'Reggae', 'Reggaeton', 'Rock', 'Ska', 'Trap']
+    const genres = ['Ambient', 'Blues', 'Country', 'Electronic', 'Funk', 'Hip-hop', 'Jazz', 'Latin', 'Metal', 'Pop', 'Punk', 'R&B and Soul', 'Rap', 'Reggae', 'Reggaeton', 'Rock', 'Ska', 'Trap']
 
     let submit = () => {
 

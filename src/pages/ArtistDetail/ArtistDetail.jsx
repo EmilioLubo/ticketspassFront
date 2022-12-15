@@ -20,17 +20,19 @@ const ArtistDetail = () => {
             })
             .catch(err => {
                 setLoad(false)
-                setError(err.response.data.message)
+                err.response ?
+                setError(err.response.data.message) :
+                setError(err.message)
             })
     }, [id])
 
   return (
-    <div className='w-100 mb-2'>
+    <div className='w-100 mb-2 d-flex justify-content-center align-items-center'>
         {
             load ?
             <Spinner/> :
             artist.name ?
-            <>
+            <div>
                 <h2 className='text-center text-light bg-dark'>{artist.name}</h2>
                 <div className='d-flex flex-column flex-md-row'>
                     <div className='detail__image--container'>
@@ -42,8 +44,8 @@ const ArtistDetail = () => {
                         <a href="http://">link</a>
                     </div>
                 </div>
-            </> :
-            <h2>{error}</h2>
+            </div> :
+            <h2 className='text-center'>{error}</h2>
         }
     </div>
   )

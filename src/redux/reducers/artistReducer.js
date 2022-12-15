@@ -1,10 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
-import artistsActions from "../actions/artistsactions";
+import artistsActions from "../actions/artistsActions";
 
-const {getArtists} = artistsActions
+const {getArtists, getFilteredArtists} = artistsActions
 const initialState = {
     artists: [],
-    loading: false
+    loading: false,
+    message: ''
 }
 
 const artistsReducer = createReducer(initialState, (builder) => {
@@ -13,10 +14,19 @@ const artistsReducer = createReducer(initialState, (builder) => {
             return {...state, loading: true}
         })
         .addCase(getArtists.fulfilled, (state, action) => {
-            return {...action.payload, loading: false}
+            return {...state, ...action.payload, loading: false}
         })
         .addCase(getArtists.rejected, (state, action) => {
-            return { ...state, loading: false}
+            return { ...state, loading: false, message: action.payload.message}
+        })
+        .addCase(getFilteredArtists.pending, (state, action) => {
+            return {...state, loading: true}
+        })
+        .addCase(getFilteredArtists.fulfilled, (state, action) => {
+            return {...state, ...action.payload, loading: false}
+        })
+        .addCase(getFilteredArtists.rejected, (state, action) => {
+            return { ...state ,loading: false, message: action.payload.message}
         })
 })
 
