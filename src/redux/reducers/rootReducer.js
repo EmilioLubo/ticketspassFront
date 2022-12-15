@@ -1,7 +1,16 @@
+
+import artistsReducer from "./artistReducer"
 import concertsReducer from './concertsReducer';
+import filterArtistReducer from "./filterArtistReducer";
+import adminConcertsReducer from './adminConcertsReducer';
+import userReducers from './userReducers';
 
 const rootReducer = {
-  concerts: concertsReducer,
+    artistsReducer,
+    filterArtistReducer,
+    concerts: concertsReducer,
+    user: userReducers,
+    adminConcerts: adminConcertsReducer
 }
 
 export default rootReducer
