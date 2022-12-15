@@ -54,7 +54,7 @@ export default function AdminVenues() {
     <div>
       <Link to="/admin/venues/new">
         <Button variant="success" className="mb-4">
-          Nuevo Lugar
+          New Venue
         </Button>
       </Link>
       {loading ? (
@@ -62,7 +62,7 @@ export default function AdminVenues() {
           <Spinner className="text-center" />
         </div>
       ) : venues.length > 0 ? (
-        <AdminTable title="Lugares" collection={venues} editRoute="/admin/venues/edit/" deleteOnClick={deleteOnClick} />
+        <AdminTable title="Venues" collection={venues} editRoute="/admin/venues/edit/" deleteOnClick={deleteOnClick} />
       ) : (
         <h2 className="text-center text-main">{message}</h2>
       )}
