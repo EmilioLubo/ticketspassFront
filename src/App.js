@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 // Layout (Header/Footer)
 import Main from "./layouts/Main";
@@ -19,11 +19,13 @@ import AdminConcerts from "./pages/AdminConcerts/AdminConcerts";
 import AdminArtists from "./pages/AdminArtists/AdminArtists";
 import AdminVenues from "./pages/Adminvenues/AdminVenues";
 import NewConcert from "./pages/NewConcert/NewConcert";
+import { ProtectedRoute } from "./utils/ProtectedRoute/ProtectedRoute";
 import EditConcert from "./pages/EditConcert/EditConcert";
 
 export default function App() {
   const dispatch = useDispatch()
   const { reLogin } = userActions
+  const {online, role} = useSelector(state => state.user)
   // const { online, role } = useSelector(state => state.user)
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"))
@@ -35,26 +37,31 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Navigate to="home" replace />} />
-          <Route path="home" element={<AdminHome />}/>
-          <Route path="concerts" element={<AdminConcerts />}/>
-          <Route path="concerts/new" element={<NewConcert />}/>
-          <Route path="concerts/edit/:id" element={<EditConcert />}/>
-          <Route path="artists" element={<AdminArtists />}/>
-          <Route path="venues" element={<AdminVenues />}/>
-        </Route>  
+        <Route element={<ProtectedRoute isAllowed={!!online && role === 'admin'} reDirect={'/'}/> }>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="home" replace />} />
+              <Route path="home" element={<AdminHome />}/>
+              <Route path="concerts" element={<AdminConcerts />}/>
+              <Route path="concerts/new" element={<NewConcert />}/>
+              <Route path="concerts/edit/:id" element={<EditConcert />}/>
+              <Route path="artists" element={<AdminArtists />}/>
+              <Route path="artists/new" element={<NewArtist/>}/>
+              <Route path="venues" element={<AdminVenues />}/>
+            </Route>  
+        </Route>
         <Route path="/" element={<Main />} >
           <Route index element={<Home/>}/>
           <Route path="concerts" element={<Concerts />} />
+          <Route element={<ProtectedRoute isAllowed={!!online} reDirect={'/'}/> }>
           <Route path="cart" element={<Cart />} />
+          </Route>
           <Route path="/artists" element={<Artists/>}/>
           <Route path="/artists/:id" element={<ArtistDetail/>}/>
-          <Route path="/new-artist" element={<NewArtist/>}/>
-          <Route path="signup" element={<SignUp />} />
-          <Route path="signin" element={<SignIn />} />
+          <Route element={<ProtectedRoute isAllowed={!online} reDirect={'/'}/> }>
+            <Route path="signup" element={<SignUp />} />
+            <Route path="signin" element={<SignIn />} />
+          </Route>
           <Route path="concerts/:id" element={<Concert />} />
-          <Route path="home" element={<Home/>} />
         </Route>
       </Routes>
     </>

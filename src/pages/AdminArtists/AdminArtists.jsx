@@ -23,7 +23,7 @@ export default function AdminArtists() {
 
   return (
     <div>
-      <Link to="/admin/concerts/new">
+      <Link to="/admin/artists/new">
         <Button variant="success" className="mb-4">Nuevo Artista</Button>
       </Link>
       <AdminTable title="Artistas" collection={artists} editRoute="/admin/artists/edit/" deleteOnClick={() => {}} />

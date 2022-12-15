@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import artistsActions from "../actions/artistsactions";
+import artistsActions from "../actions/artistsActions";
 
 const {getArtists, getFilteredArtists} = artistsActions
 const initialState = {
@@ -20,7 +20,7 @@ const artistsReducer = createReducer(initialState, (builder) => {
             return { ...state, loading: false, message: action.payload.message}
         })
         .addCase(getFilteredArtists.pending, (state, action) => {
-            return {...state, loading: true}
+            return {...state, loading: false}
         })
         .addCase(getFilteredArtists.fulfilled, (state, action) => {
             return {...state, ...action.payload, loading: false}

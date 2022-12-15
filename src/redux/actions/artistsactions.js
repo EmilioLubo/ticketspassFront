@@ -33,7 +33,6 @@ const getFilteredArtists = createAsyncThunk('getFilteredArtists', async(filter) 
             message: res.data.message
         }
     } catch (error) {
-        console.log(error)
         let err
         error.response ?
         err = error.response.data.message :
