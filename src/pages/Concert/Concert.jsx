@@ -66,7 +66,7 @@ export default function Concert() {
           <p className="Concert-description">{`${concert.description}`}</p>
           <h3 className="fs-2 text-main fw-bold">{concert.type === "festival" ? "Lineup" : "Artist"}</h3>
           {concert.artists.map(artist => (
-            <p className="fs-4 mb-2">
+            <p key={artist._id} className="fs-4 mb-2">
               <FontAwesomeIcon icon={faMusic} /> {artist.name}
             </p>
           ))}
