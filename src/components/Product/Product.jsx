@@ -10,8 +10,9 @@ export default function Product(props) {
 
     function add() {
         setQuantity(quantity + 1)
-        setTotal(total + item.price)
+        setTotal(total + item.price) 
     }
+    
 
     function remove() {
         if (quantity > 1) {

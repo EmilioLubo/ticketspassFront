@@ -51,7 +51,7 @@ export default function Cart() {
                             <tbody>
                                 <tr>
                                     <td className="text-info text-center fw-semibold">Imagen</td>
-                                    <td className="text-info text-center fw-semibold">Producto</td>
+                                    <td className="text-info text-center fw-semibold">Producto</td> 
                                     <td className="text-info text-center fw-semibold">Precio Unitario</td>
                                     <td className="text-info text-center fw-semibold">Cantidad</td>
                                     <td className="text-info text-center fw-semibold">Precio Total</td>
