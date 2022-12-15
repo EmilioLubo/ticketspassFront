@@ -11,7 +11,7 @@ export default function NavbarBS() {
         <img className='navbar-logo' src={logo} alt="Logo" />
         <Navbar.Brand  href="/">TicketsPass+</Navbar.Brand>
         <Navbar.Toggle  aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse className='nav-flex0'>
+        <Navbar.Collapse className=''>
           <Nav className="me-auto nav-flex1">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/artists">Artists</Nav.Link>

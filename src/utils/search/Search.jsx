@@ -9,7 +9,7 @@ export default function Search({ placeholder, onChange, defaultValue = ''}) {
       <input
         placeholder={placeholder}
         name="search"
-        className="p-3 border-0"
+        className="p-3 mb-0 border-0"
         onChange={onChange}
         defaultValue={defaultValue}
       />

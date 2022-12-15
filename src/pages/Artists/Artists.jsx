@@ -30,10 +30,8 @@ export const Artists = () => {
     useEffect(() => {
       if(artists.length < 1 && filter.name === '' && filter.genre.length < 1){
         dispatch(getArtists())
-        console.log('aqui');
       } 
       else{
-        console.log('tambien')
         dispatch(getFilteredArtists(filter))
       }// eslint-disable-next-line
     }, [])
@@ -66,8 +64,8 @@ export const Artists = () => {
           {
             genres.length > 0 ?
             genres.map(el => 
-              <label key={el} className='d-flex align-items-center gap-1 check__label'>
-                  <input checked={filter.genre.includes(el)} onChange={checkHandler} type="checkbox" value={el}/><span>{el}</span>
+              <label key={el} className='d-flex align-items-center gap-1'>
+                  <input className='mb-0' checked={filter.genre.includes(el)} onChange={checkHandler} type="checkbox" value={el}/><span>{el}</span>
               </label>
             ) :
             <p>Cannot get genres</p>
