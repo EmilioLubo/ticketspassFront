@@ -1,0 +1,45 @@
+.nav-flex2{
+    display: flex!important;
+}
+.nav-flex1{
+    display: flex!important;
+    flex-grow: 1;
+    justify-content: flex-end!important;
+}
+.nav-btn{
+    margin-left: 10px;
+    padding: 0px;
+    padding-top:7px;
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+}
+.nav-flex0{
+    display: flex!important;
+    flex-grow: 1!important;
+    flex-direction: row;
+}
+.register{
+    margin-left: 60px;
+    padding: 0px;
+    padding-top:7px;
+}
+.login{
+    margin-left: 10px;
+    padding-top:7px;
+}
+@media screen and (max-width: 990px){
+   .register{
+    border: none!important;
+    background-color: transparent!important;
+    color: rgb(124, 124, 124)!important;
+    margin-left: -1px!important;
+    font-weight: normal!important;
+    }
+    .login{
+        margin-left: -1px!important;
+        font-weight: normal;
+        padding-left: 0px!important;
+        padding-top: 12px;
+    }
+}

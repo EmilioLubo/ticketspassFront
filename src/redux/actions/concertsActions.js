@@ -11,7 +11,7 @@ const getInitialData = createAsyncThunk("getInitialData", async data => {
       message: res.data.message,
     };
   } catch (error) {
-    let message = error.response ? error.response.data.message || error.response.data : error.messaga;
+    let message = error.response ? error.response.data.message || error.response.data : error.message;
     return { success: false, message };
   }
 });
@@ -25,14 +25,14 @@ const getQuery = createAsyncThunk("getQuery", async data => {
       message: res.data.message,
     };
   } catch (error) {
-    let message = error.response ? error.response.data.message || error.response.data : error.messaga;
+    let message = error.response ? error.response.data.message || error.response.data : error.message;
     return { success: false, message, query: data.query.params };
   }
 });
 
 const concertsActions = {
   getInitialData,
-  getQuery
+  getQuery,
 };
 
 export default concertsActions;
