@@ -33,7 +33,7 @@ export default function Concerts() {
       ) : concerts.length > 0 ? (
         <Row xs={1} md={2} xl={3}>
           {concerts.map(concert => (
-            <Col key={concert._id}>
+            <Col key={concert._id} className="mb-5">
               <ConcertCard concert={concert} />
             </Col>
           ))}

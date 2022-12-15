@@ -1,0 +1,39 @@
+.formSign{
+    display: flex;
+    background-color: rgb(39, 39, 39);
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.form-shadows-content{
+    box-shadow: 4px 0px 9px rgb(112, 2, 137);
+}
+.form-bodySign{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(220, 220, 220);
+    min-width: 300px;
+    min-height: 300px;
+    border-bottom: 4px solid rgb(119, 3, 178);
+}
+.form-title-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(75, 0, 95);
+    width: 300px;
+    height: 100%;
+    border-bottom: 4px solid rgb(119, 3, 178);
+
+}
+.title2Sign{
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(167, 53, 255);
+    text-shadow: 6px 2px 6px rgb(0, 0, 0);
+    font-weight: bold;
+}

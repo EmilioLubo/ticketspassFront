@@ -1,37 +1,42 @@
 // Imports
 import Card from 'react-bootstrap/Card';
 import React from 'react'
+import { BASE_URL } from '../../../api/url';
+import { useEffect, useState } from 'react';
 
 //Styles
 import './PopularArtist.css'
 
 export default function PopularArtist() {
+    const [data, setData] = useState([])
+    useEffect(() => {
+        getConcerts()
+    }, [])
+    async function getConcerts() {
+        const response = await fetch(`${BASE_URL}/api/concerts`)
+        const data = await response.json()
+        console.log(data)
+        // Here you can manage the total of artists you want to show - BB
+        const artists = data.response.slice(0, 7)
+        // Avoid promise setting a state after component unmount - BB
+        setData(artists)
+    }
     return (
         <>
             <div className='module2-artist-container'>
-                <h2 className='module2-h2'>Most Popular artists</h2>
+                <h2 className='module2-h2'>Incoming Concerts</h2>
                 <div className='module2-cards-artist'>
-                    {/* CARD 1 */}
-                    <Card className="bg-dark text-white module2-cards">
-                        <Card.Img className='module2-cards-image' src="https://i.pinimg.com/550x/f9/f3/77/f9f377dcc36e7da2677a807e1f8802ba.jpg" alt="Card image" />
-                        <Card.ImgOverlay className='module2-cards-overlay'>
-                            <Card.Text className='module2-cards-text'>Coldplay</Card.Text>
-                        </Card.ImgOverlay>
-                    </Card>
-                    {/* CARD 2 */}
-                    <Card className="bg-dark text-white module2-cards">
-                        <Card.Img className='module2-cards-image' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVDHBqZpasvidmQlcGEm9tp67jiNglciahlL7xvPtQdGVahHCXMqjdB2HJej4Du-gxzDc&usqp=CAU" alt="Card image" />
-                        <Card.ImgOverlay className='module2-cards-overlay'>
-                            <Card.Text className='module2-cards-text'>Rihanna</Card.Text>
-                        </Card.ImgOverlay>
-                    </Card>
-                    {/* CARD 3 */}
-                    <Card className="bg-dark text-white module2-cards">
-                        <Card.Img className='module2-cards-image' src="https://c-fa.cdn.smule.com/rs-s40/arr/4e/6b/1b42344c-74cf-42e0-946b-c07a8bd22c71.jpg" alt="Card image" />
-                        <Card.ImgOverlay className='module2-cards-overlay'>
-                            <Card.Text className='module2-cards-text'>Drake</Card.Text>
-                        </Card.ImgOverlay>
-                    </Card>
+                    {data.map((concerts) => {
+                        return (
+                            <Card className="bg-dark text-white module2-cards">
+                                <Card.Img className='module2-cards-image' src={concerts.photo} alt="Card image" />
+                                <Card.ImgOverlay className='module2-cards-overlay'>
+                                    <Card.Text className='module2-cards-text'>{concerts.name}</Card.Text>
+                                </Card.ImgOverlay>
+                            </Card>
+                        )
+                    }
+                        )}
                     {/* BTN & REDIRECT */}
                     <div className='module2-btn-artist'>
                         <button className='module2-btn-artist-text'>See More</button>

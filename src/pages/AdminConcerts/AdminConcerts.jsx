@@ -1,32 +1,42 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { BASE_URL } from "../../api/url";
 import AdminTable from "../../utils/AdminTable/AdminTable";
+import adminConcertsActions from "../../redux/actions/adminConcertsActions";
 import "./AdminConcerts.css";
+import { Spinner } from "react-bootstrap";
 
 export default function AdminConcerts() {
-  const [concerts, setConcerts] = useState([]);
-  useEffect(() => {
-    getConcerts();
-  }, []);
+  const dispatch = useDispatch();
+  const { getInitialData } = adminConcertsActions;
+  const { concerts, message, loading } = useSelector(store => store.adminConcerts);
 
-  const getConcerts = async () => {
-    try {
-      let res = await axios.get(`${BASE_URL}/api/concerts`);
-      setConcerts(res.data.response);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  useEffect(() => {
+    dispatch(getInitialData());
+  }, []);
 
   return (
     <div>
       <Link to="/admin/concerts/new">
-        <Button variant="success" className="mb-4">Nuevo Concierto</Button>
+        <Button variant="success" className="mb-4">
+          Nuevo Concierto
+        </Button>
       </Link>
-      <AdminTable title="Conciertos" collection={concerts} editRoute="/admin/concerts/edit/" deleteOnClick={() => {}} />
+      {loading ? (
+        <div className="d-flex justify-content-center">
+          <Spinner className="text-center" />
+        </div>
+      ) : concerts.length > 0 ? (
+        <AdminTable
+          title="Conciertos"
+          collection={concerts}
+          editRoute="/admin/concerts/edit/"
+          deleteOnClick={() => {}}
+        />
+      ) : (
+        <h2 className="text-center text-main">{message}</h2>
+      )}
     </div>
   );
 }
