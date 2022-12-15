@@ -8,17 +8,11 @@ function Footer() {
         <footer className="footer">
             <div className="columns-footer">
             <div className="footer-col-1">
-            <h3>TicketsPass+</h3>
-                <ul className="footer-ul">
-                    <li className="footer-li">Item 1</li>
-                    <li className="footer-li">Item 2</li>
-                    <li className="footer-li">Item 3</li>
-                    <li className="footer-li">Item 4</li>
-                    <li className="footer-li">Item 5</li>
-                </ul>
+            <h3 className="footer-title-navg">About Us</h3>
+                <p className="footer-about-us">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ipsam, fugit ducimus totam in iste explicabo temporibus tempore deserunt nam minus itaque quisquam, necessitatibus error. Soluta dolorem libero eaque laborum.</p>
             </div>
             <div className="footer-col-2">
-                <h3>Support</h3>
+                <h3  className="footer-title-navg">Support</h3>
                 <ul className="footer-ul">
                     <li className="footer-li">Help & FAQ</li>
                     <li className="footer-li">Terms of Use</li>
@@ -28,7 +22,7 @@ function Footer() {
                 </ul>
             </div>
             <div className="footer-col-3">
-            <h3>Languages</h3>
+            <h3  className="footer-title-navg">Languages</h3>
                 <ul className="footer-ul">
                     <li className="footer-li">English</li>
                     <li className="footer-li">Spanish</li>
@@ -37,7 +31,7 @@ function Footer() {
             </div>
             <hr className="hr-footer-color-grey" />
             <div className="footer-second-line">
-        <h2>Find us on</h2>
+        <h2 className="other-titles-footer">Find us on</h2>
         <div className="container-btns-footer">
             <button className="footer-social-btns">
             <SocialIcon className="icon-social" network="youtube" bgColor="#9F00FF" fgColor="#ffffff" />
@@ -61,7 +55,7 @@ function Footer() {
             </button>
         </div>
         <hr className="hr-footer-color-grey" />
-            <h2>Our Sponsors</h2>
+            <h2  className="other-titles-footer">Our Sponsors</h2>
         <div className="container-btns-footer">
             <button className="sponsor-btn-footer"><img className="img-footer" src="https://images.squarespace-cdn.com/content/v1/53cebe13e4b0e8c9c90dd5b7/1574468994977-2DGLV7NCTGFNZ5OV281T/CMA_Foundation_NoTag_1C_Black-2.png?format=1000w" alt="" /></button>
             <button className="sponsor-btn-footer"><img className="img-footer" src="https://images.squarespace-cdn.com/content/v1/57e008179de4bbf2fdde01ef/1614449418283-98ISATZNMX51YD3D5KSK/BT-ROCmusic-transparent-logo+%283%29.png?format=1500w" alt="" /></button>
