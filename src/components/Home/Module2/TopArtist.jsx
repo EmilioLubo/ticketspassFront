@@ -5,8 +5,10 @@ import {BASE_URL} from '../../../api/url'
 import { useState } from 'react';
 //Styles
 import './TopArtist.css'
+import { useNavigate } from 'react-router';
 
 export default function TopArtist() {
+    const navigate = useNavigate()
     const [data, setData] = useState([])
     useEffect(() => {
         getArtist()
@@ -38,7 +40,7 @@ export default function TopArtist() {
                     )}
                     {/* BTN & REDIRECT */}
                     <div className='module2-btn-artist'>
-                        <button className='module2-btn-artist-text'>See More</button>
+                        <button className='module2-btn-artist-text' onClick={e=> navigate('/artists')}>See More</button>
                     </div>
                 </div>
             </div>
