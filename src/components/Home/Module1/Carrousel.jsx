@@ -18,7 +18,6 @@ export default function M1Carrousel() {
   async function getConcerts() {
       const response = await fetch(`${BASE_URL}/api/concerts`)
       const data = await response.json()
-      console.log(data)
       // Here you can manage the total of artists you want to show - BB
       const concerts = data.response.slice(0, 10)
       // Avoid promise setting a state after component unmount - BB
@@ -28,7 +27,7 @@ export default function M1Carrousel() {
             <Carousel fade className='sssdcontainer'>
               {data.map((concerts) => {
                 return (
-                  <Carousel.Item className='carrousel-container'>
+                  <Carousel.Item key={concerts._id} className='carrousel-container'>
                     <img
                       className="home-module-carrousel"
                       src={concerts.photo}
