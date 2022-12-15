@@ -21,6 +21,8 @@ import AdminVenues from "./pages/Adminvenues/AdminVenues";
 import NewConcert from "./pages/NewConcert/NewConcert";
 import { ProtectedRoute } from "./utils/ProtectedRoute/ProtectedRoute";
 import EditConcert from "./pages/EditConcert/EditConcert";
+import NewVenue from "./pages/NewVenue/NewVenue";
+import EditVenue from "./pages/EditVenue/EditVenue";
 
 export default function App() {
   const dispatch = useDispatch()
@@ -55,6 +57,8 @@ let isLoading = async() => {
               <Route path="artists" element={<AdminArtists />}/>
               <Route path="artists/new" element={<NewArtist/>}/>
               <Route path="venues" element={<AdminVenues />}/>
+              <Route path="venues/new" element={<NewVenue />}/>
+              <Route path="venues/edit/:id" element={<EditVenue />}/>
             </Route>  
         </Route>
         <Route path="/" element={<Main />} >
