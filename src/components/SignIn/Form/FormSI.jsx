@@ -51,8 +51,7 @@ export default function Form() {
             }else{
                 Swal.fire({
                     icon: "error",
-                    title: error,
-                    // title: error.response.data.message,
+                    title: "Wrong email or password.",
                     showConfirmButton: true,
                 });
             }
@@ -85,7 +84,7 @@ export default function Form() {
                         required
                     />
                     <div className="submitSign">
-                        <input onClick={saveData} className="submit2Sign" type='button' value='Register' />
+                        <input onClick={saveData} className="submit2Sign" type='button' value='Login' />
                     </div>
                 </div>
                 </div>

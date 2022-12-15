@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './favicon.ico'
 import './NavbarBS.css'
+import { Link } from 'react-router-dom';
 export default function NavbarBS() {
   return (
     <Navbar bg="light" expand="lg" >
@@ -13,11 +14,11 @@ export default function NavbarBS() {
         <Navbar.Toggle  aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className=''>
           <Nav className="me-auto nav-flex1">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/artists">Artists</Nav.Link>
-            <Nav.Link href="#link">Buy</Nav.Link>
-            <Nav.Link className='register' href="signup">Sign Up</Nav.Link>
-            <Nav.Link className='login' href="signin">Sign In</Nav.Link>
+            <Link className='nav-btn' to="/">Home</Link>
+            <Link className='nav-btn' to="/artists">Artists</Link>
+            <Link className='nav-btn' to="#link">Buy</Link>
+            <Link className='register nav-btn' to="signup">Sign Up</Link>
+            <Link className='login nav-btn' to="signin">Sign In</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
