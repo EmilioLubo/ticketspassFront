@@ -6,6 +6,7 @@ import Main from "./layouts/Main";
 import { Artists } from "./pages/Artists/Artists.jsx";
 import Home from './pages/Home/Home'
 import Concerts from "./pages/Concerts/Concerts";
+import Cart from "./pages/Cart/Cart";
 import ArtistDetail from "./pages/ArtistDetail/ArtistDetail";
 import NewArtist from "./pages/NewArtist/NewArtist";
 import SignUp from "./pages/SignUp/SignUp";
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/" element={<Main />} >
           <Route index element={<Home/>}/>
           <Route path="concerts" element={<Concerts />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="/artists" element={<Artists/>}/>
           <Route path="/artists/:id" element={<ArtistDetail/>}/>
           <Route path="/new-artist" element={<NewArtist/>}/>
