@@ -40,35 +40,36 @@ function Footer() {
         <h2>Find us on</h2>
         <div className="container-btns-footer">
             <button className="footer-social-btns">
-            <SocialIcon network="youtube" bgColor="#9F00FF" fgColor="#ffffff" />
+            <SocialIcon className="icon-social" network="youtube" bgColor="#9F00FF" fgColor="#ffffff" />
                 <h4 className="footer-social-text">Youtube</h4>
             </button>
             <button className="footer-social-btns">
-            <SocialIcon network="instagram" bgColor="#9F00FF" fgColor="#ffffff"  />
+            <SocialIcon  className="icon-social" network="instagram" bgColor="#9F00FF" fgColor="#ffffff"  />
             <h4 className="footer-social-text">Instagram</h4>
             </button>
             <button className="footer-social-btns">
-            <SocialIcon network="tiktok" bgColor="#9F00FF"  fgColor="#ffffff" />
+            <SocialIcon className="icon-social"  network="tiktok" bgColor="#9F00FF"  fgColor="#ffffff" />
             <h4 className="footer-social-text">TikTok</h4>
             </button>
             <button className="footer-social-btns">
-            <SocialIcon network="twitter" bgColor="#9F00FF" fgColor="#ffffff"  />
+            <SocialIcon className="icon-social"  network="twitter" bgColor="#9F00FF" fgColor="#ffffff"  />
             <h4 className="footer-social-text">Twitter</h4>
             </button>
             <button className="footer-social-btns">
-            <SocialIcon network="facebook" bgColor="#9F00FF" fgColor="#ffffff"  />
+            <SocialIcon className="icon-social"  network="facebook" bgColor="#9F00FF" fgColor="#ffffff"  />
             <h4 className="footer-social-text">Facebook</h4>
             </button>
         </div>
-    
+        <hr className="hr-footer-color-grey" />
+            <h2>Our Sponsors</h2>
         <div className="container-btns-footer">
-            <button className="sponsor-btn-footer">Sponsor 1</button>
-            <button className="sponsor-btn-footer">Sponsor 2</button>
-            <button className="sponsor-btn-footer">Sponsor 3</button>
+            <button className="sponsor-btn-footer"><img className="img-footer" src="https://images.squarespace-cdn.com/content/v1/53cebe13e4b0e8c9c90dd5b7/1574468994977-2DGLV7NCTGFNZ5OV281T/CMA_Foundation_NoTag_1C_Black-2.png?format=1000w" alt="" /></button>
+            <button className="sponsor-btn-footer"><img className="img-footer" src="https://images.squarespace-cdn.com/content/v1/57e008179de4bbf2fdde01ef/1614449418283-98ISATZNMX51YD3D5KSK/BT-ROCmusic-transparent-logo+%283%29.png?format=1500w" alt="" /></button>
+            <button className="sponsor-btn-footer"><img className="img-footer" src="https://miro.medium.com/max/1400/1*2FPJiUKoNB55CQV1Pu_iYQ.png" alt="" /></button>
         </div>
         <hr className="hr-footer-color-grey" />
         <div>
-            <h4 className="footer-text">© 2021 TicketsPass+. All rights reserved.</h4>
+            <h4 className="footer-text">© 2022 TicketsPass+. All rights reserved.</h4>
         </div>
             </div>
         </footer>
