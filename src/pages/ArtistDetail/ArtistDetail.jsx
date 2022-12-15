@@ -6,12 +6,10 @@ import  {Spinner} from 'react-bootstrap'
 import './ArtistDetail.css'
 
 const ArtistDetail = () => {
-
     let {id} = useParams()
     let [artist, setArtist] = useState({})
     let [load, setLoad] = useState(true)
     let [error, setError] = useState('')
-
     useEffect(() => {
         axios.get(`${BASE_URL}/api/artists/${id}`)
             .then(res => {
@@ -25,7 +23,6 @@ const ArtistDetail = () => {
                 setError(err.message)
             })
     }, [id])
-
   return (
     <div className='w-100 mb-2 d-flex justify-content-center align-items-center'>
         {

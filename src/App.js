@@ -6,6 +6,7 @@ import Main from "./layouts/Main";
 import { Artists } from "./pages/Artists/Artists.jsx";
 import Home from './pages/Home/Home'
 import Concerts from "./pages/Concerts/Concerts";
+import Cart from "./pages/Cart/Cart";
 import ArtistDetail from "./pages/ArtistDetail/ArtistDetail";
 import NewArtist from "./pages/NewArtist/NewArtist";
 import SignUp from "./pages/SignUp/SignUp";
@@ -19,6 +20,7 @@ import AdminArtists from "./pages/AdminArtists/AdminArtists";
 import AdminVenues from "./pages/Adminvenues/AdminVenues";
 import NewConcert from "./pages/NewConcert/NewConcert";
 import { ProtectedRoute } from "./utils/ProtectedRoute/ProtectedRoute";
+import EditConcert from "./pages/EditConcert/EditConcert";
 
 export default function App() {
   const dispatch = useDispatch()
@@ -41,6 +43,7 @@ export default function App() {
               <Route path="home" element={<AdminHome />}/>
               <Route path="concerts" element={<AdminConcerts />}/>
               <Route path="concerts/new" element={<NewConcert />}/>
+              <Route path="concerts/edit/:id" element={<EditConcert />}/>
               <Route path="artists" element={<AdminArtists />}/>
               <Route path="artists/new" element={<NewArtist/>}/>
               <Route path="venues" element={<AdminVenues />}/>
@@ -49,6 +52,9 @@ export default function App() {
         <Route path="/" element={<Main />} >
           <Route index element={<Home/>}/>
           <Route path="concerts" element={<Concerts />} />
+          <Route element={<ProtectedRoute isAllowed={!!online} reDirect={'/'}/> }>
+          <Route path="cart" element={<Cart />} />
+          </Route>
           <Route path="/artists" element={<Artists/>}/>
           <Route path="/artists/:id" element={<ArtistDetail/>}/>
           <Route element={<ProtectedRoute isAllowed={!online} reDirect={'/'}/> }>
@@ -56,7 +62,6 @@ export default function App() {
             <Route path="signin" element={<SignIn />} />
           </Route>
           <Route path="concerts/:id" element={<Concert />} />
-          {/* <Route path="home" element={<Home/>} /> */}
         </Route>
       </Routes>
     </>
