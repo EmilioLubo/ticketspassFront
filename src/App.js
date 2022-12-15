@@ -1,5 +1,7 @@
 // Dependencies
 import { Navigate, Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 // Layout (Header/Footer)
 import Main from "./layouts/Main";
@@ -9,8 +11,6 @@ import Concerts from "./pages/Concerts/Concerts";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./components/SignIn/Form/FormSI";
 import userActions from "./redux/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import Concert from "./pages/Concert/Concert"
 import AdminLayout from "./layouts/Admin/AdminLayout/AdminLayout";
 import AdminHome from "./pages/AdminHome/AdminHome";
@@ -23,7 +23,7 @@ import NewConcert from "./pages/NewConcert/NewConcert";
 export default function App() {
   const dispatch = useDispatch()
   const { reLogin } = userActions
-  const { online, role } = useSelector(state => state.user)
+  // const { online, role } = useSelector(state => state.user)
   const token = JSON.parse(localStorage.getItem("token"))
   useEffect(() => {
       if (token) {
@@ -48,6 +48,7 @@ export default function App() {
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="concerts/:id" element={<Concert />} />
+          <Route path="home" element={<Home/>} />
         </Route>
       </Routes>
     </>

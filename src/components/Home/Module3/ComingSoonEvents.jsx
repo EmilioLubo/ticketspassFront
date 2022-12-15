@@ -5,9 +5,11 @@ import { BASE_URL } from '../../../api/url';
 import { useEffect, useState } from 'react';
 
 //Styles
-import './PopularArtist.css'
+import './ComingSoonEvents.css'
+import { useNavigate } from 'react-router';
 
-export default function PopularArtist() {
+export default function ComingSoonEvents() {
+    const navigate = useNavigate()
     const [data, setData] = useState([])
     useEffect(() => {
         getConcerts()
@@ -39,7 +41,7 @@ export default function PopularArtist() {
                         )}
                     {/* BTN & REDIRECT */}
                     <div className='module2-btn-artist'>
-                        <button className='module2-btn-artist-text'>See More</button>
+                        <button className='module2-btn-artist-text' onClick={e=> navigate('/concerts')}>See More</button>
                     </div>
                 </div>
             </div>

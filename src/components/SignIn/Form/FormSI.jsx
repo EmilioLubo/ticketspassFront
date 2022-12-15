@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
 import Swal from 'sweetalert2';
-import axios from 'axios'
-import {BASE_URL} from '../../../api/url'
 import '../../SignUp/Form/Form.css'
 import { useDispatch } from 'react-redux'
 import userActions from "../../../redux/actions/userActions";
