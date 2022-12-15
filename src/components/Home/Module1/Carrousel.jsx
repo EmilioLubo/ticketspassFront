@@ -6,6 +6,7 @@ import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import { BASE_URL } from '../../../api/url';
+import { Link } from 'react-router-dom';
 // Styles
 import './Carrousel.css';
 
@@ -33,6 +34,7 @@ export default function M1Carrousel() {
                       src={concerts.photo}
                       alt={concerts.name}
                     />
+              <Link to={`/concerts/${concerts._id}`} className="stretched-link"></Link>
        
                   </Carousel.Item>
                 )

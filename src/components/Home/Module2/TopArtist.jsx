@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import React, { useEffect } from 'react'
 import {BASE_URL} from '../../../api/url'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 //Styles
 import './TopArtist.css'
 import { useNavigate } from 'react-router';
@@ -29,11 +30,15 @@ export default function TopArtist() {
                     {/* CARD 1 */}
                     {data.map((artist) => {
                         return (
+                            
                             <Card key={artist._id} className="bg-dark text-white module2-cards">
+                                 <Link to={`/artists/${artist._id}`} className="stretched-link">
+
                                 <Card.Img className='module2-cards-image' src={artist.photo} alt="Card image" />
                                 <Card.ImgOverlay className='module2-cards-overlay'>
                                     <Card.Text className='module2-cards-text'>{artist.name}</Card.Text>
                                 </Card.ImgOverlay>
+                                 </Link>
                             </Card>
                         )
                     }

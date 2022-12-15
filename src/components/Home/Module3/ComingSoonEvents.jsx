@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import React from 'react'
 import { BASE_URL } from '../../../api/url';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 //Styles
 import './ComingSoonEvents.css'
@@ -30,10 +31,12 @@ export default function ComingSoonEvents() {
                     {data.map((concerts) => {
                         return (
                             <Card key={concerts._id} className="bg-dark text-white module2-cards">
+                                 <Link to={`/concerts/${concerts._id}`} className="stretched-link">
                                 <Card.Img className='module2-cards-image' src={concerts.photo} alt="Card image" />
                                 <Card.ImgOverlay className='module2-cards-overlay'>
                                     <Card.Text className='module2-cards-text'>{concerts.name}</Card.Text>
                                 </Card.ImgOverlay>
+                                 </Link>
                             </Card>
                         )
                     }

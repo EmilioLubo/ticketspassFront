@@ -4,12 +4,9 @@ import './ArtistsCard.css'
 import {useNavigate} from 'react-router-dom'
 
 const ArtistsCard = ({id, name, photo}) => {
-
     let navigate = useNavigate()
     let imgRef = useRef(null)
     let textRef = useRef(null)
-
-
   return (
     <Card 
         className='artist__card'
