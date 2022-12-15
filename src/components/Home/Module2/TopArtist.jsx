@@ -29,7 +29,7 @@ export default function TopArtist() {
                     {/* CARD 1 */}
                     {data.map((artist) => {
                         return (
-                            <Card className="bg-dark text-white module2-cards">
+                            <Card key={artist._id} className="bg-dark text-white module2-cards">
                                 <Card.Img className='module2-cards-image' src={artist.photo} alt="Card image" />
                                 <Card.ImgOverlay className='module2-cards-overlay'>
                                     <Card.Text className='module2-cards-text'>{artist.name}</Card.Text>

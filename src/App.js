@@ -23,8 +23,8 @@ export default function App() {
   const dispatch = useDispatch()
   const { reLogin } = userActions
   // const { online, role } = useSelector(state => state.user)
-  const token = JSON.parse(localStorage.getItem("token"))
   useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"))
       if (token) {
           dispatch(reLogin(token.token.user))
       }

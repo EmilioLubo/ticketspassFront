@@ -17,7 +17,6 @@ export default function ComingSoonEvents() {
     async function getConcerts() {
         const response = await fetch(`${BASE_URL}/api/concerts`)
         const data = await response.json()
-        console.log(data)
         // Here you can manage the total of artists you want to show - BB
         const artists = data.response.slice(0, 7)
         // Avoid promise setting a state after component unmount - BB
@@ -30,7 +29,7 @@ export default function ComingSoonEvents() {
                 <div className='module2-cards-artist'>
                     {data.map((concerts) => {
                         return (
-                            <Card className="bg-dark text-white module2-cards">
+                            <Card key={concerts._id} className="bg-dark text-white module2-cards">
                                 <Card.Img className='module2-cards-image' src={concerts.photo} alt="Card image" />
                                 <Card.ImgOverlay className='module2-cards-overlay'>
                                     <Card.Text className='module2-cards-text'>{concerts.name}</Card.Text>
