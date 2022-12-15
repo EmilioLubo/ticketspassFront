@@ -19,7 +19,7 @@ export default function AdminTable({ editRoute, deleteOnClick, title, collection
       <tbody>
         {collection.map(document => {
           return (
-            <tr>
+            <tr key={document._id}>
               <td>{document.name}</td>
               <td className="AdminTable-buttonContainer">
                 <Button
