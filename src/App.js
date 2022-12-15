@@ -19,6 +19,7 @@ import AdminConcerts from "./pages/AdminConcerts/AdminConcerts";
 import AdminArtists from "./pages/AdminArtists/AdminArtists";
 import AdminVenues from "./pages/Adminvenues/AdminVenues";
 import NewConcert from "./pages/NewConcert/NewConcert";
+import EditConcert from "./pages/EditConcert/EditConcert";
 
 export default function App() {
   const dispatch = useDispatch()
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="home" element={<AdminHome />}/>
           <Route path="concerts" element={<AdminConcerts />}/>
           <Route path="concerts/new" element={<NewConcert />}/>
+          <Route path="concerts/edit/:id" element={<EditConcert />}/>
           <Route path="artists" element={<AdminArtists />}/>
           <Route path="venues" element={<AdminVenues />}/>
         </Route>  
