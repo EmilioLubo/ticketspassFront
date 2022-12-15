@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ConcertCard from "../../components/Concerts/ConcertCard/ConcertCard";
 import concertsActions from "../../redux/actions/concertsActions";
 import Search from "../../utils/search/Search";
-import "./Concerts.css";
+import "./concerts.css";
 
 export default function Concerts() {
   const dispatch = useDispatch();

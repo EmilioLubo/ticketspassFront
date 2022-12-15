@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import artistsActions from "../actions/artistsactions";
+import artistsActions from "../actions/artistsActions";
 
 const {getArtists, getFilteredArtists} = artistsActions
 const initialState = {
