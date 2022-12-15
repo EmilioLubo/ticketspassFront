@@ -20,8 +20,8 @@ export default function Form() {
             password: passwordRef.current.value,
         }
         try {
-            let response = await dispatch(login(userValue))
-            let res = response.payload.res
+            let response = await dispatch(login(userValue)).unwrap()
+            let res = response.res
             if (res.success) {
                 Swal.fire({
                     title: res.message,
@@ -32,7 +32,6 @@ export default function Form() {
                       navigate('/')
                     }
                   })
-                formRef.current.reset()
             }
             else {
                 Swal.fire({
@@ -42,6 +41,7 @@ export default function Form() {
                 })
             }
         }catch(error){
+            console.log(error);
             if(Array.isArray(error)){
                 Swal.fire({
                     icon: "error",

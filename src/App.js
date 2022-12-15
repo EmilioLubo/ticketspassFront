@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // Layout (Header/Footer)
 import Main from "./layouts/Main";
 import { Artists } from "./pages/Artists/Artists.jsx";
@@ -26,17 +26,25 @@ export default function App() {
   const dispatch = useDispatch()
   const { reLogin } = userActions
   const {online, role} = useSelector(state => state.user)
-  // const { online, role } = useSelector(state => state.user)
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"))
-      if (token) {
-          dispatch(reLogin(token.token.user))
-      }
+    isLoading()
       // eslint-disable-next-line
   }, [])  
+
+let isLoading = async() => {
+  const token = JSON.parse(localStorage.getItem("token"))
+      if (token) {
+          await dispatch(reLogin(token.token.user)).unwrap()
+      }
+      setLoading(false)
+}
+
   return (
-    <>
       <Routes>
+        {!loading && 
+        <>
         <Route element={<ProtectedRoute isAllowed={!!online && role === 'admin'} reDirect={'/'}/> }>
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="home" replace />} />
@@ -53,17 +61,18 @@ export default function App() {
           <Route index element={<Home/>}/>
           <Route path="concerts" element={<Concerts />} />
           <Route element={<ProtectedRoute isAllowed={!!online} reDirect={'/'}/> }>
-          <Route path="cart" element={<Cart />} />
+            <Route path="cart" element={<Cart />} />
           </Route>
-          <Route path="/artists" element={<Artists/>}/>
-          <Route path="/artists/:id" element={<ArtistDetail/>}/>
+          <Route path="artists" element={<Artists/>}/>
+          <Route path="artists/:id" element={<ArtistDetail/>}/>
           <Route element={<ProtectedRoute isAllowed={!online} reDirect={'/'}/> }>
             <Route path="signup" element={<SignUp />} />
             <Route path="signin" element={<SignIn />} />
           </Route>
           <Route path="concerts/:id" element={<Concert />} />
         </Route>
+        </>
+      }
       </Routes>
-    </>
   );
 }
