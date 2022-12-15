@@ -37,7 +37,7 @@ const ArtistDetail = () => {
                     </div>
                     <div className='p-3'>
                         <p>{artist.description}</p>
-                        {/* <p><span className='genre__key'>Genre:</span> {artist.genre.join(", ")}</p> */}
+                        <p><span className='genre__key'>Genre:</span> {artist.genre.join(", ")}</p>
                         <a href="http://">link</a>
                     </div>
                 </div>

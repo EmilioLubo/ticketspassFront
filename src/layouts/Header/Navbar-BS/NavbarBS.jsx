@@ -16,7 +16,7 @@ export default function NavbarBS() {
           <Nav className="me-auto nav-flex1">
             <Link className='nav-btn' to="/">Home</Link>
             <Link className='nav-btn' to="/artists">Artists</Link>
-            <Link className='nav-btn' to="#link">Buy</Link>
+            <Link className='nav-btn' to="/concerts">Concerts</Link>
             <Link className='register nav-btn' to="signup">Sign Up</Link>
             <Link className='login nav-btn' to="signin">Sign In</Link>
           </Nav>
