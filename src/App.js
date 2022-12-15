@@ -1,13 +1,13 @@
-// Dependencies
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-
 // Layout (Header/Footer)
 import Main from "./layouts/Main";
-// Import of pages
+import { Artists } from "./pages/Artists/Artists.jsx";
 import Home from './pages/Home/Home'
 import Concerts from "./pages/Concerts/Concerts";
+import ArtistDetail from "./pages/ArtistDetail/ArtistDetail";
+import NewArtist from "./pages/NewArtist/NewArtist";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./components/SignIn/Form/FormSI";
 import userActions from "./redux/actions/userActions";
@@ -19,7 +19,6 @@ import AdminArtists from "./pages/AdminArtists/AdminArtists";
 import AdminVenues from "./pages/Adminvenues/AdminVenues";
 import NewConcert from "./pages/NewConcert/NewConcert";
 
-// Export to Index.js
 export default function App() {
   const dispatch = useDispatch()
   const { reLogin } = userActions
@@ -45,6 +44,9 @@ export default function App() {
         <Route path="/" element={<Main />} >
           <Route index element={<Home/>}/>
           <Route path="concerts" element={<Concerts />} />
+          <Route path="/artists" element={<Artists/>}/>
+          <Route path="/artists/:id" element={<ArtistDetail/>}/>
+          <Route path="/new-artist" element={<NewArtist/>}/>
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="concerts/:id" element={<Concert />} />

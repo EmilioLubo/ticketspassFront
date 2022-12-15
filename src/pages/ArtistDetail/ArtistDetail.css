@@ -1,0 +1,23 @@
+.detail__image--container{
+    height: 500px;
+    width: 400px;
+}
+.detail__image{
+    width: 400px;
+    border-radius: 0 5% 5% 0;
+    height: 500px;
+    object-fit: cover;
+}
+.genre__key{
+    text-decoration: underline;
+    font-weight: 600;
+}
+@media screen and (max-width: 768px){
+    .detail__image--container{
+        width: 100%;
+    }
+    .detail__image{
+        width: 100%;
+        border-radius: 0;
+    }
+}
