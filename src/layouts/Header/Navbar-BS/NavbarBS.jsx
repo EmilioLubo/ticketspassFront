@@ -10,11 +10,15 @@ export default function NavbarBS() {
   let {online} = useSelector(state => state.user)
 
   return (
-    <Navbar bg="light" expand="lg" >
-      <Container className='nav-flex2' style={{alignItems: 'center', display: 'flex'}}>
-        <img className='navbar-logo mr-2' src='../assets/img/logo.png' alt="Logo" />
-        <Navbar.Brand><Link className='logo-redirect-nav' to='/'>TicketsPass</Link></Navbar.Brand>
-        <Navbar.Toggle  aria-controls="basic-navbar-nav" />
+    <Navbar className='navBar' bg="transparent" expand="lg" variant="dark" >
+      <Container className='nav-flex2' style={{ alignItems: 'center', display: 'flex' }}>
+        <div>
+          <Link className='logo-redirect-nav' to='/'>
+            <img className='navbar-logo mr-2' src='../assets/img/logo.png' alt="Logo" />
+            <Navbar.Brand style={{margin: '0'}}>TicketsPass</Navbar.Brand>
+          </Link>
+        </div>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className=''>
           <Nav className="me-auto nav-flex1">
             <Link className='nav-btn' to="/">Home</Link>

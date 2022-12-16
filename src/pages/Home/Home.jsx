@@ -1,13 +1,11 @@
 import React from 'react'
-import Carrousel from '../../components/Home/Module1/Carrousel'
-import Divisor from '../../components/Home/Divisor/Divisor'
+import Carrousel from '../../components/Carrousel/Carrousel'
 import TopArtists from '../../components/Home/Module2/TopArtist'
 import ComingSoonEvents from '../../components/Home/Module3/ComingSoonEvents'
 export default function Home() {
     return (
         <div>
-           <Carrousel/>
-           <Divisor/>
+            <Carrousel/>
            <TopArtists/>
            <ComingSoonEvents/>
         </div>

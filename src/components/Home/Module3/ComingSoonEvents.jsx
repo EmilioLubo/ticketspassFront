@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 //Styles
-import './ComingSoonEvents.css'
+import '../Module2/TopArtist.css'
 import { useNavigate } from 'react-router';
 
 export default function ComingSoonEvents() {
@@ -31,21 +31,18 @@ export default function ComingSoonEvents() {
                     {data.map((concerts) => {
                         return (
                             <Card key={concerts._id} className="bg-dark text-white module2-cards">
-                                 <Link to={`/concerts/${concerts._id}`} className="stretched-link">
-                                <Card.Img className='module2-cards-image' src={concerts.photo} alt="Card image" />
-                                <Card.ImgOverlay className='module2-cards-overlay'>
-                                    <Card.Text className='module2-cards-text'>{concerts.name}</Card.Text>
-                                </Card.ImgOverlay>
-                                 </Link>
+                                <Link to={`/concerts/${concerts._id}`} className="stretched-link">
+                                    <Card.Img className='module2-cards-image' src={concerts.photo} alt="Card image" />
+                                    <Card.ImgOverlay className='module2-cards-overlay'>
+                                        <Card.Text className='module2-cards-text'>{concerts.name}</Card.Text>
+                                    </Card.ImgOverlay>
+                                </Link>
                             </Card>
                         )
                     }
-                        )}
-                    {/* BTN & REDIRECT */}
-                    <div className='module2-btn-artist'>
-                        <button className='module2-btn-artist-text' onClick={e=> navigate('/concerts')}>See More</button>
-                    </div>
+                    )}
                 </div>
+                <button className='module2-btn-artist-text' onClick={e => navigate('/concerts')}>See More</button>
             </div>
         </>
     )

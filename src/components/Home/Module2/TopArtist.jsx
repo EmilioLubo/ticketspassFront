@@ -1,7 +1,7 @@
 // Imports
 import Card from 'react-bootstrap/Card';
 import React, { useEffect } from 'react'
-import {BASE_URL} from '../../../api/url'
+import { BASE_URL } from '../../../api/url'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 //Styles
@@ -27,27 +27,23 @@ export default function TopArtist() {
             <div className='module2-artist-container'>
                 <h2 className='module2-h2'>Our Trending Artists</h2>
                 <div className='module2-cards-artist'>
-                    {/* CARD 1 */}
                     {data.map((artist) => {
                         return (
-                            
-                            <Card key={artist._id} className="bg-dark text-white module2-cards">
-                                 <Link to={`/artists/${artist._id}`} className="stretched-link">
 
-                                <Card.Img className='module2-cards-image' src={artist.photo} alt="Card image" />
-                                <Card.ImgOverlay className='module2-cards-overlay'>
-                                    <Card.Text className='module2-cards-text'>{artist.name}</Card.Text>
-                                </Card.ImgOverlay>
-                                 </Link>
+                            <Card key={artist._id} className="bg-dark text-white module2-cards">
+                                <Link to={`/artists/${artist._id}`} className="stretched-link">
+
+                                    <Card.Img className='module2-cards-image' src={artist.photo} alt="Card image" />
+                                    <Card.ImgOverlay className='module2-cards-overlay'>
+                                        <Card.Text className='module2-cards-text'>{artist.name}</Card.Text>
+                                    </Card.ImgOverlay>
+                                </Link>
                             </Card>
                         )
                     }
                     )}
-                    {/* BTN & REDIRECT */}
-                    <div className='module2-btn-artist'>
-                        <button className='module2-btn-artist-text' onClick={e=> navigate('/artists')}>See More</button>
-                    </div>
                 </div>
+                <button className='module2-btn-artist-text' onClick={e => navigate('/artists')}>See More</button>
             </div>
         </>
     )
