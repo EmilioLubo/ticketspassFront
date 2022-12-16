@@ -46,24 +46,24 @@ export default function Product(props) {
 
 
     return (
-        <tr>
+        <tr valign='baseline'>
             <td className="text-center">
-                <img src={item.img} className="img-fluid" alt="..." width="100px" />
+                <img src={item.photo} className="img-fluid" alt="..." width="100px" />
             </td>
             <td className='text-center'>
                 {item.name}
             </td>
             <td className='text-center'>
-                {item.price}
+                {item.category.price}
             </td>
-            <td className='d-flex justify-content-around'>
-                <button className="btn btn-primary" onClick={remove}>-</button>
+            <td className='text-center'>
+                <button className="btn btn-primary m-4" onClick={remove}>-</button>
                 {quantity}
-                <button className="btn btn-primary" onClick={add}>+</button>
+                <button className="btn btn-primary m-4" onClick={add}>+</button>
 
             </td>
             <td className='text-center'>
-                {item.price * quantity}
+                {item.category.price * quantity}
             </td>
             </tr>
     )
