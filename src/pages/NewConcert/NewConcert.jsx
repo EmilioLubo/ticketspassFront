@@ -24,7 +24,7 @@ const initialValues = {
 };
 
 export default function NewConcert() {
-  const {token} = useSelector(store => store.user);
+  const { token } = useSelector(store => store.user);
   const [venues, setVenues] = useState([]);
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,33 +57,32 @@ export default function NewConcert() {
       Swal.fire({
         title: "Success",
         text: res.data.message,
-        icon: "success"
+        icon: "success",
       });
-      resetForm(initialValues)
-    }catch(error) {
-      if(error.response) {
-        if(Array.isArray(error.response.data.message)) {
+      resetForm(initialValues);
+    } catch (error) {
+      if (error.response) {
+        if (Array.isArray(error.response.data.message)) {
           Swal.fire({
             title: "error",
-            text: error.response.data.message.join("\n"),
-            icon: "error"
-          })
+            html: error.response.data.message.join("<br>"),
+            icon: "error",
+          });
         } else {
           Swal.fire({
             title: "error",
             text: error.response.data.message || error.response.data,
-            icon: "error"
-          })
+            icon: "error",
+          });
         }
       } else {
         Swal.fire({
           title: "error",
           text: error.message,
-          icon: "error"
-        })
+          icon: "error",
+        });
       }
     }
-
   };
 
   return (
@@ -96,7 +95,7 @@ export default function NewConcert() {
       ) : venues.length > 0 && artists.length > 0 ? (
         <Formik
           initialValues={initialValues}
-          onSubmit={(values, {resetForm}) => {
+          onSubmit={(values, { resetForm }) => {
             sendData(values, resetForm);
           }}
         >

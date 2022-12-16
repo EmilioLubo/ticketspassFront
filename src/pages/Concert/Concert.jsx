@@ -2,11 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { faCartShopping, faCalendar, faMapSigns, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { BASE_URL } from "../../api/url";
 import "./Concert.css";
 import { Spinner } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 export default function Concert() {
   const { id } = useParams();
@@ -14,6 +16,8 @@ export default function Concert() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [cart, setCart] = useState([]);
+  const {online} = useSelector(state => state.user)
+  const navigate = useNavigate()
 
   useEffect(() => {
     let cart = localStorage.getItem("cart");
@@ -33,11 +37,27 @@ export default function Concert() {
   };
 
   const addToCart = data => {
-    let cart = localStorage.getItem("cart");
-    cart = cart ? JSON.parse(cart) : [];
-    cart = [...cart, data];
-    setCart(cart);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    if(online){
+      let cart = localStorage.getItem("cart");
+      cart = cart ? JSON.parse(cart) : [];
+      cart = [...cart, data];
+      setCart(cart);
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } else{
+      Swal.fire({
+            title: "Redirect to login?",
+            text: "you must be logged to complete this action",
+            icon: "warning",
+            showCloseButton: true,
+            showConfirmButton: true,
+            showDenyButton: true,
+      })
+      .then(result => {
+        if(result.isConfirmed){
+          navigate('/signin')
+        }
+      })
+    }
   };
 
   return loading ? (

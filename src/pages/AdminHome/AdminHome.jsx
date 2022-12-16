@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react";
 
 export default function AdminHome() {
   return (
     <div>
-      <h1>Bienvenido al panel de administración de TicketsPass</h1>
-      <p>Aquí podrás:</p>
+      <h1>Welcome to the administration panel of TicketsPass</h1>
+      <p>Here you can:</p>
       <ul>
-        <li>Ver, editar y eliminar Conciertos</li>
-        <li>Ver, editar y eliminar Artistas</li>
-        <li>Ver, editar y eliminar Lugares</li>
+        <li>See, edit, and delete Concerts</li>
+        <li>See, edit, and delete Artists</li>
+        <li>See, edit, and delete Venues</li>
       </ul>
-      <p>¡Y otras funcionalidades que se están por agregar!</p>
+      <p>And other functionalities to be implemented!</p>
     </div>
-  )
+  );
 }
