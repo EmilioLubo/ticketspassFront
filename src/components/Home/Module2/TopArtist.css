@@ -65,5 +65,5 @@
     text-shadow: 4px 4px 4px black;
 }
 .module2-btn-artist-text:hover{
-    border: 2px solid gold;
+    border: 2px solid var(--main-color);
 }
