@@ -44,8 +44,30 @@ const getFilteredArtists = createAsyncThunk('getFilteredArtists', async(filter) 
     }
 })
 
+const deleteArtist = createAsyncThunk('deleteArtist', async({id, token}) => {
+    let headers = {headers: {'Authorization': `Bearer ${token}`}}
+    try {
+        let res = await axios.delete(`${BASE_URL}/api/artists/${id}`, headers)
+        return {
+            id: res.data.data,
+            success: res.data.success,
+            message: res.data.message
+        }
+    } catch (error) {
+        let err
+        error.response ?
+        err = error.response.data.message :
+        err = error.message
+        return {
+            success: false,
+            message: err
+        }
+    }
+})
+
 const artistsActions = {
     getArtists,
-    getFilteredArtists
+    getFilteredArtists,
+    deleteArtist
 }
 export default artistsActions
