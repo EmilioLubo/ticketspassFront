@@ -5,7 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './favicon.ico'
 import './NavbarBS.css'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 export default function NavbarBS() {
+  let {online} = useSelector(state => state.user)
+
   return (
     <Navbar bg="light" expand="lg" >
       <Container className='nav-flex2'>
@@ -17,8 +20,13 @@ export default function NavbarBS() {
             <Link className='nav-btn' to="/">Home</Link>
             <Link className='nav-btn' to="/artists">Artists</Link>
             <Link className='nav-btn' to="/concerts">Concerts</Link>
-            <Link className='register nav-btn' to="signup">Sign Up</Link>
-            <Link className='login nav-btn' to="signin">Sign In</Link>
+            {!online ?
+            <>
+              <Link className='register nav-btn' to="signup">Sign Up</Link>
+              <Link className='login nav-btn' to="signin">Sign In</Link>
+            </> :
+            <></>
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>

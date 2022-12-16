@@ -1,22 +1,44 @@
 import axios from 'axios'
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import { BASE_URL } from '../../api/url'
 import Swal from'sweetalert2'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const NewArtist = () => {
 
+const EditArtist = () => {
+    let {id} = useParams()
     let navigate = useNavigate()
     let {token} = useSelector(state => state.user)
     const formRef = useRef()
+    let [name, setName] = useState('')
+    let [photo, setPhoto] = useState('')
     let [checked, setChecked] = useState([])
+    let [description, setDescription] = useState('')
+    let [youtubeVideo, setYoutubeVideo] = useState('')
+    let [youtubeChannel, setYoutubeChannel] = useState('')
+    let [spotifyPlaylist, setSpotifyPlaylist] = useState('')
     const genres = ['Ambient', 'Blues', 'Country', 'Electronic', 'Funk', 'Hip-hop', 'Jazz', 'Latin', 'Metal', 'Pop', 'Punk', 'R&B and Soul', 'Rap', 'Reggae', 'Reggaeton', 'Rock', 'Ska', 'Trap']
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/api/artists/${id}`)
+        .then(res => {
+            let {name, photo, genre, description, youtubeVideo, youtubeChannel, spotifyPlaylist} = res.data.data
+            setName(name)
+            setPhoto(photo)
+            setChecked(genre)
+            setDescription(description)
+            setYoutubeVideo(youtubeVideo)
+            setYoutubeChannel(youtubeChannel)
+            setSpotifyPlaylist(spotifyPlaylist)
+        })
+        .catch(err => console.log(err.message))
+    }, [])
 
     let submit = (e) => {
         e.preventDefault();
         Swal.fire({
-            title: "Confirm new Artist?",
+            title: "Edit artist?",
             text: "you can edit or remove the artist later from the admin panel",
             icon: "warning",
             showCloseButton: true,
@@ -37,10 +59,9 @@ const NewArtist = () => {
                         spotifyPlaylist: values.spotifyPlaylist
                     }
                     let headers = {headers: {'Authorization': `Bearer ${token}`}}
-                    axios.post(`${BASE_URL}/api/artists`, newArtist, headers)
+                    axios.patch(`${BASE_URL}/api/artists/${id}`, newArtist, headers)
                         .then(res => {
                             if(res.data.success){
-                                let id = res.data.data
                                 Swal.fire({
                                     title: "Success",
                                     text: res.data.message,
@@ -50,7 +71,6 @@ const NewArtist = () => {
                             }
                         })
                         .catch(err => {
-                            console.log(err)
                             if(err.response.data.message){
                                 Swal.fire({
                                     title: "error",
@@ -77,6 +97,14 @@ const NewArtist = () => {
         })
     }
 
+    let handleName = (e) => {
+        setName(e.target.value)
+    }
+
+    let handlePhoto = (e) => {
+        setPhoto(e.target.value)
+    }
+
     let checkHandler = (e) => {
         let auxArray = [...checked]
         if(e.target.checked){
@@ -87,36 +115,52 @@ const NewArtist = () => {
         setChecked(auxArray)
     }
 
+    let handleDescription = (e) => {
+        setDescription(e.target.value)
+    }
+
+    let handleYoutubeVideo = (e) => {
+        setYoutubeVideo(e.target.value)
+    }
+
+    let handleYoutubeChannel = (e) => {
+        setYoutubeChannel(e.target.value)
+    }
+
+    let handleSpotifyPlaylist = (e) => {
+        setSpotifyPlaylist(e.target.value)
+    }
+
   return (
     <div className='container'>
-        <h1 className='text-center'>New Artist</h1>
+        <h1 className='text-center'>Edit Artist</h1>
         <form ref={formRef} className='d-flex flex-column p-1' onSubmit={submit}>
             <label className='d-flex flex-column fs-6 m-1'>Name: 
-                <input className='ms-1' type="text" name="name" required/>
+                <input className='ms-1' type="text" name="name" onChange={handleName} value={name} required/>
             </label>
             <label className='d-flex flex-column fs-6 m-1'>Photo url: 
-                <input className='ms-1' type="url" name="photo" required/>
+                <input className='ms-1' type="url" name="photo" onChange={handlePhoto} value={photo} required/>
             </label>
             <fieldset>
                 <legend className='fs-6'>Genres:</legend>
                 <div className='d-flex align-items-center justify-content-center flex-wrap gap-3'>
                     {genres.map(el => 
                     <label key={el} className='m-1'>
-                        <input className='me-1' type="checkbox" onChange={checkHandler} value={el}/>{el}
+                        <input className='me-1' type="checkbox" checked={checked.includes(el)} onChange={checkHandler} value={el}/>{el}
                     </label>)}
                 </div>
             </fieldset>
             <label className='d-flex flex-column fs-6 m-1'>Description: 
-                <textarea className='ms-1 w-100' name="description" rows="10" required></textarea>
+                <textarea className='ms-1 w-100' name="description" rows="10" onChange={handleDescription} value={description} required></textarea>
             </label>
             <label className='d-flex flex-column fs-6 m-1'>YouTube Video: 
-                <input className='ms-1' type="url" name="youtubeVideo"/>
+                <input className='ms-1' type="url" name="youtubeVideo" onChange={handleYoutubeVideo} value={youtubeVideo}/>
             </label>
             <label className='d-flex flex-column fs-6 m-1'>YouTube Channel: 
-                <input className='ms-1' type="url" name="youtubeChannel"/>
+                <input className='ms-1' type="url" name="youtubeChannel" onChange={handleYoutubeChannel} value={youtubeChannel}/>
             </label>
             <label className='d-flex flex-column fs-6 m-1'>Spotify playlist: 
-                <input className='ms-1' type="url" name="spotifyPlaylist"/>
+                <input className='ms-1' type="url" name="spotifyPlaylist" onChange={handleSpotifyPlaylist} value={spotifyPlaylist}/>
             </label>
             <div className='d-flex justify-content-evenly align-items-center'>
                 <input className='btn btn-outline-danger' type="reset" value={'Clear'}/>
@@ -127,4 +171,4 @@ const NewArtist = () => {
   )
 }
 
-export default NewArtist
+export default EditArtist

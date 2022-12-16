@@ -12,12 +12,25 @@
     text-decoration: underline;
     font-weight: 600;
 }
-@media screen and (max-width: 768px){
+iframe{
+    width: 100%;
+    height: 480px;
+}
+@media screen and (max-width: 1024px){
     .detail__image--container{
         width: 100%;
     }
     .detail__image{
         width: 100%;
         border-radius: 0;
+    }
+    iframe{
+        height: 320px;
+        width: 100%;
+    }
+}
+@media screen and (min-width: 1024px){
+    iframe{
+        width: 75%;
     }
 }
