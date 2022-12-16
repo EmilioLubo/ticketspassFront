@@ -8,7 +8,7 @@ const getArtists = createAsyncThunk('getArtists', async() => {
         return {
             artists: res.data.data,
             success: res.data.success,
-            message: res.data.message
+            message: res.data.message,
         }
     } catch (error) {
         let err
