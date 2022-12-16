@@ -18,7 +18,7 @@ export default function TopArtist() {
         const response = await fetch(`${BASE_URL}/api/artists`)
         const data = await response.json()
         // Here you can manage the total of artists you want to show - BB
-        const artists = data.data.slice(0, 7)
+        const artists = data.data.slice(0, 6)
         // Avoid promise setting a state after component unmount - BB
         setData(artists)
     }
