@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import userActions from "../actions/userActions";
+import userActions from "../actions/useractions";
 
 const { login, reLogin, logout } = userActions;
 
