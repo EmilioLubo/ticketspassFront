@@ -1,0 +1,71 @@
+.navBar {
+    display: flex;
+    width: 100%;
+    padding: 30px;
+    position: absolute;
+}
+
+.nav-flex2 {
+    display: flex !important;
+    align-items: center;
+}
+
+.nav-flex1 {
+    display: flex !important;
+    flex-grow: 1;
+    justify-content: flex-end !important;
+    align-items: center;
+}
+
+.nav-btn {
+    text-decoration: none;
+    padding: 5px 1rem;
+    margin: 0 10px;
+    color: white;
+    position: relative;
+}
+
+.nav-btn:hover {
+    color: var(--main-color);
+    transform: scale(1.2);
+    border-bottom: 2px solid var(--main-color);
+    transition: all .3s ease-in-out
+}
+
+.nav-btn-cart:hover {
+    transform: scale(1.2);
+}
+
+.nav-flex0 {
+    display: flex !important;
+    flex-grow: 1 !important;
+    flex-direction: row;
+}
+
+.register {
+    margin-left: 60px;
+    padding: 0px;
+    padding-top: 7px;
+}
+
+.login {
+    margin-left: 10px;
+    padding-top: 7px;
+}
+
+.logo-redirect-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.logo-redirect-nav:hover {
+    color: var(--main-color);
+}
+
+.nav-img{
+    width: 40px;
+    filter: saturate(6);
+}

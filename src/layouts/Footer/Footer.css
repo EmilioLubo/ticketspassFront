@@ -7,10 +7,13 @@
   color: white;
   height: auto;
   font-size: 30px;
+  padding: .5em 0 .5em 0;
 }
 .columns-footer{
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
   width: 100%;
 }
 .footer-col-1{
@@ -19,7 +22,6 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  width: 33.3%;
   padding-top: 10px;
   color: white;
 }
@@ -29,17 +31,15 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  width: 33.3%;
   padding-top: 10px;
   color: white;
 }
 .footer-col-3{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 100%;
-  width: 33.3%;
   padding-top: 10px;
   color:white;
 }
@@ -52,56 +52,90 @@
   background-color: rgb(0, 0, 0);
   color: white;
   height: auto;
-  font-size: 30px;
 }
 .hr-footer-color-grey{
-  border: 3px solid rgb(108, 108, 108);
+  border: 2px solid rgb(108, 108, 108);
   width: 100%;
 }
 .footer-social-btns{
   display: flex;
-  font-size: 60px;
-  background-color: rgb(0, 0, 0);
+  border: none;
+  border-color: rgba(255, 255, 255, 0);
+  background-color: rgba(0, 0, 0, 0);
   color: white;
-  height: auto;
-  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
 .footer-social-text{
-  font-size: 34px;
+  font-size: 1rem;
   padding-left: 10px;
+  margin-top: 10px;
+  width: 5.2em;
+  text-align: start;
 }
 .container-btns-footer{
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 2rem;
+  gap: 1em;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding: 40px;
   flex-wrap: wrap;
   border: none;
-  
 }
-
+.img-footer{
+  width: 80px;
+  height: 65px;
+}
 .footer-ul{
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0;
+  padding-top: .5em;
+  gap: .5em;
 }
 .footer-li{
-  font-size: 17px;
+  font-size: 1rem;
+}
+.footer-li:hover{
+  border-bottom: 3px solid var(--main-color);
+  cursor: pointer;
 }
 .sponsor-btn-footer{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(0, 0, 0);
-  height: 50px;
-  width: 180px;
+  background-color: rgb(255, 255, 255);
+  width: 90px;
+  height: 70px;
   border: 2px solid rgb(238, 238, 238);
   color: white;
-  font-size: 20px;
   font-weight: bold;
 }
 .sponsor-btn-footer:hover{
   background-color: rgb(238, 238, 238);
-  color: black;
+  filter:drop-shadow(0 0 1rem var(--main-color));
+}
+.footer-title-navg{
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--main-color)
+}
+.footer-about-us{
+  font-size: 14px;
+  color: white;
+  width: 45%;
+}
+.other-titles-footer{
+  font-size: 24px;
+  font-weight: bold;
+}
+.footer-text{
+  padding-top: 1em;
+  font-size: 14px;
+  color: white;
 }
