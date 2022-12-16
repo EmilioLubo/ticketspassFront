@@ -8,7 +8,6 @@ function Header() {
         <>
             <header>
                 <NavbarBS/>
-                <div className="color-line-topnav"></div>
             </header>
         </>
     )

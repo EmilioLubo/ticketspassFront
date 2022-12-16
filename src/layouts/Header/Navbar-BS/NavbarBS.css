@@ -1,71 +1,71 @@
-.nav-flex2{
-    display: flex!important;
-    align-items: center;
+.navBar {
+    display: flex;
+    width: 100%;
+    padding: 30px;
+    position: absolute;
 }
-.nav-flex1{
-    display: flex!important;
-    flex-grow: 1;
-    justify-content: flex-end!important;
+
+.nav-flex2 {
+    display: flex !important;
     align-items: center;
 }
 
-.nav-btn{
+.nav-flex1 {
+    display: flex !important;
+    flex-grow: 1;
+    justify-content: flex-end !important;
+    align-items: center;
+}
+
+.nav-btn {
     text-decoration: none;
     padding: 5px 1rem;
     margin: 0 10px;
-    color: black;
+    color: white;
     position: relative;
 }
 
-.nav-btn:hover{
+.nav-btn:hover {
     color: var(--main-color);
     transform: scale(1.2);
     border-bottom: 2px solid var(--main-color);
     transition: all .3s ease-in-out
 }
 
-.nav-btn-cart:hover{
+.nav-btn-cart:hover {
     transform: scale(1.2);
 }
 
-.nav-flex0{
-    display: flex!important;
-    flex-grow: 1!important;
+.nav-flex0 {
+    display: flex !important;
+    flex-grow: 1 !important;
     flex-direction: row;
 }
-.register{
+
+.register {
     margin-left: 60px;
     padding: 0px;
-    padding-top:7px;
-}
-.login{
-    margin-left: 10px;
-    padding-top:7px;
+    padding-top: 7px;
 }
 
-.logo-redirect-nav{
+.login {
     margin-left: 10px;
-    padding: 0px;
-    padding-top:7px;
-    text-decoration: none;
-    color: rgb(35, 35, 35);
+    padding-top: 7px;
 }
-.logo-redirect-nav:hover{
+
+.logo-redirect-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.logo-redirect-nav:hover {
     color: var(--main-color);
 }
 
-@media screen and (max-width: 990px){
-   .register{
-    border: none!important;
-    background-color: transparent!important;
-    color: rgb(124, 124, 124)!important;
-    margin-left: -1px!important;
-    font-weight: normal!important;
-    }
-    .login{
-        margin-left: -1px!important;
-        font-weight: normal;
-        padding-left: 0px!important;
-        padding-top: 12px;
-    }
+.nav-img{
+    width: 40px;
+    filter: saturate(6);
 }
