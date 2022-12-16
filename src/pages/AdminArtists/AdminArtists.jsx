@@ -15,7 +15,7 @@ export default function AdminArtists() {
   let {token} = useSelector(state => state.user)
   
   useEffect(() => {
-    dispatch(getArtists());
+    dispatch(getArtists()); //eslint-disable-next-line
   }, [])
 
   let removeArtist = (id, name) => {
