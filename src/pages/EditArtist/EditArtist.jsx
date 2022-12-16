@@ -32,7 +32,7 @@ const EditArtist = () => {
             setYoutubeChannel(youtubeChannel)
             setSpotifyPlaylist(spotifyPlaylist)
         })
-        .catch(err => console.log(err.message))
+        .catch(err => console.log(err.message))//eslint-disable-next-line
     }, [])
 
     let submit = (e) => {

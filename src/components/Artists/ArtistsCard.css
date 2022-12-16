@@ -1,9 +1,8 @@
-.artist__card{
-    border-color: black;
+.card{
+    border: none;
 }
 .artist__card:hover{
     cursor: pointer;
-    box-shadow: 1px 1px var(--main-color);
 }
 .artist__card:active{
     transition: 50ms;

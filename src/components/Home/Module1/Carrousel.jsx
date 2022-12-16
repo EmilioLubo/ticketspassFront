@@ -25,12 +25,12 @@ export default function M1Carrousel() {
       setData(concerts)
   }
     return (
-            <Carousel fade className='sssdcontainer'>
+            <Carousel fade >
               {data.map((concerts) => {
                 return (
                   <Carousel.Item key={concerts._id} className='carrousel-container'>
                     <img
-                      className="home-module-carrousel"
+                      className="home-module-carrousel img-fluid"
                       src={concerts.photo}
                       alt={concerts.name}
                     />

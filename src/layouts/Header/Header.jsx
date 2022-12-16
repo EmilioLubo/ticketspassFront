@@ -7,8 +7,8 @@ function Header() {
     return (
         <>
             <header>
-                <div className="color-line-topnav"></div>
                 <NavbarBS/>
+                <div className="color-line-topnav"></div>
             </header>
         </>
     )

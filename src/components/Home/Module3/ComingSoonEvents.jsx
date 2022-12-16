@@ -25,7 +25,7 @@ export default function ComingSoonEvents() {
     }
     return (
         <>
-            <div className='module2-artist-container'>
+            <div className='module2-artist-container pb-5'>
                 <h2 className='module2-h2'>Incoming Concerts</h2>
                 <div className='module2-cards-artist'>
                     {data.map((concerts) => {
