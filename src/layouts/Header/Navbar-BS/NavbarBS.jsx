@@ -4,11 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavbarBS.css'
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import { useSelector } from 'react-redux';
-=======
 
->>>>>>> d888496da700ed1a764b7806784109ebb363606f
 export default function NavbarBS() {
   let {online} = useSelector(state => state.user)
 
@@ -23,19 +20,14 @@ export default function NavbarBS() {
             <Link className='nav-btn' to="/">Home</Link>
             <Link className='nav-btn' to="/artists">Artists</Link>
             <Link className='nav-btn' to="/concerts">Concerts</Link>
-<<<<<<< HEAD
             {!online ?
             <>
               <Link className='register nav-btn' to="signup">Sign Up</Link>
               <Link className='login nav-btn' to="signin">Sign In</Link>
             </> :
             <></>
-            }
-=======
-            <Link className='nav-btn' to="signup">Sign Up</Link>
-            <Link className='nav-btn' to="signin">Sign In</Link>
-            <Link className='nav-btn-cart' to="cart"><img src="../assets/img/cart.png" alt="cart" width='40px' /></Link>
->>>>>>> d888496da700ed1a764b7806784109ebb363606f
+          }
+          <Link className='nav-btn-cart' to="cart"><img src="../assets/img/cart.png" alt="cart" width='40px' /></Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

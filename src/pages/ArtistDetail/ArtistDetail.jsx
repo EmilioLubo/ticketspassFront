@@ -36,10 +36,11 @@ const ArtistDetail = () => {
                             <img className='detail__image' src={artist.photo} alt={artist.name} />
                         </div>
                         <div className='p-3 d-flex flex-column'>
-                            <div>
+                            <div className='d-flex flex-column'>
                                 <p>{artist.description}</p>
                                 <p><span className='genre__key'>Genre:</span> {artist.genre.join(", ")}</p>
-                                <a href="http://">link</a>
+                                <a href={artist.youtubeChannel}>YouTube Channel</a>
+                                <a href={artist.spotifyPlaylist}>Spotify Playlist</a>
                             </div>
                             <div className='align-self-center d-flex justify-content-center w-100'>
                                 <iframe src={artist.youtubeVideo} title={artist.name} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
