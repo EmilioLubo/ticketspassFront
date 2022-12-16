@@ -4,7 +4,7 @@ import { BASE_URL } from "../../api/url";
 
 const getInitialData = createAsyncThunk("getInitialData", async data => {
   try {
-    const res = await axios.get(`${process.env.REACT_APP_URL || BASE_URL}/api/concerts`);
+    const res = await axios.get(`${BASE_URL}/api/concerts`);
     return {
       success: res.data.success,
       response: res.data.response,
@@ -17,7 +17,7 @@ const getInitialData = createAsyncThunk("getInitialData", async data => {
 });
 const getQuery = createAsyncThunk("getQuery", async data => {
   try {
-    const res = await axios.get(`${process.env.REACT_APP_URL || BASE_URL}/api/concerts`, data.query);
+    const res = await axios.get(`${BASE_URL}/api/concerts`, data.query);
     return {
       success: res.data.success,
       response: res.data.response,
