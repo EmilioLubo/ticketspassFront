@@ -27,7 +27,7 @@ export default function Concert() {
 
    const getConcert = async concertId => {
       try {
-         const res = await axios.get(`${process.env.REACT_APP_URL || BASE_URL}/api/concerts/${concertId}`);
+         const res = await axios.get(`${BASE_URL}/api/concerts/${concertId}`);
          setConcert(res.data.response);
       } catch (error) {
          setMessage(error.response ? error.response.data.message || error.response.data : error.message);
