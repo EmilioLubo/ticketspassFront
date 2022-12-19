@@ -24,6 +24,7 @@ import EditConcert from "./pages/EditConcert/EditConcert";
 import NewVenue from "./pages/NewVenue/NewVenue";
 import EditVenue from "./pages/EditVenue/EditVenue";
 import EditArtist from "./pages/EditArtist/EditArtist";
+import ProcessPayment from "./pages/ProcessPayment/ProcessPayment";
 
 export default function App() {
   const dispatch = useDispatch()
@@ -68,6 +69,7 @@ let isLoading = async() => {
           <Route path="concerts" element={<Concerts />} />
           <Route element={<ProtectedRoute isAllowed={!!online} reDirect={'/'}/> }>
             <Route path="cart" element={<Cart />} />
+            <Route path="process-payment" element={<ProcessPayment />}/>
           </Route>
           <Route path="artists" element={<Artists/>}/>
           <Route path="artists/:id" element={<ArtistDetail/>}/>

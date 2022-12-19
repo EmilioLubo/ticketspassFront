@@ -28,6 +28,17 @@ export default function Cart() {
         }
     }
 
+    const goToPayment = async () => {
+        try {
+            let headers = {headers: {Authorization: `Bearer ${token}`}}
+            let res = await axios.get(`${BASE_URL}/api/carts/pay`, headers);
+            let response = res.data.response;
+            window.location.href = response.sandbox_init_point;
+        }catch(error) {
+            console.log(error)
+        }
+    }
+
     function clearCart() {
 
         Swal.fire({
@@ -98,52 +109,9 @@ export default function Cart() {
                         </table>
                         <div className='d-flex justify-content-center'>
                             <div className="d-flex justify-content-around w-50">
-                                <p className="btn btn-danger" onClick={clearCart}>Vaciar Carrito</p>
-                                <Navlink to="/"><p className="btn btn-primary">Seguir Comprando</p></Navlink>
-                                <p className="btn btn-success" onClick={async () => {
-                                    const preference = {
-                                        paymode: "modal",
-                                        back_urls: {
-                                            success: "http://localhost:3000/",
-                                            failure: "http://localhost:3000/",
-                                            pending: "http://localhost:3000/"
-                                        },
-                                        payer: {
-                                            name: "Lalo",
-                                            surname: "Landa",
-                                            email: "aleenetflix1995@gmail.com",
-                                            phone: {
-                                                area_code: "11",
-                                                number: 22223333
-                                            },
-                                            address: {
-                                                street_name: "False",
-                                                street_number: 123,
-                                                zip_code: "1111"
-                                            }
-                                        },
-                                        items: cart.items.map(item => {
-                                            return {
-                                                title: `${item.concertName} - ${item.categoryName}`,
-                                                description: 'Dispositivo móvil de Tienda e-commerce',
-                                                picture_url: item.photo,
-                                                unit_price: item.price,
-                                                quantity: item.quantity,
-                                                currency_id: "ARS",
-                                                id: item.concertId
-                                            }
-                                        })
-                                    };
-                                    let response = await axios.post('https://api.mercadopago.com/checkout/preferences', preference, {
-                                        headers: {
-                                            "Content-Type": "application/json",
-                                            Authorization: `Bearer ${MERCADO_PAGO_KEY}`
-                                        }
-                                    })
-                                    console.log(response)
-                                    window.open(response.data.init_point, "_blank")
-
-                                }}>Abonar</p>
+                                <button className="btn btn-danger" onClick={clearCart}>Vaciar Carrito</button>
+                                <Navlink to="/"><button className="btn btn-primary">Seguir Comprando</button></Navlink>
+                                <button className="btn btn-success" onClick={goToPayment}>Abonar</button>
                             </div>
                         </div>
                     </>
