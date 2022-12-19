@@ -9,7 +9,7 @@ import "./Concerts.css";
 export default function Concerts() {
     const dispatch = useDispatch();
     const { getInitialData, getQuery } = concertsActions;
-    const { concerts, search, initial, loading, message } = useSelector(store => store.concerts);
+    const { concerts, name, initial, loading, message } = useSelector(store => store.concerts);
 
     useState(() => {
         if (initial) {
@@ -24,9 +24,10 @@ export default function Concerts() {
     return (
         <>
             <div className='backNav'></div>
-            <div className="p-5 container">
+            <div className="pt-4 container">
+            <h1 className='text-center'>Concerts</h1>
                 <div className="mb-4 d-flex justify-content-end">
-                    <Search placeholder="Search by concert" onChange={onSearch} defaultValue={search} />
+                    <Search placeholder="Search by concert" onChange={onSearch} defaultValue={name} />
                 </div>
                 {loading ? (
                     <div className="d-flex justify-content-center">

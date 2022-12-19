@@ -24,6 +24,7 @@ import EditConcert from "./pages/EditConcert/EditConcert";
 import NewVenue from "./pages/NewVenue/NewVenue";
 import EditVenue from "./pages/EditVenue/EditVenue";
 import EditArtist from "./pages/EditArtist/EditArtist";
+import ProcessPayment from "./pages/ProcessPayment/ProcessPayment";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from "./pages/MyProfile/MyProfile";
 
@@ -72,6 +73,7 @@ let isLoading = async() => {
           <Route element={<ProtectedRoute isAllowed={!!online} reDirect={'/'}/> }>
             <Route path="cart" element={<Cart />} />
             <Route path="profile" element={<Profile/>} />
+            <Route path="succes-payment" element={<ProcessPayment />}/>
           </Route>
           <Route path="artists" element={<Artists/>}/>
           <Route path="artists/:id" element={<ArtistDetail/>}/>
