@@ -69,7 +69,7 @@ let isLoading = async() => {
           <Route path="concerts" element={<Concerts />} />
           <Route element={<ProtectedRoute isAllowed={!!online} reDirect={'/'}/> }>
             <Route path="cart" element={<Cart />} />
-            <Route path="process-payment" element={<ProcessPayment />}/>
+            <Route path="succes-payment" element={<ProcessPayment />}/>
           </Route>
           <Route path="artists" element={<Artists/>}/>
           <Route path="artists/:id" element={<ArtistDetail/>}/>
