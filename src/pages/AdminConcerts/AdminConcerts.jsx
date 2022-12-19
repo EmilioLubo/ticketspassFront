@@ -16,6 +16,7 @@ export default function AdminConcerts() {
 
   useEffect(() => {
     dispatch(getInitialData());
+    // eslint-disable-next-line
   }, []);
 
   const deleteOnClick = async (id, name) => {
@@ -54,7 +55,7 @@ export default function AdminConcerts() {
     <div>
       <Link to="/admin/concerts/new">
         <Button variant="success" className="mb-4">
-          Nuevo Concierto
+          New Concert
         </Button>
       </Link>
       {loading ? (
@@ -63,7 +64,7 @@ export default function AdminConcerts() {
         </div>
       ) : concerts.length > 0 ? (
         <AdminTable
-          title="Conciertos"
+          title="Concerts"
           collection={concerts}
           editRoute="/admin/concerts/edit/"
           deleteOnClick={deleteOnClick}

@@ -4,12 +4,14 @@ import "./AdminNav.css";
 
 export default function AdminNav() {
   return (
-    <div className="AdminNav">
+    <div className="AdminNav d-flex flex-column">
       <AdminButton to="/admin/home" name="Home" />
-      <AdminButton to="/admin/concerts" name="Conciertos" />
-      <AdminButton to="/admin/artists" name="Artistas" />
-      <AdminButton to="/admin/venues" name="Lugares" />
-      <AdminButton to="/" name="Volver al sitio" />
+      <AdminButton to="/admin/concerts" name="Concerts" />
+      <AdminButton to="/admin/artists" name="Artists" />
+      <AdminButton to="/admin/venues" name="Venues" />
+      <div className='mt-auto'>
+      <AdminButton to="/" name="Back to site" />
+      </div>
     </div>
   )
 }

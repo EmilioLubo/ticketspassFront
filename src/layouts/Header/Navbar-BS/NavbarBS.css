@@ -1,45 +1,110 @@
-.nav-flex2{
-    display: flex!important;
+.navBar {
+    display: flex;
+    width: 100%;
+    padding: 30px;
+    position: absolute;
+    z-index: 10;
 }
-.nav-flex1{
-    display: flex!important;
+
+.nav-flex2 {
+    display: flex !important;
+    align-items: center;
+}
+
+.nav-flex1 {
+    display: flex !important;
     flex-grow: 1;
-    justify-content: flex-end!important;
+    gap: 10px;
+    justify-content: flex-end !important;
+    align-items: center;
 }
-.nav-btn{
-    margin-left: 10px;
-    padding: 0px;
-    padding-top:7px;
+
+.nav-btn {
     text-decoration: none;
-    color: black;
-    text-transform: uppercase;
+    padding: 5px 1rem;
+    margin: 0 10px;
+    color: white;
+    position: relative;
 }
-.nav-flex0{
-    display: flex!important;
-    flex-grow: 1!important;
+
+.nav-btn:hover {
+    color: var(--main-color);
+    transform: scale(1.2);
+    border-bottom: 2px solid var(--main-color);
+    transition: all .3s ease-in-out
+}
+
+.nav-btn-cart{
+    padding: 5px 1rem;
+    margin: 0 10px;
+}
+
+.nav-btn-cart:hover {
+    transform: scale(1.2);
+}
+
+.nav-flex0 {
+    display: flex !important;
+    flex-grow: 1 !important;
     flex-direction: row;
 }
-.register{
-    margin-left: 60px;
-    padding: 0px;
-    padding-top:7px;
+
+.logo-redirect-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
 }
-.login{
-    margin-left: 10px;
-    padding-top:7px;
+
+.logo-redirect-nav:hover {
+    color: var(--main-color);
 }
-@media screen and (max-width: 990px){
-   .register{
-    border: none!important;
-    background-color: transparent!important;
-    color: rgb(124, 124, 124)!important;
-    margin-left: -1px!important;
-    font-weight: normal!important;
+
+.nav-img {
+    width: 40px;
+    filter: saturate(6);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, .7);
+    position: absolute;
+    top: 100px;
+    right: 150px;
+    z-index: 20;
+}
+
+@media screen and (max-width: 990px) {
+
+    .navColapse {
+        background-color: rgba(0, 0, 0, .9);
+        margin: .5em;
+        padding-top: 10px;
+        padding-bottom: 20px;
     }
-    .login{
-        margin-left: -1px!important;
-        font-weight: normal;
-        padding-left: 0px!important;
-        padding-top: 12px;
+
+    .menu{
+        top: 370px;
+        right: 40%;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .menu{
+        top: 370px;
+        right: 35%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .menu{
+        top: 370px;
+        right: 30%;
     }
 }

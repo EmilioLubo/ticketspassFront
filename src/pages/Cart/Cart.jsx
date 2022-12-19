@@ -3,6 +3,7 @@ import Product from '../../components/Product/Product'
 import Swal from 'sweetalert2'
 import { Link as Navlink } from 'react-router-dom'
 import axios from 'axios';
+import { MERCADO_PAGO_KEY } from "../../api/url";
 
 export default function Cart() {
 
@@ -42,19 +43,20 @@ export default function Cart() {
             {
                 cart.length > 0 ? (
                     <>
-                        <table className="table container">
+                        <div className='backNav'></div>
+                        <table className="table container-fluid">
                             <thead>
                                 <tr>
-                                    <th className="text-black text-center fs-1 fw-bold" colspan="5">Carrito de compras</th>
+                                    <th className="text-black text-center fs-1 fw-bold" colSpan="5">Carrito de compras</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td className="text-info text-center fw-semibold">Imagen</td>
-                                    <td className="text-info text-center fw-semibold">Producto</td> 
-                                    <td className="text-info text-center fw-semibold">Precio Unitario</td>
-                                    <td className="text-info text-center fw-semibold">Cantidad</td>
-                                    <td className="text-info text-center fw-semibold">Precio Total</td>
+                                    <td className="text-main text-center fw-semibold">Imagen</td>
+                                    <td className="text-main text-center fw-semibold">Producto</td>
+                                    <td className="text-main text-center fw-semibold">Precio Unitario</td>
+                                    <td className="text-main text-center fw-semibold">Cantidad</td>
+                                    <td className="text-main text-center fw-semibold">Precio Total</td>
                                 </tr>
                             </tbody>
                             <tbody>
@@ -64,9 +66,9 @@ export default function Cart() {
                             </tbody>
                             <tbody>
                                 <tr>
-                                    <td className="text-info text-center fw-semibold" colspan="4">Total</td>
-                                    <td className="text-info text-center fw-semibold">${
-                                        cart.reduce((acc, item) => acc + item.price, 0)
+                                    <td className="text-main text-center fw-semibold" colSpan="4">Total</td>
+                                    <td className="text-main text-center fw-semibold">${
+                                        cart.reduce((acc, item) => acc + item.category.price, 0)
                                     }</td>
                                 </tr>
                             </tbody>
@@ -77,23 +79,45 @@ export default function Cart() {
                                 <Navlink to="/"><p className="btn btn-primary">Seguir Comprando</p></Navlink>
                                 <p className="btn btn-success" onClick={async () => {
                                     const preference = {
+                                        paymode: "modal",
+                                        back_urls: {
+                                            success: "http://localhost:3000/",
+                                            failure: "http://localhost:3000/",
+                                            pending: "http://localhost:3000/"
+                                        },
+                                        payer: {
+                                            name: "Lalo",
+                                            surname: "Landa",
+                                            email: "aleenetflix1995@gmail.com",
+                                            phone: {
+                                                area_code: "11",
+                                                number: 22223333
+                                            },
+                                            address: {
+                                                street_name: "False",
+                                                street_number: 123,
+                                                zip_code: "1111"
+                                            }
+                                        },
                                         items: cart.map(item => {
                                             return {
                                                 title: item.title,
-                                                unit_price: item.price,
+                                                description: 'Dispositivo móvil de Tienda e-commerce',
+                                                picture_url: item.photo,
+                                                unit_price: item.category.price,
                                                 quantity: 1,
                                                 currency_id: "ARS",
                                                 id: item._id
                                             }
                                         })
                                     };
-                                    let response = await axios.post('https://api.mercadopago.com/checkout/preferences', preference , {
+                                    let response = await axios.post('https://api.mercadopago.com/checkout/preferences', preference, {
                                         headers: {
                                             "Content-Type": "application/json",
-                                            Authorization: `Bearer APP_USR-5455371630357360-121409-16f3245feba61f81a4037002eaa8acfd-158410015`
+                                            Authorization: `Bearer ${MERCADO_PAGO_KEY}`
                                         }
                                     })
-
+                                    console.log(response)
                                     window.open(response.data.init_point, "_blank")
 
                                 }}>Abonar</p>

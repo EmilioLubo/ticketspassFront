@@ -6,29 +6,31 @@ import axios from "axios";
 import "./EditConcert.css";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 export default function EditConcert() {
-  const {id} = useParams();
-  const {token} = useSelector(store => store.user);
+  const { id } = useParams();
+  const { token } = useSelector(store => store.user);
   const [concert, setConcert] = useState(null);
   const [success, setSuccess] = useState(false);
   const [venues, setVenues] = useState([]);
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
-    const getConcert = () => axios.get(`${BASE_URL}/api/concerts/${id}`)
+    const getConcert = () => axios.get(`${BASE_URL}/api/concerts/${id}`);
     const getVenues = () => axios.get(`${BASE_URL}/api/venues`);
     const getArtists = () => axios.get(`${BASE_URL}/api/artists`);
     Promise.all([getConcert(), getVenues(), getArtists()])
       .then(results => {
         let [concertRes, venuesRes, artistsRes] = results;
-        
+        let { date, venue, artists } = concertRes.data.response;
         const offset = new Date(concertRes.data.response.date).getTimezoneOffset();
-        let date = Date.parse(concertRes.data.response.date) - (offset * 60 * 60);
-        console.log(new Date(date));
+        date = new Date(concertRes.data.response.date).getTime() - offset * 1000 * 60;
+        concertRes.data.response.date = new Date(date).toISOString().slice(0, 16);
+        concertRes.data.response.venue = venue._id;
+        concertRes.data.response.artists = artists.map(artist => artist._id);
         setConcert(concertRes.data.response);
         setVenues(venuesRes.data.response);
         setArtists(artistsRes.data.data);
@@ -38,49 +40,47 @@ export default function EditConcert() {
       .catch(error => {
         setLoading(false);
         setSuccess(false);
-        setMessage(error.message);
+        setMessage(error.response ? error.response.data.message || error.response.data : error.message);
       });
   }, [id]);
 
-  const sendData = async (values, resetForm) => {
-    console.log(values);
-    /* const headers = {
+  const sendData = async values => {
+    const headers = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
     try {
-      let res = await axios.post(`${BASE_URL}/api/concerts`, values, headers);
+      let res = await axios.patch(`${BASE_URL}/api/concerts/${id}`, values, headers);
       Swal.fire({
         title: "Success",
         text: res.data.message,
-        icon: "success"
+        icon: "success",
       });
-      resetForm(initialValues)
-    }catch(error) {
-      if(error.response) {
-        if(Array.isArray(error.response.data.message)) {
+      navigate("/admin/concerts");
+    } catch (error) {
+      if (error.response) {
+        if (Array.isArray(error.response.data.message)) {
           Swal.fire({
             title: "error",
             text: error.response.data.message.join("\n"),
-            icon: "error"
-          })
+            icon: "error",
+          });
         } else {
           Swal.fire({
             title: "error",
             text: error.response.data.message || error.response.data,
-            icon: "error"
-          })
+            icon: "error",
+          });
         }
       } else {
         Swal.fire({
           title: "error",
           text: error.message,
-          icon: "error"
-        })
+          icon: "error",
+        });
       }
     }
- */
   };
 
   return (
@@ -93,7 +93,7 @@ export default function EditConcert() {
       ) : success ? (
         <Formik
           initialValues={concert}
-          onSubmit={(values, {resetForm}) => {
+          onSubmit={(values, { resetForm }) => {
             sendData(values, resetForm);
           }}
         >
@@ -113,7 +113,7 @@ export default function EditConcert() {
               </div>
               <div>
                 <label htmlFor="date">Date:</label>
-                <Field name="date" type="datetime-local" value={values.date}/>
+                <Field name="date" type="datetime-local" value={values.date} />
               </div>
               <div>
                 <label htmlFor="type">Type:</label>
@@ -128,7 +128,7 @@ export default function EditConcert() {
               <div>
                 <label htmlFor="venue">Venue:</label>
                 <br />
-                <Field as="select" name="venue" value={values.venue._id}>
+                <Field as="select" name="venue" value={values.venue}>
                   <option value="">-- Select Venue --</option>
                   {venues.map(venue => (
                     <option key={venue._id} value={venue._id}>
@@ -154,7 +154,7 @@ export default function EditConcert() {
                           >
                             X
                           </Button>
-                          <Field as="select" name={`artists.${index}`} value={artistValue._id}>
+                          <Field as="select" name={`artists.${index}`} value={artistValue}>
                             <option value="">-- Select Artist --</option>
                             {artists.map(artist => (
                               <option key={artist._id} value={artist._id}>
@@ -184,7 +184,7 @@ export default function EditConcert() {
                 </div>
                 <div>
                   <label htmlFor="categoryArea">Category Area:</label>
-                  <Field name="category.area" id="categoryArea" type="text" value={values.category.area}/>
+                  <Field name="category.area" id="categoryArea" type="text" value={values.category.area} />
                 </div>
               </div>
               <div>
@@ -192,7 +192,7 @@ export default function EditConcert() {
                 <Field as="textarea" name="description" value={values.description} />
               </div>
               <Button type="submit" variant="success">
-                Submit
+                Edit
               </Button>
             </Form>
           )}

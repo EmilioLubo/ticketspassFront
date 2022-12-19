@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
-import artistsActions from "../actions/artistsActions";
+import artistsActions from "../actions/artistsactions";
 
-const {getArtists, getFilteredArtists} = artistsActions
+const {getArtists, getFilteredArtists, deleteArtist} = artistsActions
 const initialState = {
     artists: [],
     loading: false,
@@ -23,10 +23,24 @@ const artistsReducer = createReducer(initialState, (builder) => {
             return {...state, loading: false}
         })
         .addCase(getFilteredArtists.fulfilled, (state, action) => {
-            return {...state, ...action.payload, loading: false}
+            if(action.payload.success){
+                return {...state, ...action.payload, loading: false}
+            } else{
+                return {...state, artists: [] , message: action.payload.message}
+            }
         })
         .addCase(getFilteredArtists.rejected, (state, action) => {
             return { ...state ,loading: false, message: action.payload.message}
+        })
+        .addCase(deleteArtist.pending, (state, action) => {
+            return {...state, loading: true}
+        })
+        .addCase(deleteArtist.fulfilled, (state, action) => {
+            let filtered = state.artists.filter(el => el._id !== action.payload.id)
+            return {...state, message: action.payload.message, artists: filtered}
+        })
+        .addCase(deleteArtist.rejected, (state, action) => {
+            return { ...state, loading: false, message: action.payload.message}
         })
 })
 

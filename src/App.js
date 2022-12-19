@@ -21,6 +21,9 @@ import AdminVenues from "./pages/Adminvenues/AdminVenues";
 import NewConcert from "./pages/NewConcert/NewConcert";
 import { ProtectedRoute } from "./utils/ProtectedRoute/ProtectedRoute";
 import EditConcert from "./pages/EditConcert/EditConcert";
+import NewVenue from "./pages/NewVenue/NewVenue";
+import EditVenue from "./pages/EditVenue/EditVenue";
+import EditArtist from "./pages/EditArtist/EditArtist";
 
 export default function App() {
   const dispatch = useDispatch()
@@ -42,9 +45,9 @@ let isLoading = async() => {
 }
 
   return (
-      <Routes>
-        {!loading && 
-        <>
+      
+    !loading && 
+      <Routes>    
         <Route element={<ProtectedRoute isAllowed={!!online && role === 'admin'} reDirect={'/'}/> }>
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="home" replace />} />
@@ -54,7 +57,10 @@ let isLoading = async() => {
               <Route path="concerts/edit/:id" element={<EditConcert />}/>
               <Route path="artists" element={<AdminArtists />}/>
               <Route path="artists/new" element={<NewArtist/>}/>
+              <Route path="artists/edit/:id" element={<EditArtist/>}/>
               <Route path="venues" element={<AdminVenues />}/>
+              <Route path="venues/new" element={<NewVenue />}/>
+              <Route path="venues/edit/:id" element={<EditVenue />}/>
             </Route>  
         </Route>
         <Route path="/" element={<Main />} >
@@ -71,8 +77,6 @@ let isLoading = async() => {
           </Route>
           <Route path="concerts/:id" element={<Concert />} />
         </Route>
-        </>
-      }
       </Routes>
   );
 }
