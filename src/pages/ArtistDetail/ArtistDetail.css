@@ -12,8 +12,8 @@
 .concert-link:hover{
    cursor: pointer;
    color: var(--main-color);
-   transform: scale(1.1);
-   transition: .5s;
+   transform: scale(1.01);
+   transition: .2s;
 }
 .genre__key {
    text-decoration: underline;
