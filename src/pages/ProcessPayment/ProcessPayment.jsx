@@ -12,8 +12,7 @@ export default function ProcessPayment() {
   const { token } = useSelector(store => store.user);
 
   useEffect(() => {
-    processPayment();
-    //eslint-disable-next-line
+    processPayment();//eslint-disable-next-line
   }, []);
 
   const processPayment = async () => {

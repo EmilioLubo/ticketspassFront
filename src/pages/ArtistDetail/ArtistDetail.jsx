@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { BASE_URL } from '../../api/url'
-import { Spinner } from 'react-bootstrap'
+import { Button, Spinner } from 'react-bootstrap'
 import { SocialIcon } from 'react-social-icons';
-import { Link as Navlink } from 'react-router-dom'
 import './ArtistDetail.css'
 
 const ArtistDetail = () => {
    let { id } = useParams()
    let [artist, setArtist] = useState({})
+   let [concerts, setConcerts] = useState([])
    let [load, setLoad] = useState(true)
    let [error, setError] = useState('')
+   let navigate = useNavigate()
    useEffect(() => {
       axios.get(`${BASE_URL}/api/artists/${id}`)
          .then(res => {
@@ -24,17 +25,25 @@ const ArtistDetail = () => {
                setError(err.response.data.message) :
                setError(err.message)
          })
+
+      axios.get(`${BASE_URL}/api/concerts?artistId=${id}`)
+         .then(res => setConcerts(res.data.response))
    }, [id])
    return (
       <>
          <div className='backNav'></div>
-         <div className='w-100 mb-2 d-flex justify-content-center align-items-center'>
+         <div className='w-100 mb-2 d-flex flex-column justify-content-center align-items-center'>
             {
                load ?
                   <Spinner /> :
                   artist.name ?
                      <div className='w-100 pb-4'>
                         <div className='detail__image--container' style={{ backgroundImage: `url(${artist.photo})` }}>
+                           <div className='p-5'>
+                              <h4 className='text-warning'>upcoming concerts</h4>
+                              {concerts.length > 0 ?
+                              concerts.map(el => <div className='concert-link' onClick={() => navigate(`/concerts/${el._id}`)} key={el._id} to={`/concerts/${el._id}`}>+{el.name}</div>) : <></>}
+                           </div>
                            <h2 className='text-light text-detail text-center'>{artist.name}</h2>
                         </div>
 
@@ -45,14 +54,16 @@ const ArtistDetail = () => {
                                  <p><span className='genre__key'>Genre:</span> {artist.genre.join(", ")}</p>
                                  <span className='genre__key text-center fs-5'>Social Media</span>
                                  <div className='d-flex justify-content-center gap-5 p-5'>
-                                    <div>
-                                       <a href={artist.youtubeChannel} className='d-flex flex-column align-items-center gap-2' style={{ textDecoration: 'none' }}>
-                                          <SocialIcon className="icon-social" network="youtube" fgColor="#ffffff" style={{ height: 40, width: 40 }} /> Youtube Channel
+                                    <div className='d-flex flex-column align-items-center gap-2'>
+                                          <SocialIcon label='YouTube Channel' url={artist.youtubeChannel} className="icon-social" network="youtube" fgColor="#ffffff" style={{ height: 40, width: 40 }} /> 
+                                       <a href={artist.youtubeChannel} style={{ textDecoration: 'none' }}>
+                                          Youtube Channel
                                        </a>
                                     </div>
-                                    <div>
-                                       <a href={artist.spotifyPlaylist} className='d-flex flex-column align-items-center gap-2' style={{ textDecoration: 'none' }}>
-                                          <SocialIcon className="icon-social" network="spotify" fgColor="#ffffff" style={{ height: 40, width: 40 }} /> Spotify Playlist
+                                    <div className='d-flex flex-column align-items-center gap-2'>
+                                          <SocialIcon label='Spotify Playlist' url={artist.spotifyPlaylist} className="icon-social" network="spotify" fgColor="#ffffff" style={{ height: 40, width: 40 }} /> 
+                                       <a href={artist.spotifyPlaylist} style={{ textDecoration: 'none' }}>
+                                          Spotify Playlist
                                        </a>
                                     </div>
 
@@ -66,6 +77,7 @@ const ArtistDetail = () => {
                      </div> :
                      <h2 className='text-center'>{error}</h2>
             }
+            <Button variant='outline-danger' onClick={() => navigate('/artists')}>Go back to Artists</Button>
          </div>
       </>
    )

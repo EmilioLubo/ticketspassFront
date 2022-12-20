@@ -25,7 +25,6 @@ export default function Form() {
         }
         try {
             let res = await axios.post(`${BASE_URL}/api/auth/sign-up`, userValue)
-            console.log(res.data)
             if (res.data.success) {
                 Swal.fire({
                     icon: 'success',

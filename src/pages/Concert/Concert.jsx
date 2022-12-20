@@ -9,6 +9,7 @@ import "./Concert.css";
 import { Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 export default function Concert() {
    const { id } = useParams();
@@ -20,8 +21,7 @@ export default function Concert() {
    const navigate = useNavigate()
 
    useEffect(() => {
-      getData(id);
-      //eslint-disable-next-line
+      getData(id); //eslint-disable-next-line
    }, [id]);
 
    const getData = async concertId => {
@@ -103,13 +103,16 @@ export default function Concert() {
                         hrs.
                      </p>
                   </div>
-                  <div className="d-flex gap-2 align-items-center">
-                     <h4 className="text-main fw-bold">{concert.type === "festival" ? "Lineup :" : "Artist :"}</h4>
-                     {concert.artists.map(artist => (
-                        <p key={artist._id} className="fs-6 mb-0">
-                           <FontAwesomeIcon icon={faMusic} /> {artist.name}
-                        </p>
-                     ))}
+                  <div className="d-flex flex-column flex-lg-row justify-content-between">
+                     <div className="d-flex gap-2 align-items-center flex-wrap">
+                        <h4 className="text-main fw-bold">{concert.type === "festival" ? "Lineup:" : "Artist:"}</h4>
+                        {concert.artists.map(artist => (
+                           <Link to={`/artists/${artist._id}`} key={artist._id} className="fs-6 mb-0">
+                              <FontAwesomeIcon icon={faMusic} /> {artist.name}
+                           </Link>
+                        ))}
+                     </div>
+                           <Button className="mt-2" variant='outline-danger' onClick={() => navigate('/concerts')}>Go back to Concerts</Button>
                   </div>
                </div>
                <div className="col-md col-lg-4">
