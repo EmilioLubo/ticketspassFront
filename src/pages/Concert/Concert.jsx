@@ -92,10 +92,9 @@ export default function Concert() {
       </div>
    ) : !!concert ? (
       <>
-         <div className='backNav'></div>
          <div className="w-100 pb-4">
             <div className="Concert-banner" style={{ backgroundImage: `url(${concert.banner})` }}>
-               <h2 className="text-light text-detail text-center">{concert.name}</h2>
+               <h2 className="text-light text-detail text-center text-capitalize">{concert.name}</h2>
             </div>
             <div className="row ps-5 pe-5 pt-5 pb-5 w-100">
                <div className="col-md col-lg-8 pe-5 d-flex flex-column gap-4 pb-5">

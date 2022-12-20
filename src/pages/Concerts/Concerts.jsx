@@ -31,7 +31,6 @@ const onSearch = e => {
   };
   return (
     <>
-      <div className="backNav"></div>
       <div className="pt-4 container">
         <h1 className="text-center">{t('concert')}</h1>
         <div className="d-flex justify-content-between flex-wrap-reverse mb-5">
