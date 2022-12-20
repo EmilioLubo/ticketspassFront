@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom';
 //Styles
 import '../Module2/TopArtist.css'
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 export default function ComingSoonEvents() {
+    const {t} = useTranslation()
     const navigate = useNavigate()
     const [data, setData] = useState([])
     useEffect(() => {
@@ -26,7 +28,7 @@ export default function ComingSoonEvents() {
     return (
         <>
             <div className='module2-artist-container pb-5'>
-                <h2 className='module2-h2'>Incoming Concerts</h2>
+                <h2 className='module2-h2'>{t('incom_c')}</h2>
                 <div className='module2-cards-artist'>
                     {data.map((concerts) => {
                         return (
@@ -42,7 +44,7 @@ export default function ComingSoonEvents() {
                     }
                     )}
                 </div>
-                <button className='module2-btn-artist-text' onClick={e => navigate('/concerts')}>See More</button>
+                <button className='module2-btn-artist-text' onClick={e => navigate('/concerts')}>{t('see_m')}</button>
             </div>
         </>
     )

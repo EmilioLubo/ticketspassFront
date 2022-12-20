@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import userActions from "../../../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
 import { SocialIcon } from 'react-social-icons';
+import { useTranslation } from "react-i18next";
 
 export default function Form() {
     const navigate = useNavigate()
@@ -13,7 +14,10 @@ export default function Form() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const formRef = useRef()
+
+    const {t} = useTranslation()
     const submitRef = useRef()
+
 
     async function saveData(e) {
         e.preventDefault()
@@ -35,6 +39,7 @@ export default function Form() {
                     }
                 })
             } else {
+
                 if(Array.isArray(response)){
                     let text = response.join('<br>')
                     Swal.fire({
@@ -73,10 +78,10 @@ export default function Form() {
                 <div>
                     <div className="form-shadows-content">
                     <div className="form-title-div">
-                        <h2 className="title2Sign">Login to Your Account</h2>
+                        <h2 className="title2Sign">{t('log')}</h2>
                     </div>
                     <div className="d-flex flex-column align-items-center gap-2">
-                        <h5>Login using social networks</h5>
+                        <h5>{t('log_s')}</h5>
                         <div className="social-networks">
                             <SocialIcon className="icon-social" network="facebook" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
                             <SocialIcon className="icon-social" network="instagram" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
@@ -85,7 +90,7 @@ export default function Form() {
                     </div>
                 </div>
                 <div className="form-bodySign">
-                    <label htmlFor="">Email</label>
+                    <label htmlFor="">{t('email')}</label>
                     <input
                         id="Email"
                         type="email"
@@ -94,7 +99,7 @@ export default function Form() {
                         ref={emailRef}
                         required
                     />
-                    <label htmlFor="">Password</label>
+                    <label htmlFor="">{t('pass')}</label>
                     <input
                         id="Password"
                         type="password"
@@ -104,7 +109,7 @@ export default function Form() {
                         required
                     />
                     <div className="submitSign">
-                        <input ref={submitRef} onClick={saveData} className="submit2Sign" type='button' value='Login' />
+                        <input ref={submitRef} onClick={saveData} className="submit2Sign" type='button' value={t('log_in')} />
                     </div>
                 </div>
                 </div>

@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios'
 import {BASE_URL} from '../../../api/url'
 import './Form.css'
+import { useTranslation } from "react-i18next";
 
 export default function Form() {
     const nameRef = useRef()
@@ -12,6 +13,7 @@ export default function Form() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const formRef = useRef()
+    const {t} = useTranslation()
 
     async function saveData(e) {
         e.preventDefault()
@@ -28,8 +30,8 @@ export default function Form() {
             if (res.data.success) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'The user has been created successfully!',
-                    text: `Activate your account login in your email.`,
+                    title: t('alert_create'),
+                    text: t('alert_verify'),
                 })
                 formRef.current.reset()
             }
@@ -65,10 +67,10 @@ export default function Form() {
             <form ref={formRef} className="formSign" id="miFormulario">
                 <div className="form-shadows-content">
                     <div className="form-title-div">
-                    <h2 className="title2Sign">Sign Up</h2>
+                    <h2 className="title2Sign">{t('sign_up')}</h2>
                     </div>
                 <div className="form-bodySign">
-                    <label htmlFor="">Name</label>
+                    <label htmlFor="">{t('name')}</label>
                     <input
                         id="name"
                         name="name"
@@ -78,7 +80,7 @@ export default function Form() {
                         ref={nameRef}
                         required
                     />
-                        <label htmlFor="">LastName</label>
+                        <label htmlFor="">{t('Lname')}</label>
                     <input
                         id="lastName"
                         name="lastName"
@@ -88,7 +90,7 @@ export default function Form() {
                         ref={lastNameRef}
                         required
                     />
-                        <label htmlFor="">Photo</label>
+                        <label htmlFor="">{t('photo')}</label>
                     <input
                         className="form__input"
                         type='text'
@@ -97,7 +99,7 @@ export default function Form() {
                         ref={photoRef}
                         required
                     />
-                        <label htmlFor="">Birthday</label>
+                        <label htmlFor="">{t('birth')}</label>
                     <input
                         className="form__input"
                         type='date'
@@ -105,7 +107,7 @@ export default function Form() {
                         ref={ageRef}
                         required
                     />
-                        <label htmlFor="">Email</label>
+                        <label htmlFor="">{t('email')}</label>
                     <input
                         id="Email"
                         type="email"
@@ -114,7 +116,7 @@ export default function Form() {
                         ref={emailRef}
                         required
                     />
-                        <label htmlFor="">Password</label>
+                        <label htmlFor="">{t('pass')}</label>
                     <input
                         id="Password"
                         type="password"
@@ -124,7 +126,7 @@ export default function Form() {
                         required
                     />
                     <div className="submitSign">
-                        <input onClick={saveData} className="submit2Sign" type='button' value='Register' />
+                        <input onClick={saveData} className="submit2Sign" type='button' value={t('register')} />
                     </div>
                 </div>
                 </div>

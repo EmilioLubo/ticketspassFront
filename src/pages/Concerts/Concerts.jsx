@@ -5,11 +5,14 @@ import ConcertCard from "../../components/Concerts/ConcertCard/ConcertCard";
 import concertsActions from "../../redux/actions/concertsActions";
 import Search from "../../utils/search/Search";
 import "./Concerts.css";
+import { useTranslation } from "react-i18next";
 
 export default function Concerts() {
-  const dispatch = useDispatch();
-  const { getInitialData, getQuery } = concertsActions;
-  const { concerts, name, type, initial, loading, message } = useSelector(store => store.concerts);
+    const dispatch = useDispatch();
+    const { getInitialData, getQuery } = concertsActions;
+    const { concerts, name,type, initial, loading, message } = useSelector(store => store.concerts);
+    const {t} = useTranslation()
+
 
   useState(() => {
     if (initial) {
@@ -17,7 +20,7 @@ export default function Concerts() {
     }
   }, []);
 
-  const onSearch = e => {
+const onSearch = e => {
     let query = { params: { name: e.target.value, type } };
     dispatch(getQuery({ query }));
   };
@@ -30,18 +33,18 @@ export default function Concerts() {
     <>
       <div className="backNav"></div>
       <div className="pt-4 container">
-        <h1 className="text-center">Concerts</h1>
+        <h1 className="text-center">{t('concert')}</h1>
         <div className="d-flex justify-content-between flex-wrap-reverse mb-5">
           <div>
             <select className="Concerts-select border me-5" defaultValue={type} onChange={changeType}>
-              <option value="">— All types —</option>
-              <option value="concert">Concert</option>
+              <option value="">— {t('all_type')} —</option>
+              <option value="concert">{t('concrt')}</option>
               <option value="festival">Festival</option>
             </select>
           </div>
 
           <div className="mb-4 d-flex justify-content-end">
-            <Search placeholder="Search by concert" onChange={onSearch} defaultValue={name} />
+            <Search placeholder={t('search_c')} onChange={onSearch} defaultValue={name} />
           </div>
         </div>
 
@@ -63,4 +66,5 @@ export default function Concerts() {
       </div>
     </>
   );
+
 }
