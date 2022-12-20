@@ -7,44 +7,60 @@ import Search from "../../utils/search/Search";
 import "./Concerts.css";
 
 export default function Concerts() {
-    const dispatch = useDispatch();
-    const { getInitialData, getQuery } = concertsActions;
-    const { concerts, name, initial, loading, message } = useSelector(store => store.concerts);
+  const dispatch = useDispatch();
+  const { getInitialData, getQuery } = concertsActions;
+  const { concerts, name, type, initial, loading, message } = useSelector(store => store.concerts);
 
-    useState(() => {
-        if (initial) {
-            dispatch(getInitialData());
-        }
-    }, []);
+  useState(() => {
+    if (initial) {
+      dispatch(getInitialData());
+    }
+  }, []);
 
-    const onSearch = e => {
-        let query = { params: { name: e.target.value } };
-        dispatch(getQuery({ query }));
-    };
-    return (
-        <>
-            <div className='backNav'></div>
-            <div className="pt-4 container">
-            <h1 className='text-center'>Concerts</h1>
-                <div className="mb-4 d-flex justify-content-end">
-                    <Search placeholder="Search by concert" onChange={onSearch} defaultValue={name} />
-                </div>
-                {loading ? (
-                    <div className="d-flex justify-content-center">
-                        <Spinner className="text-center" />
-                    </div>
-                ) : concerts.length > 0 ? (
-                    <Row xs={1} md={2} xl={3}>
-                        {concerts.map(concert => (
-                            <Col key={concert._id} className="mb-5">
-                                <ConcertCard concert={concert} />
-                            </Col>
-                        ))}
-                    </Row>
-                ) : (
-                    <h2 className="text-center text-main">{message}</h2>
-                )}
-            </div>
-        </>
-    );
+  const onSearch = e => {
+    let query = { params: { name: e.target.value, type } };
+    dispatch(getQuery({ query }));
+  };
+
+  const changeType = e => {
+    let query = { params: { name, type: e.target.value } };
+    dispatch(getQuery({ query }));
+  };
+  return (
+    <>
+      <div className="backNav"></div>
+      <div className="pt-4 container">
+        <h1 className="text-center">Concerts</h1>
+        <div className="d-flex justify-content-between flex-wrap-reverse mb-5">
+          <div>
+            <select className="Concerts-select border me-5" defaultValue={type} onChange={changeType}>
+              <option value="">— All types —</option>
+              <option value="concert">Concert</option>
+              <option value="festival">Festival</option>
+            </select>
+          </div>
+
+          <div className="mb-4 d-flex justify-content-end">
+            <Search placeholder="Search by concert" onChange={onSearch} defaultValue={name} />
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <Spinner className="text-center" />
+          </div>
+        ) : concerts.length > 0 ? (
+          <Row xs={1} md={2} xl={3}>
+            {concerts.map(concert => (
+              <Col key={concert._id} className="mb-5">
+                <ConcertCard concert={concert} />
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <h2 className="text-center text-main">{message}</h2>
+        )}
+      </div>
+    </>
+  );
 }
