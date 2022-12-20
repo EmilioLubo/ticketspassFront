@@ -23,7 +23,7 @@ export default function Concert() {
 
    useEffect(()=>{
       getData(id)
-   },[id])
+   },[])
    
    const getData = async concertId => {
       try {
@@ -44,12 +44,14 @@ export default function Concert() {
          let headers = { headers: {Authorization: `Bearer ${token}`} }
          try {
             let res = await axios.get(`${BASE_URL}/api/carts`, headers);
+            console.log(res)
             setItems(res.data.response.items);
          } catch {
             setItems([]);
          }
       }
    }
+   console.log(items)
 
    const addToCart = async data => {
       if (online) {

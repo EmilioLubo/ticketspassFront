@@ -16,7 +16,7 @@ export default function Cart() {
 
     useEffect(() => {
         getCart();
-    }, [])
+    },[])
 
     const getCart = async () => {
         let headers = {headers: {Authorization: `Bearer ${token}`}}
@@ -87,11 +87,11 @@ export default function Cart() {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td className="text-main text-center fw-semibold">Imagen</td>
-                                    <td className="text-main text-center fw-semibold">Producto</td>
-                                    <td className="text-main text-center fw-semibold">Precio Unitario</td>
-                                    <td className="text-main text-center fw-semibold">Cantidad</td>
-                                    <td className="text-main text-center fw-semibold">Precio Total</td>
+                                    <td className="text-main text-center fw-semibold"></td>
+                                    <td className="text-main text-center fw-semibold">{t('product')}</td>
+                                    <td className="text-main text-center fw-semibold">{t('price_u')}</td>
+                                    <td className="text-main text-center fw-semibold">{t('quanty')}</td>
+                                    <td className="text-main text-center fw-semibold">{t('price_t')}</td>
                                 </tr>
                             </tbody>
                             <tbody>
@@ -101,7 +101,7 @@ export default function Cart() {
                             </tbody>
                             <tbody>
                                 <tr>
-                                    <td className="text-main text-center fw-semibold" colSpan="4">Total</td>
+                                    <td className="text-main text-center fw-semibold" colSpan="4">{t('total')}</td>
                                     <td className="text-main text-center fw-semibold">${
                                         cart.total.toLocaleString()
                                     }</td>
@@ -110,9 +110,9 @@ export default function Cart() {
                         </table>
                         <div className='d-flex justify-content-center'>
                             <div className="d-flex justify-content-around w-50">
-                                <button className="btn btn-danger" onClick={clearCart}>Vaciar Carrito</button>
-                                <Navlink to="/"><button className="btn btn-primary">Seguir Comprando</button></Navlink>
-                                <button className="btn btn-success" onClick={goToPayment}>Abonar</button>
+                                <button className="btn btn-danger" onClick={clearCart}>{t('cart_emp')}</button>
+                                <Navlink to="/"><button className="btn btn-primary">{t('cart_ke')}</button></Navlink>
+                                <button className="btn btn-success" onClick={goToPayment}>{t('pay')}</button>
                             </div>
                         </div>
                     </>
