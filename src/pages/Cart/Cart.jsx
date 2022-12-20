@@ -3,7 +3,7 @@ import Product from '../../components/Product/Product'
 import Swal from 'sweetalert2'
 import { Link as Navlink } from 'react-router-dom'
 import axios from 'axios';
-import { BASE_URL, MERCADO_PAGO_KEY } from "../../api/url";
+import { BASE_URL} from "../../api/url";
 import { useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 
@@ -15,6 +15,7 @@ export default function Cart() {
 
     useEffect(() => {
         getCart();
+        //eslint-disable-next-line
     }, [])
 
     const getCart = async () => {

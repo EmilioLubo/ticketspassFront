@@ -8,11 +8,12 @@ import { BASE_URL } from "../../api/url";
 export default function ProcessPayment() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { token } = useSelector(store => store.user);
 
   useEffect(() => {
     processPayment();
+    //eslint-disable-next-line
   }, []);
 
   const processPayment = async () => {

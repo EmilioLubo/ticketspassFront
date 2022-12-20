@@ -21,6 +21,7 @@ export default function Concert() {
 
    useEffect(() => {
       getData(id);
+      //eslint-disable-next-line
    }, [id]);
 
    const getData = async concertId => {
