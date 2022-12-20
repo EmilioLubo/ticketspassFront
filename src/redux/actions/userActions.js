@@ -8,7 +8,7 @@ const login = createAsyncThunk('login', async (datos) => {
         return {
             success: true,
             response: user.data.response,
-            res: user.data,
+            message: user.data.message,
         }
     } catch (error) {
         return {
