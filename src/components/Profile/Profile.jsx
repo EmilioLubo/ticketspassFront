@@ -14,7 +14,7 @@ export default function Profile() {
     let token = store
     const [user, setUser] = useState()
     useEffect(() => {
-        fetchData()
+        fetchData()//eslint-disable-next-line
     }, [])
     async function fetchData() {
         const response = await axios.get(`${BASE_URL}/api/auth/me/${token}`)

@@ -97,14 +97,6 @@ const EditArtist = () => {
         })
     }
 
-    let handleName = (e) => {
-        setName(e.target.value)
-    }
-
-    let handlePhoto = (e) => {
-        setPhoto(e.target.value)
-    }
-
     let checkHandler = (e) => {
         let auxArray = [...checked]
         if(e.target.checked){
@@ -115,31 +107,16 @@ const EditArtist = () => {
         setChecked(auxArray)
     }
 
-    let handleDescription = (e) => {
-        setDescription(e.target.value)
-    }
-
-    let handleYoutubeVideo = (e) => {
-        setYoutubeVideo(e.target.value)
-    }
-
-    let handleYoutubeChannel = (e) => {
-        setYoutubeChannel(e.target.value)
-    }
-
-    let handleSpotifyPlaylist = (e) => {
-        setSpotifyPlaylist(e.target.value)
-    }
-
   return (
     <div className='container'>
         <h1 className='text-center'>Edit Artist</h1>
         <form ref={formRef} className='d-flex flex-column p-1' onSubmit={submit}>
             <label className='d-flex flex-column fs-6 m-1'>Name: 
-                <input className='ms-1' type="text" name="name" onChange={handleName} value={name} required/>
+                <input className='ms-1' type="text" name="name" onChange={(e) => setName(e.target.value)
+    } value={name} required/>
             </label>
             <label className='d-flex flex-column fs-6 m-1'>Photo url: 
-                <input className='ms-1' type="url" name="photo" onChange={handlePhoto} value={photo} required/>
+                <input className='ms-1' type="url" name="photo" onChange={(e) => setPhoto(e.target.value)} value={photo} required/>
             </label>
             <fieldset>
                 <legend className='fs-6'>Genres:</legend>
@@ -151,16 +128,16 @@ const EditArtist = () => {
                 </div>
             </fieldset>
             <label className='d-flex flex-column fs-6 m-1'>Description: 
-                <textarea className='ms-1 w-100' name="description" rows="10" onChange={handleDescription} value={description} required></textarea>
+                <textarea className='ms-1 w-100' name="description" rows="10" onChange={(e) => setDescription(e.target.value)} value={description} required></textarea>
             </label>
             <label className='d-flex flex-column fs-6 m-1'>YouTube Video: 
-                <input className='ms-1' type="url" name="youtubeVideo" onChange={handleYoutubeVideo} value={youtubeVideo}/>
+                <input className='ms-1' type="url" name="youtubeVideo" onChange={(e) => setYoutubeVideo(e.target.value)} value={youtubeVideo}/>
             </label>
             <label className='d-flex flex-column fs-6 m-1'>YouTube Channel: 
-                <input className='ms-1' type="url" name="youtubeChannel" onChange={handleYoutubeChannel} value={youtubeChannel}/>
+                <input className='ms-1' type="url" name="youtubeChannel" onChange={(e) => setYoutubeChannel(e.target.value)} value={youtubeChannel}/>
             </label>
             <label className='d-flex flex-column fs-6 m-1'>Spotify playlist: 
-                <input className='ms-1' type="url" name="spotifyPlaylist" onChange={handleSpotifyPlaylist} value={spotifyPlaylist}/>
+                <input className='ms-1' type="url" name="spotifyPlaylist" onChange={(e) => setSpotifyPlaylist(e.target.value)} value={spotifyPlaylist}/>
             </label>
             <div className='d-flex justify-content-evenly align-items-center'>
                 <input className='btn btn-outline-danger' type="reset" value={'Clear'}/>
