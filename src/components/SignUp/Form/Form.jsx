@@ -25,7 +25,6 @@ export default function Form() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         }
-
         try {
             let res = await axios.post(`${BASE_URL}/api/auth/sign-up`, userValue)
             console.log(res.data)

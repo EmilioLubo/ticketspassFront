@@ -3,16 +3,42 @@ import Product from '../../components/Product/Product'
 import Swal from 'sweetalert2'
 import { Link as Navlink } from 'react-router-dom'
 import axios from 'axios';
-import { MERCADO_PAGO_KEY } from "../../api/url";
+import { BASE_URL, MERCADO_PAGO_KEY } from "../../api/url";
+import { useSelector } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 export default function Cart() {
-
-    const [cart, setCart] = useState([])
-    const [reload, setReload] = useState(false)
+    const {t} = useTranslation()
+    const { token } = useSelector(store => store.user);
+    const [loading, setLoading] = useState(true);
+    const [cart, setCart] = useState(null)
 
     useEffect(() => {
-        setCart(JSON.parse(localStorage.getItem('cart')))
-    }, [reload])
+        getCart();
+    }, [])
+
+    const getCart = async () => {
+        let headers = {headers: {Authorization: `Bearer ${token}`}}
+        try {
+            let res = await axios.get(`${BASE_URL}/api/carts`, headers);
+            setCart(res.data.response);
+            setLoading(false);
+        }catch {
+            setLoading(false);
+        }
+    }
+
+    const goToPayment = async () => {
+        try {
+            let headers = {headers: {Authorization: `Bearer ${token}`}}
+            let res = await axios.get(`${BASE_URL}/api/carts/pay`, headers);
+            let response = res.data.response;
+            window.location.href = response.sandbox_init_point;
+        }catch(error) {
+            console.log(error)
+        }
+    }
 
     function clearCart() {
 
@@ -21,33 +47,42 @@ export default function Cart() {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
             confirmButtonText: 'Yes, clear cart!'
         }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.setItem('cart', JSON.stringify([]))
-                setReload(!reload)
-                Swal.fire(
-                    'Deleted!',
-                    'Your cart has been cleared.',
-                    'success'
-                )
+                let headers = {headers: {Authorization: `Bearer ${token}`}}
+                axios.delete(`${BASE_URL}/api/carts/${cart._id}`, headers).then(res => {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your cart has been cleared.',
+                        'success'
+                    )
+                    setCart(null);
+                }).catch(error => {
+                    Swal.fire(
+                        'Error',
+                        error.response ? error.response.data.message || error.resonse.data : error.message,
+                        'error'
+                    )
+                });
             }
-        }
-        )
+        })
     }
 
     return (
         <>
             {
-                cart.length > 0 ? (
+                loading ? <div className="d-flex justify-content-center">
+                <Spinner className="text-center" />
+            </div> : !!cart ? (
                     <>
                         <div className='backNav'></div>
                         <table className="table container-fluid">
                             <thead>
                                 <tr>
-                                    <th className="text-black text-center fs-1 fw-bold" colSpan="5">Carrito de compras</th>
+                                    <th className="text-black text-center fs-1 fw-bold" colSpan="5">{t('shop_cart')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,73 +96,30 @@ export default function Cart() {
                             </tbody>
                             <tbody>
                                 {
-                                    cart.map((item, index) => <Product cart={cart} item={item} key={index} fx={() => setReload(!reload)} />)
+                                    cart.items.map((item) => <Product setCart={setCart} item={item} key={item._id} />)
                                 }
                             </tbody>
                             <tbody>
                                 <tr>
                                     <td className="text-main text-center fw-semibold" colSpan="4">Total</td>
                                     <td className="text-main text-center fw-semibold">${
-                                        cart.reduce((acc, item) => acc + item.category.price, 0)
+                                        cart.total.toLocaleString()
                                     }</td>
                                 </tr>
                             </tbody>
                         </table>
                         <div className='d-flex justify-content-center'>
                             <div className="d-flex justify-content-around w-50">
-                                <p className="btn btn-danger" onClick={clearCart}>Vaciar Carrito</p>
-                                <Navlink to="/"><p className="btn btn-primary">Seguir Comprando</p></Navlink>
-                                <p className="btn btn-success" onClick={async () => {
-                                    const preference = {
-                                        paymode: "modal",
-                                        back_urls: {
-                                            success: "http://localhost:3000/",
-                                            failure: "http://localhost:3000/",
-                                            pending: "http://localhost:3000/"
-                                        },
-                                        payer: {
-                                            name: "Lalo",
-                                            surname: "Landa",
-                                            email: "aleenetflix1995@gmail.com",
-                                            phone: {
-                                                area_code: "11",
-                                                number: 22223333
-                                            },
-                                            address: {
-                                                street_name: "False",
-                                                street_number: 123,
-                                                zip_code: "1111"
-                                            }
-                                        },
-                                        items: cart.map(item => {
-                                            return {
-                                                title: item.title,
-                                                description: 'Dispositivo móvil de Tienda e-commerce',
-                                                picture_url: item.photo,
-                                                unit_price: item.category.price,
-                                                quantity: 1,
-                                                currency_id: "ARS",
-                                                id: item._id
-                                            }
-                                        })
-                                    };
-                                    let response = await axios.post('https://api.mercadopago.com/checkout/preferences', preference, {
-                                        headers: {
-                                            "Content-Type": "application/json",
-                                            Authorization: `Bearer ${MERCADO_PAGO_KEY}`
-                                        }
-                                    })
-                                    console.log(response)
-                                    window.open(response.data.init_point, "_blank")
-
-                                }}>Abonar</p>
+                                <button className="btn btn-danger" onClick={clearCart}>Vaciar Carrito</button>
+                                <Navlink to="/"><button className="btn btn-primary">Seguir Comprando</button></Navlink>
+                                <button className="btn btn-success" onClick={goToPayment}>Abonar</button>
                             </div>
                         </div>
                     </>
                 ) : (
                     <div className="text-center p-5">
                         <img className="img-fluid" src="../assets/img/cartClear.png" alt="StockClear" width="300px" />
-                        <h1>There are no items in the cart</h1>
+                        <h1>{t('shop_cart_found')}</h1>
                     </div>
                 )
             }
