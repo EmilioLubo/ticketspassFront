@@ -1,0 +1,23 @@
+.Chat-container {
+  max-width: 800px;
+  width: 100%;
+  background-color: #18181B;
+}
+.Chat {
+  max-width: 800px;
+  height: 600px;
+  max-height: 80%;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+.Chat-input {
+  background: #3D3D40;
+  word-wrap: break-word;
+}
+.Chat-input:focus {
+  outline: 3px solid var(--main-color);
+  background: black
+}
+.Chat-input::placeholder {
+  color:rgb(212, 212, 212)
+}
