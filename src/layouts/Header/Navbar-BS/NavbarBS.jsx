@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import userActions from '../../../redux/actions/userActions';
+import { useTranslation } from 'react-i18next';
 
 export default function NavbarBS() {
   let { online, name, photo, token } = useSelector(state => state.user)
@@ -17,6 +18,7 @@ export default function NavbarBS() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { logout } = userActions;
+  const {t} = useTranslation()
 
   useEffect(() => {
     setOpen(false)
@@ -57,17 +59,17 @@ export default function NavbarBS() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className='navColapse'>
           <Nav className="me-auto nav-flex1">
-            <Link className='nav-btn' to="/">Home</Link>
-            <Link className='nav-btn' to="/artists">Artists</Link>
-            <Link className='nav-btn' to="/concerts">Concerts</Link>
+            <Link className='nav-btn' to="/">{t('home')}</Link>
+            <Link className='nav-btn' to="/artists">{t('artist')}</Link>
+            <Link className='nav-btn' to="/concerts">{t('concert')}</Link>
             <Link className='nav-btn-cart' to="cart"><img src="../assets/img/cart.png" alt="cart" width='40px' /></Link>
             {!online ? (
               <div>
                 <ButtonNav fx={() => setOpen(!open)} />
                 {open && (
                   <div className='menu'>
-                    <Link className='nav-btn' to="signup">Sign Up</Link>
-                    <Link className='nav-btn' to="signin">Sign In</Link>
+                    <Link className='nav-btn' to="signup">{t('sign_up')}</Link>
+                    <Link className='nav-btn' to="signin">{t('sign_in')} </Link>
                   </div>
                 )}
               </div>
@@ -77,8 +79,8 @@ export default function NavbarBS() {
                 <h5 className='text-white fs-6'>{name}</h5>
                 {open && (
                   <div className='menu'>
-                    <Link className='nav-btn' to="profile">My Profile</Link>
-                    <Link className='nav-btn' onClick={signOut}>Logout</Link>
+                    <Link className='nav-btn' to="profile">{t('profile')}</Link>
+                    <Link className='nav-btn' onClick={signOut}>{t('log_out')}</Link>
                   </div>
                 )}
               </div>

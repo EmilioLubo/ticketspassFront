@@ -5,11 +5,13 @@ import ConcertCard from "../../components/Concerts/ConcertCard/ConcertCard";
 import concertsActions from "../../redux/actions/concertsActions";
 import Search from "../../utils/search/Search";
 import "./Concerts.css";
+import { useTranslation } from "react-i18next";
 
 export default function Concerts() {
     const dispatch = useDispatch();
     const { getInitialData, getQuery } = concertsActions;
     const { concerts, search, initial, loading, message } = useSelector(store => store.concerts);
+    const {t} = useTranslation()
 
     useState(() => {
         if (initial) {
@@ -26,7 +28,7 @@ export default function Concerts() {
             <div className='backNav'></div>
             <div className="p-5 container">
                 <div className="mb-4 d-flex justify-content-end">
-                    <Search placeholder="Search by concert" onChange={onSearch} defaultValue={search} />
+                    <Search placeholder={t('search_c')} onChange={onSearch} defaultValue={search} />
                 </div>
                 {loading ? (
                     <div className="d-flex justify-content-center">

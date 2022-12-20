@@ -9,6 +9,7 @@ import "./Concert.css";
 import { Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 export default function Concert() {
    const { id } = useParams();
@@ -18,6 +19,7 @@ export default function Concert() {
    const [cart, setCart] = useState([]);
    const { online } = useSelector(state => state.user)
    const navigate = useNavigate()
+   const {t} = useTranslation()
 
    useEffect(() => {
       let cart = localStorage.getItem("cart");
@@ -45,8 +47,8 @@ export default function Concert() {
          localStorage.setItem("cart", JSON.stringify(cart));
       } else {
          Swal.fire({
-            title: "Redirect to login?",
-            text: "you must be logged to complete this action",
+            title: t('alert_redir_log'),
+            text: t('alert_ticket_cart'),
             icon: "warning",
             showCloseButton: true,
             showConfirmButton: true,
@@ -85,7 +87,7 @@ export default function Concert() {
                      </p>
                   </div>
                   <div className="d-flex gap-2 align-items-center">
-                     <h4 className="text-main fw-bold">{concert.type === "festival" ? "Lineup :" : "Artist :"}</h4>
+                     <h4 className="text-main fw-bold">{concert.type === "festival" ? "Lineup :" : t('art') + ":" }</h4>
                      {concert.artists.map(artist => (
                         <p key={artist._id} className="fs-6 mb-0">
                            <FontAwesomeIcon icon={faMusic} /> {artist.name}
@@ -95,7 +97,7 @@ export default function Concert() {
                </div>
                <div className="col-md col-lg-4">
                   <div className="border mb-3 p-2">
-                     <h3 className="text-center text-main fw-bold">Tickets</h3>
+                     <h3 className="text-center text-main fw-bold">{t('ticket')}</h3>
                      <div className="d-flex justify-content-between">
                         <p className="text-decoration-underline">{concert.category.name}</p>
                         <p className="fw-semibold">${concert.category.price.toLocaleString()} ARS</p>
@@ -109,8 +111,8 @@ export default function Concert() {
                      >
                         <FontAwesomeIcon icon={faCartShopping} />{" "}
                         {cart.some(product => product.category.name === concert.category.name && product._id === concert._id)
-                           ? "added to cart"
-                           : "add to cart "}
+                           ? t('added')
+                           : t('add')}
                      </Button>
                   </div>
                </div>
