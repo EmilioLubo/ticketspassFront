@@ -21,7 +21,7 @@ export default function NavbarBS() {
   const {t} = useTranslation()
   let togglerRef = useRef(null)
   let collapseRef = useRef(null)
-
+  const [isHome, setIsHome] = useState(true);
 
   useEffect(() => {
     document.addEventListener('mouseup', e => {
@@ -39,6 +39,11 @@ export default function NavbarBS() {
     if(collapseRef.current.classList.contains('show')){
       togglerRef.current.click()
     }  
+    if(location.pathname === "/") {
+        setIsHome(true);
+    } else {
+        setIsHome(false);
+    }
   }, [location])
 
   function signOut() {
@@ -64,12 +69,14 @@ export default function NavbarBS() {
 }
 
   return (
- <Navbar collapseOnSelect className="navBar" bg="transparent" expand="lg" variant="dark">
+ <Navbar collapseOnSelect className={`navBar ${isHome ? 'Navbar-transparent' : 'Navbar-solid' }`} expand="lg" variant="dark">
             <Container className="nav-flex2" style={{ alignItems: "center", display: "flex" }}>
-                <Navbar.Brand href="../assets/img/logo.png" style={{ margin: "0" }}>
+                <Link to="/" style={{textDecoration: 'none'}}>
+                <Navbar.Brand style={{ margin: "0" }}>
                     <img className="navbar-logo pb-2 pe-2" src="../assets/img/logo.png" alt="Logo" />
                     TicketsPass
                 </Navbar.Brand>
+                </Link>
                 <Navbar.Toggle ref={togglerRef} aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse ref={collapseRef} id="responsive-navbar-nav" className="navColapse">
                     <Nav className="me-auto nav-flex1">

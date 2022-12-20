@@ -73,7 +73,6 @@ export default function Form() {
     }
     return (
         <>
-            <div className='backNav'></div>
             <form onKeyUp={keySend} ref={formRef} className="formSign pb-5" >
                 <div>
                     <div className="form-shadows-content">

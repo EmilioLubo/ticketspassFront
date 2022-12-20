@@ -62,7 +62,6 @@ export const Artists = () => {
 
     return (
         <>
-            <div className='backNav'></div>
             <div className='full-container-fluid pt-4'>
                 <h1 className='text-center'>{t('artist')}</h1>
                 <div className="d-flex justify-content-between flex-wrap gap-4 px-5">
