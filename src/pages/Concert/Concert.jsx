@@ -16,34 +16,52 @@ export default function Concert() {
    const [concert, setConcert] = useState(null);
    const [loading, setLoading] = useState(true);
    const [message, setMessage] = useState("");
-   const [cart, setCart] = useState([]);
-   const { online } = useSelector(state => state.user)
+   const [items, setItems] = useState([]);
+   const { online, token } = useSelector(state => state.user)
    const navigate = useNavigate()
 
    useEffect(() => {
-      let cart = localStorage.getItem("cart");
-      setCart(cart ? JSON.parse(cart) : []);
-      getConcert(id);
+      getData(id); //eslint-disable-next-line
    }, [id]);
 
-   const getConcert = async concertId => {
+   const getData = async concertId => {
       try {
-         const res = await axios.get(`${process.env.REACT_APP_URL || BASE_URL}/api/concerts/${concertId}`);
+         const res = await axios.get(`${BASE_URL}/api/concerts/${concertId}`);
          setConcert(res.data.response);
       } catch (error) {
          setMessage(error.response ? error.response.data.message || error.response.data : error.message);
       } finally {
          setLoading(false);
       }
+      await getCart();
    };
 
-   const addToCart = data => {
+   const getCart = async () => {
+      if(online) {
+         let headers = { headers: {Authorization: `Bearer ${token}`} }
+         try {
+            let res = await axios.get(`${BASE_URL}/api/carts`, headers);
+            setItems(res.data.response.items);
+         } catch {
+            setItems([]);
+         }
+      }
+   }
+
+   const addToCart = async data => {
       if (online) {
-         let cart = localStorage.getItem("cart");
-         cart = cart ? JSON.parse(cart) : [];
-         cart = [...cart, data];
-         setCart(cart);
-         localStorage.setItem("cart", JSON.stringify(cart));
+         let headers = { headers: {Authorization: `Bearer ${token}`} }
+         try {
+         let res = await axios.post(`${BASE_URL}/api/carts`, {concertId: data._id, quantity: 1}, headers);
+         setItems(res.data.response.items);
+         }catch(error) {
+            Swal.fire({
+               title: "Error",
+               text: error.response ? error.response.data.message || error.response.data : error.message,
+               icon: "error"
+            })
+         }
+         
       } else {
          Swal.fire({
             title: "Redirect to login?",
@@ -70,7 +88,7 @@ export default function Concert() {
          <div className='backNav'></div>
          <div className="w-100 pb-4">
             <div className="Concert-banner" style={{ backgroundImage: `url(${concert.banner})` }}>
-               <h2 className="text-light text-detail text-center">{concert.name}</h2>
+               <h2 className="text-light text-detail text-center text-capitalize">{concert.name}</h2>
             </div>
             <div className="row ps-5 pe-5 pt-5 pb-5 w-100">
                <div className="col-md col-lg-8 pe-5 d-flex flex-column gap-4 pb-5">
@@ -107,12 +125,12 @@ export default function Concert() {
                      <Button
                         variant="main"
                         onClick={() => addToCart(concert)}
-                        disabled={cart.some(
-                           product => product.category.name === concert.category.name && product._id === concert._id
+                        disabled={items.some(
+                           product => product.categoryName === concert.category.name && product.concertId === concert._id
                         )}
                      >
                         <FontAwesomeIcon icon={faCartShopping} />{" "}
-                        {cart.some(product => product.category.name === concert.category.name && product._id === concert._id)
+                        {items.some(product => product.categoryName === concert.category.name && product.concertId === concert._id)
                            ? "added to cart"
                            : "add to cart "}
                      </Button>

@@ -1,47 +1,75 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React from 'react'
+import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
+import { BASE_URL } from '../../api/url'
 
 export default function Product(props) {
+    let { token } = useSelector(store => store.user);
+    let { item, setCart} = props
 
-    let { item, cart , fx} = props
-
-    const [total, setTotal] = useState(item.price)
-    const [quantity, setQuantity] = useState(1)
-
-    function add() {
-        setQuantity(quantity + 1)
-        setTotal(total + item.price) 
+    const add = async() => {
+        let headers = {headers: {Authorization: `Bearer ${token}`}}
+        try {
+            let res = await axios.post(`${BASE_URL}/api/carts`, {concertId: item.concertId, quantity: item.quantity + 1}, headers);
+            setCart(res.data.response);
+        }catch(error) {
+            Swal.fire(
+                'Error',
+                error.response ? error.response.data.message || error.response.data : error.message,
+                'error'
+            )
+        }
     }
     
-
-    function remove() {
-        if (quantity > 1) {
-            setQuantity(quantity - 1)
-            setTotal(total - item.price)
+    const remove = async() => {
+        let headers = {headers: {Authorization: `Bearer ${token}`}}
+        if (item.quantity > 1) {
+            try {
+                let res = await axios.post(`${BASE_URL}/api/carts`, {concertId: item.concertId, quantity: item.quantity - 1}, headers);
+                setCart(res.data.response);
+            } catch(error) {
+                Swal.fire(
+                    'Error',
+                    error.response ? error.response.data.message || error.response.data : error.message,
+                    'error'
+                )
+            }
         }
         else {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+            let confirmation = await Swal.fire({
+                title: 'Confirmation',
+                text: "Are you sure you want to remove this item from the cart?",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    cart = cart.filter((product) => product._id !== item._id)
-                    localStorage.setItem('cart', JSON.stringify(cart))
-                    fx()
+            })
+            if (confirmation.isConfirmed) {
+                try {
+                    let res = await axios.delete(`${BASE_URL}/api/carts?concertId=${item.concertId}`, headers);
+                    if(res.data.response.items.length === 0) {
+                        setCart(null)
+                    } else {
+                        setCart(res.data.response); 
+                    }
                     Swal.fire(
                         'Deleted!',
                         'Your product has been deleted.',
                         'success'
                     )
+                }catch(error) {
+                    Swal.fire(
+                        'Error',
+                        error.response ? error.response.data.message || error.response.data : error.message,
+                        'error'
+                    )
                 }
-            })
+            }
         }
     }
+    
 
 
 
@@ -51,19 +79,19 @@ export default function Product(props) {
                 <img src={item.photo} className="img-fluid" alt="..." width="100px" />
             </td>
             <td className='text-center'>
-                {item.name}
+                {item.concertName} - {item.categoryName}
             </td>
             <td className='text-center'>
-                {item.category.price}
+                {item.price.toLocaleString()}
             </td>
             <td className='text-center'>
                 <button className="btn btn-primary m-4" onClick={remove}>-</button>
-                {quantity}
+                {item.quantity}
                 <button className="btn btn-primary m-4" onClick={add}>+</button>
 
             </td>
             <td className='text-center'>
-                {item.category.price * quantity}
+                {(item.price * item.quantity).toLocaleString()}
             </td>
             </tr>
     )
