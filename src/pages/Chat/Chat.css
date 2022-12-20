@@ -2,6 +2,7 @@
   max-width: 800px;
   width: 100%;
   background-color: #18181B;
+  position: relative;
 }
 .Chat {
   max-width: 800px;
@@ -20,4 +21,20 @@
 }
 .Chat-input::placeholder {
   color:rgb(212, 212, 212)
+}
+.Chat-picker {
+  position: absolute;
+  bottom: 130px;
+  right: 20px
+}
+.Picker-button {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  border-radius: 8px;
+  background: #3D3D40;
+  border: 0;
+}
+.Picker-button:hover {
+  background: #505055;
 }
