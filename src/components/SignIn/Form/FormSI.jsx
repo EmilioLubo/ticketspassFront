@@ -15,6 +15,7 @@ export default function Form() {
     const passwordRef = useRef()
     const formRef = useRef()
     const {t} = useTranslation()
+    const submitRef = useRef()
 
     async function saveData(e) {
         e.preventDefault()
@@ -23,47 +24,54 @@ export default function Form() {
             password: passwordRef.current.value,
         }
         try {
-            let response = await dispatch(login(userValue)).unwrap()
-            let res = response.res
-            if (res.success) {
+            let res = await dispatch(login(userValue)).unwrap()
+            let {response, success, message} = res
+            if(success){
                 Swal.fire({
-                    title: res.message,
-                    html: t('alert_redir_log_in'),
+                    title: '¡Success!',
+                    html: message,
                     timer: 2200,
                     timerProgressBar: true,
                     willClose: () => {
                         navigate('/')
                     }
                 })
-            }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'We found an error...',
-                    text: `Errors: `,
-                })
+            } else {
+                if(Array.isArray(response)){
+                    let text = response.join('<br>')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Errors: ',
+                        text: text,
+                    })
+                } else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Errors: ',
+                        text: response,
+                    })
+                }
             }
         } catch (error) {
-            console.log(error);
-            if (Array.isArray(error)) {
-                Swal.fire({
-                    icon: "error",
-                    title: error,
-                    showConfirmButton: true,
-                });
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: t('alert_pass_mail'),
-                    showConfirmButton: true,
-                });
-            }
+            Swal.fire({
+                icon: "error",
+                title: error.message,
+                showConfirmButton: true,
+            });
+            
+
+        }
+    }
+
+    let keySend = (e) => {
+        if(e.key === 'Enter'){
+            submitRef.current.click()
         }
     }
     return (
         <>
             <div className='backNav'></div>
-            <form ref={formRef} className="formSign pb-5" >
+            <form onKeyUp={keySend} ref={formRef} className="formSign pb-5" >
                 <div>
                     <div className="form-shadows-content">
                     <div className="form-title-div">
@@ -98,13 +106,12 @@ export default function Form() {
                         required
                     />
                     <div className="submitSign">
-                        <input onClick={saveData} className="submit2Sign" type='button' value={t('log_in')} />
+                        <input ref={submitRef} onClick={saveData} className="submit2Sign" type='button' value={t('log_in')} />
                     </div>
                 </div>
                 </div>
                 
                 <div className='right'>
-
                 </div>
             </form>
         </>

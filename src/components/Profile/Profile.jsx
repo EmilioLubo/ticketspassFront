@@ -4,8 +4,7 @@ import './Profile.css'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
-import axios from "axios";
-import { BASE_URL } from "../../api/url";
+
 
 
 import { useTranslation } from "react-i18next";

@@ -1,3 +1,8 @@
+.user__img:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: .5s;
+}
 .navBar {
     display: flex;
     width: 100%;
@@ -75,10 +80,21 @@
     background-color: rgba(0, 0, 0, .7);
     position: absolute;
     top: 100px;
-    right: 150px;
+    right: 100px;
     z-index: 20;
 }
-
+.menu-in{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, .7);
+    position: absolute;
+    top: 125px;
+    right: 100px;
+    z-index: 20;
+}
 @media screen and (max-width: 990px) {
 
     .navColapse {
@@ -89,7 +105,11 @@
     }
 
     .menu{
-        top: 370px;
+        top: 320px;
+        right: 40%;
+    }
+    .menu-in{
+        top: 425px;
         right: 40%;
     }
 
@@ -97,14 +117,22 @@
 
 @media screen and (max-width: 600px) {
     .menu{
-        top: 370px;
+        top: 320px;
+        right: 35%;
+    }
+    .menu-in{
+        top: 425px;
         right: 35%;
     }
 }
 
 @media screen and (max-width: 400px) {
     .menu{
-        top: 370px;
+        top: 320px;
+        right: 30%;
+    }
+    .menu-in{
+        top: 425px;
         right: 30%;
     }
 }
