@@ -14,6 +14,7 @@ import userActions from "../../redux/actions/userActions";
 // Hay un error con la funcion fetchData. Se accede correctamente a la información, siempre y cuando la pagina no sea recargada. Si la pagina no se recarga esta se muestra adecuadamente al usuario junto a los datos traidos correctamente. Sin embargo, si la pagina se recarga, las propiedades aparecen como undefined, dando un error en la consola y crasheando el componente entero. Mi teoria, el return devuelve los objetos antes de que las funciones se ejecuten. I dont know why.
 
 export default function Profile() {
+
     let dispatch = useDispatch()
     let {reLogin} = userActions
     const {t} = useTranslation()
@@ -26,6 +27,8 @@ export default function Profile() {
     
 
     console.log(user)
+
+ 
     const [state, setState] = useState("details")
     return (
         <div className="Profile-Background">
