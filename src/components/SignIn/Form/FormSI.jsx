@@ -13,6 +13,7 @@ export default function Form() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const formRef = useRef()
+    const submitRef = useRef()
 
     async function saveData(e) {
         e.preventDefault()
@@ -21,54 +22,61 @@ export default function Form() {
             password: passwordRef.current.value,
         }
         try {
-            let response = await dispatch(login(userValue)).unwrap()
-            let res = response.res
-            if (res.success) {
+            let res = await dispatch(login(userValue)).unwrap()
+            let {response, success, message} = res
+            if(success){
                 Swal.fire({
-                    title: res.message,
-                    html: "We're redirecting you to Home Page...",
+                    title: '¡Success!',
+                    html: message,
                     timer: 2200,
                     timerProgressBar: true,
                     willClose: () => {
                         navigate('/')
                     }
                 })
-            }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'We found an error...',
-                    text: `Errors: `,
-                })
+            } else {
+                if(Array.isArray(response)){
+                    let text = response.join('<br>')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Errors: ',
+                        text: text,
+                    })
+                } else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Errors: ',
+                        text: response,
+                    })
+                }
             }
         } catch (error) {
-            console.log(error);
-            if (Array.isArray(error)) {
-                Swal.fire({
-                    icon: "error",
-                    title: error,
-                    showConfirmButton: true,
-                });
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Wrong email or password.",
-                    showConfirmButton: true,
-                });
-            }
+            Swal.fire({
+                icon: "error",
+                title: error.message,
+                showConfirmButton: true,
+            });
+            
+
+        }
+    }
+
+    let keySend = (e) => {
+        if(e.key === 'Enter'){
+            submitRef.current.click()
         }
     }
     return (
         <>
             <div className='backNav'></div>
-            <form ref={formRef} className="formSign pb-5" >
+            <form onKeyUp={keySend} ref={formRef} className="formSign pb-5" >
                 <div>
                     <div className="form-shadows-content">
                     <div className="form-title-div">
                         <h2 className="title2Sign">Login to Your Account</h2>
                     </div>
                     <div className="d-flex flex-column align-items-center gap-2">
-                        <h5>Login usins social networks</h5>
+                        <h5>Login using social networks</h5>
                         <div className="social-networks">
                             <SocialIcon className="icon-social" network="facebook" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
                             <SocialIcon className="icon-social" network="instagram" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
@@ -96,7 +104,7 @@ export default function Form() {
                         required
                     />
                     <div className="submitSign">
-                        <input onClick={saveData} className="submit2Sign" type='button' value='Login' />
+                        <input ref={submitRef} onClick={saveData} className="submit2Sign" type='button' value='Login' />
                     </div>
                 </div>
                 </div>
