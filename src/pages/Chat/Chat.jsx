@@ -41,38 +41,43 @@ export default function Chat() {
   };
 
   return (
-    <div className="Chat-container my-5 mx-auto border p-3">
-      <div className="Chat d-flex flex-column justify-content-end">
-        {messages.map((message, index) => (
-          <p className="text-white" key={index}>
-            <span style={{ color: message.color, fontWeight: "bold" }}>{message.name}: </span>
-            {message.message}
-          </p>
-        ))}
+    <div className="d-flex Stream-container">
+      <div className="w-100">
+      <iframe className="h-100" src="https://www.youtube.com/embed/qZcir2K__l8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <form ref={formRef} className="d-flex flex-column" onSubmit={sendMessage}>
-        <div className="d-flex">
-          <input
-            autoComplete="off"
-            name="message"
-            placeholder="Send Message"
-            className="border-0 text-white p-2 Chat-input"
-            maxLength={100}
-          />
-          <button type="button" onClick={togglePicker} className="Picker-button">
-            <FontAwesomeIcon className="fs-5 text-white" icon={faFaceSmile} />
-          </button>
+      <div className="Chat-container border p-3">
+        <div className="Chat d-flex flex-column justify-content-end">
+          {messages.map((message, index) => (
+            <p className="text-white" key={index}>
+              <span style={{ color: message.color, fontWeight: "bold" }}>{message.name}: </span>
+              {message.message}
+            </p>
+          ))}
         </div>
-        {openPicker && (
-          <div className="Chat-picker">
-            <Picker onEmojiClick={addEmoji} native />
+        <form ref={formRef} className="d-flex flex-column" onSubmit={sendMessage}>
+          <div className="d-flex">
+            <input
+              autoComplete="off"
+              name="message"
+              placeholder="Send Message"
+              className="border-0 text-white p-2 Chat-input"
+              maxLength={100}
+            />
+            <button type="button" onClick={togglePicker} className="Picker-button">
+              <FontAwesomeIcon className="fs-5 text-white" icon={faFaceSmile} />
+            </button>
           </div>
-        )}
+          {openPicker && (
+            <div className="Chat-picker">
+              <Picker onEmojiClick={addEmoji} native />
+            </div>
+          )}
 
-        <Button type="submit" variant="main" className="ms-auto">
-          Chat
-        </Button>
-      </form>
+          <Button type="submit" variant="main" className="ms-auto">
+            Chat
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -1,12 +1,19 @@
+.Stream-container {
+
+}
 .Chat-container {
-  max-width: 800px;
+  max-width: 400px;
   width: 100%;
+  height: 800px;
   background-color: #18181B;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: auto;
 }
 .Chat {
-  max-width: 800px;
-  height: 600px;
+  max-width: 400px;
+  flex-grow: 1;
   max-height: 80%;
   overflow-y: auto;
   word-wrap: break-word;
