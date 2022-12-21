@@ -124,7 +124,6 @@ input[type="file"] {
     margin-top: 40px;
     text-transform: uppercase;
     font-weight: bold;
-
 }
 .Alert{
     background-color: black;
@@ -154,9 +153,8 @@ input[type="file"] {
     margin-bottom: 5px;
     width: 400px;
     padding: 5px;
-
 }
-    .container-box-profile > p{
+.container-box-profile > p{
     text-decoration: none;
     color: white; 
     max-width: 100%;
@@ -169,4 +167,71 @@ input[type="file"] {
     overflow-x: hidden;
     overflow-y: auto;
     text-align:justify;
+}
+
+.btn-design-profile{
+    background-color: #22013f;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+@media screen and (max-width:700px){
+    .Profile-Background{
+        height: auto;
+        width: 100%;
+    }
+    .Profile-Container{
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        border-radius: 0%;
+    }
+    .Profile-ColumnLeft{
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        border-top-left-radius: 0%;
+        border-bottom-left-radius: 0%;
+    }
+    .Profile-ColumnRight{
+        width: 100%;
+        height: auto;
+    }
+    .Profile-Options{
+        justify-content: center;
+        width: 100%;
+    }
+    .Profile-Block-Container-2{
+        justify-content: center;
+        gap: 1rem;
+        flex-direction: row;
+        text-align: center;
+        width: 100%;
+        height: auto;
+        width: 100%;
+    }
+    .container-box-profile{
+        width: 100%;
+    }
+    .Profile-social-icons {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 10px;  
+  }
+    .Profile-Block-Container-1{
+        justify-content: center;
+        align-items: center;
+        gap: 0.4rem;
+    }
 }
