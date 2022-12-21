@@ -16,8 +16,6 @@ export default function Form() {
     const formRef = useRef()
 
     const {t} = useTranslation()
-    const submitRef = useRef()
-
 
     async function saveData(e) {
         e.preventDefault()
@@ -45,7 +43,7 @@ export default function Form() {
                     Swal.fire({
                         icon: 'error',
                         title: 'Errors: ',
-                        text: text,
+                        html: text,
                     })
                 } else{
                     Swal.fire({
@@ -66,14 +64,8 @@ export default function Form() {
         }
     }
 
-    let keySend = (e) => {
-        if(e.key === 'Enter'){
-            submitRef.current.click()
-        }
-    }
     return (
         <>
-            <div className='backNav'></div>
             <div className="full-container-fluid d-flex container-login">
                 <div className="w-100">
                     <form ref={formRef} className="formSign pb-5" >
@@ -107,7 +99,7 @@ export default function Form() {
                                 <label for="password">Password</label>
                             </div>
                             <div className="d-flex justify-content-center">
-                                <p onClick={saveData} className="submit2Sign">Sign In</p>
+                                <button onClick={saveData} className="submit2Sign">Sign In</button>
                             </div>
                         </div>
                     </form>

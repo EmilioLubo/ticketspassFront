@@ -70,27 +70,25 @@ export default function Product(props) {
         }
     }
     
-
-
-
     return (
-        <tr valign='baseline'>
-            <td className="text-center">
-                <img src={item.photo} className="img-fluid" alt="..." width="100px" />
+        <tr className='align-middle'>
+            <td className="text-center" style={{width: "200px"}}>
+                <img src={item.photo} alt="concert" width="100px" />
             </td>
-            <td className='text-center'>
+            <td className='text-center' style={{width: "200px"}}>
                 {item.concertName} - {item.categoryName}
             </td>
-            <td className='text-center'>
+            <td className='text-center' style={{width: "200px"}}>
                 {item.price.toLocaleString()}
             </td>
-            <td className='text-center'>
-                <button className="btn btn-primary m-4" onClick={remove}>-</button>
+            <td className='text-center' style={{width: "200px"}}>
+                <div className='d-flex align-items-center justify-content-center h-100'>
+                <button className="btn btn-primary mx-2 " onClick={remove}>-</button>
                 {item.quantity}
-                <button className="btn btn-primary m-4" onClick={add}>+</button>
-
+                <button className="btn btn-primary mx-2" onClick={add}>+</button>
+                </div>
             </td>
-            <td className='text-center'>
+            <td className='text-center' style={{width: "200px"}}>
                 {(item.price * item.quantity).toLocaleString()}
             </td>
             </tr>

@@ -13,7 +13,7 @@ const login = createAsyncThunk('login', async (datos) => {
     } catch (error) {
         return {
             success: false,
-            response: error.response.data.message
+            response: error.response ? error.response.data.message : error.message
         }
     }
 })

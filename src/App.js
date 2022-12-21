@@ -27,6 +27,7 @@ import EditArtist from "./pages/EditArtist/EditArtist";
 import ProcessPayment from "./pages/ProcessPayment/ProcessPayment";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from "./pages/MyProfile/MyProfile";
+import Chat from "./pages/Chat/Chat";
 
 export default function App() {
   const dispatch = useDispatch()
@@ -77,6 +78,7 @@ let isLoading = async() => {
           </Route>
           <Route path="artists" element={<Artists/>}/>
           <Route path="artists/:id" element={<ArtistDetail/>}/>
+          <Route path="chat" element={<Chat />} />
           <Route element={<ProtectedRoute isAllowed={!online} reDirect={'/'}/> }>
             <Route path="signup" element={<SignUp />} />
             <Route path="signin" element={<SignIn />} />
