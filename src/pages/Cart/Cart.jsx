@@ -20,23 +20,23 @@ export default function Cart() {
 
 
     const getCart = async () => {
-        let headers = {headers: {Authorization: `Bearer ${token}`}}
+        let headers = { headers: { Authorization: `Bearer ${token}` } }
         try {
             let res = await axios.get(`${BASE_URL}/api/carts`, headers);
             setCart(res.data.response);
             setLoading(false);
-        }catch {
+        } catch {
             setLoading(false);
         }
     }
 
     const goToPayment = async () => {
         try {
-            let headers = {headers: {Authorization: `Bearer ${token}`}}
+            let headers = { headers: { Authorization: `Bearer ${token}` } }
             let res = await axios.get(`${BASE_URL}/api/carts/pay`, headers);
             let response = res.data.response;
             window.location.href = response.sandbox_init_point;
-        }catch(error) {
+        } catch (error) {
             console.log(error)
         }
     }
@@ -53,7 +53,7 @@ export default function Cart() {
             confirmButtonText: 'Yes, clear cart!'
         }).then((result) => {
             if (result.isConfirmed) {
-                let headers = {headers: {Authorization: `Bearer ${token}`}}
+                let headers = { headers: { Authorization: `Bearer ${token}` } }
                 axios.delete(`${BASE_URL}/api/carts/${cart._id}`, headers).then(res => {
                     Swal.fire(
                         'Deleted!',
@@ -76,8 +76,8 @@ export default function Cart() {
         <>
             {
                 loading ? <div className="d-flex justify-content-center">
-                <Spinner className="text-center" />
-            </div> : !!cart ? (
+                    <Spinner className="text-center" />
+                </div> : !!cart ? (
                     <>
                         <div className='backNav'></div>
                         <table className="table container-fluid">
@@ -117,7 +117,9 @@ export default function Cart() {
                             </div>
                         </div>
                     </>
-                ) : (
+                    <>
+                        <div className='backNav'></div>
+
                     <div className="text-center p-5">
                         <img className="img-fluid" src="../assets/img/cartClear.png" alt="StockClear" width="300px" />
                         <h1>{t('shop_cart_found')}</h1>
