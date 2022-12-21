@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import userActions from '../../../redux/actions/userActions';
+import { useTranslation } from 'react-i18next';
 
 export default function NavbarBS() {
   let { online, name, photo, token, role } = useSelector(state => state.user)
@@ -17,8 +18,10 @@ export default function NavbarBS() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { logout } = userActions;
+  const {t} = useTranslation()
   let togglerRef = useRef(null)
   let collapseRef = useRef(null)
+  const [isHome, setIsHome] = useState(true);
 
   useEffect(() => {
     document.addEventListener('mouseup', e => {
@@ -36,6 +39,11 @@ export default function NavbarBS() {
     if(collapseRef.current.classList.contains('show')){
       togglerRef.current.click()
     }  
+    if(location.pathname === "/") {
+        setIsHome(true);
+    } else {
+        setIsHome(false);
+    }
   }, [location])
 
   function signOut() {
@@ -61,49 +69,69 @@ export default function NavbarBS() {
 }
 
   return (
- 
-      <Navbar collapseOnSelect className='navBar' bg="transparent" expand="lg" variant="dark" >
-        <Container className='' style={{ alignItems: 'center', display: 'flex' }}>
-              <Navbar.Brand href='../assets/img/logo.png' style={{ margin: '0' }}>
-              <img className='navbar-logo pb-2 pe-2' src='../assets/img/logo.png' alt="Logo" />
-                TicketsPass</Navbar.Brand>
-          <Navbar.Toggle ref={togglerRef} aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse ref={collapseRef} id="responsive-navbar-nav" className='navColapse'>
-            <Nav className="me-auto nav-flex1">
-              <Link className='nav-btn' to="/">Home</Link>
-              <Link className='nav-btn' to="/artists">Artists</Link>
-              <Link className='nav-btn' to="/concerts">Concerts</Link>
-              {!online ? (
-                <div className='navDrop'>
-                  <ButtonNav ku={(e) => e.key === 'Escape' ? setOpen(false) : ''} fx={() => setOpen(!open)} />
-                  {open && (
-                    <div className='menu'>
-                      <Link className='nav-btn navDrop' to="signup">Sign Up</Link>
-                      <Link className='nav-btn navDrop' to="signin">Sign In</Link>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                  <>
-                    <Link className='nav-btn-cart' to="cart"><img src="../assets/img/cart.png" alt="cart" width='40px' /></Link>
-                                    <div className='navDrop d-flex flex-column align-items-center justify-content-center gap-1 pt-4'>
-                    <img className='navDrop user__img' src={photo} width='40' alt="userLoged" onKeyUp={(e) => e.key === 'Escape' ? setOpen(false) : ''} onClick={() => setOpen(!open)} />
-                    <h5 className='text-white fs-6'>{name}</h5>
-                    {open && (
-                      <div className='menu-in'>
-                        {role === 'admin' &&
-                        <Link className='nav-btn navDrop' to={'/admin'}>Admin Panel</Link>
-                        }
-                        <Link className='nav-btn navDrop' to="profile">My Profile</Link>
-                        <Link className='nav-btn navDrop' onClick={signOut}>Logout</Link>
-                      </div>
-                    )}
+ <Navbar collapseOnSelect className={`navBar ${isHome ? 'Navbar-transparent' : 'Navbar-solid' }`} expand="lg" variant="dark">
+            <Container className="nav-flex2" style={{ alignItems: "center", display: "flex" }}>
+                <Link to="/" style={{textDecoration: 'none'}}>
+                <Navbar.Brand style={{ margin: "0" }}>
+                    <img className="navbar-logo pb-2 pe-2" src="../assets/img/logo.png" alt="Logo" />
+                    TicketsPass
+                </Navbar.Brand>
+                </Link>
+                <Navbar.Toggle ref={togglerRef} aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse ref={collapseRef} id="responsive-navbar-nav" className="navColapse">
+                    <Nav className="me-auto nav-flex1">
+                        <Link className="nav-btn" to="/">
+                            {t("home")}
+                        </Link>
+                        <Link className="nav-btn" to="/artists">
+                            {t("artist")}
+                        </Link>
+                        <Link className="nav-btn" to="/concerts">
+                            {t("concert")}
+                        </Link>
+                        {!online ? (
+                            <div className="navDrop">
+                                <ButtonNav ku={(e) => (e.key === "Escape" ? setOpen(false) : "")} fx={() => setOpen(!open)} />
+                                {open && (
+                                    <div className="menu">
+                                        <Link className="nav-btn navDrop" to="signup">
+                                            {t("sign_up")}
+                                        </Link>
+                                        <Link className="nav-btn navDrop" to="signin">
+                                            {t("sign_in")}{" "}
+                                        </Link>
                                     </div>
-                  </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+                                )}
+                            </div>
+                        ) : (
+                            <>
+                                <Link className="nav-btn-cart" to="cart">
+                                    <img src="../assets/img/cart.png" alt="cart" width="40px" />
+                                </Link>
+                                <div className="navDrop d-flex flex-column align-items-center justify-content-center gap-1 pt-4">
+                                    <img className="navDrop user__img" src={photo} width="40" alt="userLoged" onKeyUp={(e) => (e.key === "Escape" ? setOpen(false) : "")} onClick={() => setOpen(!open)} />
+                                    <h5 className="text-white fs-6">{name}</h5>
+                                    {open && (
+                                        <div className="menu-in">
+                                            {role === "admin" && (
+                                                <Link className="nav-btn navDrop" to={"/admin"}>
+                                                    Admin Panel
+                                                </Link>
+                                            )}
+                                            <Link className="nav-btn navDrop" to="profile">
+                                                {t("profile")}
+                                            </Link>
+                                            <Link className="nav-btn navDrop" onClick={signOut}>
+                                                {t("log_out")}
+                                            </Link>
+                                        </div>
+                                    )}
+                                </div>
+                            </>
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
   );
 }

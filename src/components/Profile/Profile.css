@@ -111,6 +111,10 @@ input[type="file"] {
 .Profile-Internal-Block2 > h6{
     color: white
 }
+.personal-data{
+    display: flex;
+    flex-direction: column;
+}
 .Container-ColumnRight{
     display: flex;
     flex-direction: column;

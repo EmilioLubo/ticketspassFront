@@ -22,5 +22,4 @@ span{
 .arrow-icon:active{
     transform: rotate(3.142rad);
     transition: .8s;
-    
 }

@@ -9,6 +9,7 @@ import "./Concert.css";
 import { Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function Concert() {
@@ -19,10 +20,13 @@ export default function Concert() {
    const [items, setItems] = useState([]);
    const { online, token } = useSelector(state => state.user)
    const navigate = useNavigate()
+   const {t} = useTranslation()
 
-   useEffect(() => {
-      getData(id); //eslint-disable-next-line
-   }, [id]);
+
+   useEffect(()=>{
+      getData(id)
+   },[])
+   
 
    const getData = async concertId => {
       try {
@@ -36,17 +40,21 @@ export default function Concert() {
       await getCart();
    };
 
+
+
    const getCart = async () => {
       if(online) {
          let headers = { headers: {Authorization: `Bearer ${token}`} }
          try {
             let res = await axios.get(`${BASE_URL}/api/carts`, headers);
+            console.log(res)
             setItems(res.data.response.items);
          } catch {
             setItems([]);
          }
       }
    }
+   console.log(items)
 
    const addToCart = async data => {
       if (online) {
@@ -61,11 +69,10 @@ export default function Concert() {
                icon: "error"
             })
          }
-         
       } else {
          Swal.fire({
-            title: "Redirect to login?",
-            text: "you must be logged to complete this action",
+            title: t('alert_redir_log'),
+            text: t('alert_ticket_cart'),
             icon: "warning",
             showCloseButton: true,
             showConfirmButton: true,
@@ -85,7 +92,6 @@ export default function Concert() {
       </div>
    ) : !!concert ? (
       <>
-         <div className='backNav'></div>
          <div className="w-100 pb-4">
             <div className="Concert-banner" style={{ backgroundImage: `url(${concert.banner})` }}>
                <h2 className="text-light text-detail text-center text-capitalize">{concert.name}</h2>
@@ -103,9 +109,11 @@ export default function Concert() {
                         hrs.
                      </p>
                   </div>
+
+
                   <div className="d-flex flex-column flex-lg-row justify-content-between">
                      <div className="d-flex gap-2 align-items-center flex-wrap">
-                        <h4 className="text-main fw-bold">{concert.type === "festival" ? "Lineup:" : "Artist:"}</h4>
+                        <h4 className="text-main fw-bold">{concert.type === "festival" ? "Lineup:" :  t('art') + ":"}</h4>
                         {concert.artists.map(artist => (
                            <Link to={`/artists/${artist._id}`} key={artist._id} className="fs-6 mb-0">
                               <FontAwesomeIcon icon={faMusic} /> {artist.name}
@@ -117,7 +125,7 @@ export default function Concert() {
                </div>
                <div className="col-md col-lg-4">
                   <div className="border mb-3 p-2">
-                     <h3 className="text-center text-main fw-bold">Tickets</h3>
+                     <h3 className="text-center text-main fw-bold">{t('ticket')}</h3>
                      <div className="d-flex justify-content-between">
                         <p className="text-decoration-underline">{concert.category.name}</p>
                         <p className="fw-semibold">${concert.category.price.toLocaleString()} ARS</p>
@@ -131,8 +139,8 @@ export default function Concert() {
                      >
                         <FontAwesomeIcon icon={faCartShopping} />{" "}
                         {items.some(product => product.categoryName === concert.category.name && product.concertId === concert._id)
-                           ? "added to cart"
-                           : "add to cart "}
+                           ? t('added')
+                           : t('add')}
                      </Button>
                   </div>
                </div>

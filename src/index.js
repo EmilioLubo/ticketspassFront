@@ -1,5 +1,6 @@
 // React | React Navigator
 import React from 'react';
+import "./i18n.js";
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
 

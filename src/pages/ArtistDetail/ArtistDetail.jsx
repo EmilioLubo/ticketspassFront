@@ -31,7 +31,6 @@ const ArtistDetail = () => {
    }, [id])
    return (
       <>
-         <div className='backNav'></div>
          <div className='w-100 mb-2 d-flex flex-column justify-content-center align-items-center'>
             {
                load ?
