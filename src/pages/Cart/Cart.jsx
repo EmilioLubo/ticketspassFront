@@ -17,6 +17,7 @@ export default function Cart() {
 
   useEffect(() => {
     getCart();
+    // eslint-disable-next-line
   }, []);
 
   const getCart = async () => {
@@ -101,8 +102,6 @@ export default function Cart() {
           </tr>
         </tbody>
       </Table>
-
-      
         <div className="d-flex justify-content-around mt-4 mb-5 flex-wrap flex-column flex-md-row gap-3 align-items-center">
           <button style={{width: "200px"}} className="btn btn-danger mx-3" onClick={clearCart}>
             {t("cart_emp")}

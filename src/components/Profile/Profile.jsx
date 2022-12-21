@@ -3,6 +3,11 @@ import { SocialIcon } from "react-social-icons";
 import './Profile.css'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+
+
+export default function Profile() {
+
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import userActions from "../../redux/actions/userActions";
@@ -45,6 +50,7 @@ export default function Profile() {
     useEffect(() => {
         dispatch(reLogin(token))
         getOrdersData(userId, token)
+        // eslint-disable-next-line
     }, [reload])
 
     // View State
