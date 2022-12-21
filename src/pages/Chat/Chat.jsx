@@ -8,6 +8,7 @@ import io from "socket.io-client";
 import { BASE_URL } from "../../api/url";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 import "./Chat.css";
+import { Link } from "react-router-dom";
 
 const socket = io.connect("http://localhost:8000");
 export default function Chat() {
@@ -42,10 +43,15 @@ export default function Chat() {
 
   return (
     <div className="d-flex Stream-container">
-      <div className="w-100">
-      <iframe className="h-100" src="https://www.youtube.com/embed/qZcir2K__l8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div className="iframe-container">
+      <iframe className="Chat-iframe" src="https://www.youtube.com/embed/qZcir2K__l8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <div>
+        <Link to="/concerts">
+        <Button variant="main" className="m-3">Go to Concerts</Button>
+        </Link>
       </div>
-      <div className="Chat-container border p-3">
+      </div>
+      <div className="Chat-container p-3">
         <div className="Chat d-flex flex-column justify-content-end">
           {messages.map((message, index) => (
             <p className="text-white" key={index}>
