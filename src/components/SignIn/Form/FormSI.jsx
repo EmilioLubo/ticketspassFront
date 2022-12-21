@@ -61,50 +61,52 @@ export default function Form() {
     return (
         <>
             <div className='backNav'></div>
-            <form ref={formRef} className="formSign pb-5" >
-                <div>
-                    <div className="form-shadows-content">
-                    <div className="form-title-div">
-                        <h2 className="title2Sign">Login to Your Account</h2>
-                    </div>
-                    <div className="d-flex flex-column align-items-center gap-2">
-                        <h5>Login usins social networks</h5>
-                        <div className="social-networks">
-                            <SocialIcon className="icon-social" network="facebook" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
-                            <SocialIcon className="icon-social" network="instagram" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
-                            <SocialIcon className="icon-social" network="google" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
+            <div className="full-container-fluid d-flex container-login">
+                <div className="w-100">
+                    <form ref={formRef} className="formSign pb-5" >
+                        <div className="form-shadows-content pb-3">
+                            <div className="form-title-div pt-5 pb-3 text-center">
+                                <h2 className="title2Sign">Login to Your Account</h2>
+                            </div>
+                            <div className="d-flex flex-column align-items-center gap-3 mt-2">
+                                <h5>Login usins social networks</h5>
+                                <div className="social-networks">
+                                    <SocialIcon className="icon-social" network="facebook" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
+                                    <SocialIcon className="icon-social" network="instagram" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
+                                    <SocialIcon className="icon-social" network="google" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div className="form-bodySign">
-                    <label htmlFor="">Email</label>
-                    <input
-                        id="Email"
-                        type="email"
-                        placeholder="YourEmail@mail.com"
-                        className="form__input"
-                        ref={emailRef}
-                        required
-                    />
-                    <label htmlFor="">Password</label>
-                    <input
-                        id="Password"
-                        type="password"
-                        placeholder="*********"
-                        className="form__input"
-                        ref={passwordRef}
-                        required
-                    />
-                    <div className="submitSign">
-                        <input onClick={saveData} className="submit2Sign" type='button' value='Login' />
-                    </div>
-                </div>
-                </div>
-                
-                <div className='right'>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <div className="bar" style={{ flex: 1, backgroundColor: "rgb(150, 150, 200)", height: "3px" }} />
 
+                            <p style={{ margin: "0 10px" }}>Or</p>
+
+                            <div className="bar" style={{ flex: 1, backgroundColor: "rgb(150, 150, 200)", height: "3px" }} />
+                        </div>
+                        <div className="form-bodySign pt-3 w-50">
+                            <div class="inputGroup">
+                                <input id="email" type="email" required autocomplete="off" ref={emailRef} />
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="inputGroup">
+                                <input id="password" type="password" required autocomplete="off" ref={passwordRef} />
+                                <label for="password">Password</label>
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <p onClick={saveData} className="submit2Sign">Sign In</p>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div className="right">
+                        <div className="right-content-title text-center">
+                            <h1 className="title">New Here?</h1>
+                            <h5 className="subTitle">Create an account to get started!</h5>
+                            <button className="submit2SignUp" onClick={() => navigate('/signup')}>Sign Up</button>
+                        </div>
+                </div>
+            </div >
         </>
     );
 }
