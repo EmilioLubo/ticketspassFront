@@ -9,7 +9,7 @@ import { BASE_URL } from "../../api/url";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 import "./Chat.css";
 
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect(BASE_URL);
 export default function Chat() {
   const colors = ["#1E87D1", "#DAA532", "#3EC96E", "#FD0074", "#AB6CAD", "#FF0009", "#8B64DB"];
   const [messages, setMessages] = useState([]);
