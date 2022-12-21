@@ -12,18 +12,16 @@ const initialState = {
     online: false,
     token: '',
     user: {},
-    message: ''
 };
 
 const userReducers = createReducer(initialState, (builder) => {
     builder
         .addCase(login.fulfilled, (state, action) => {
-            const { success, response, message } = action.payload;
+            const { success, response } = action.payload;
             if (success) {
                 let { user, token } = response
                 localStorage.setItem("token", JSON.stringify({ token: { user: token } }))
-                return { ...state,user:user, id: user.id, name: user.name, email: user.email, photo: user.photo, role: user.role, online: true, token: token, message: message }
-
+                return { ...state,user:user, id: user.id, name: user.name, email: user.email, photo: user.photo, role: user.role, online: true, token: token }
             } else {
                 return { ...state, message: response }
             }
