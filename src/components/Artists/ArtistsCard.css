@@ -12,6 +12,7 @@
     padding: 1rem;
     position: relative;
 }
+
 .card__text{
     position: absolute;
     font-size: 2rem;
@@ -21,6 +22,7 @@
     transition: 50ms;
     z-index: 1;
 }
+
 .hidden{
     z-index: -1;
 }
