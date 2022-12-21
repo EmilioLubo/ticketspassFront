@@ -9,14 +9,14 @@ import { Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 export default function Cart() {
-    const {t} = useTranslation()
+    const { t } = useTranslation()
     const { token } = useSelector(store => store.user);
     const [loading, setLoading] = useState(true);
     const [cart, setCart] = useState(null)
 
     useEffect(() => {
         getCart();
-    },[])
+    }, [])
 
 
     const getCart = async () => {
@@ -74,11 +74,9 @@ export default function Cart() {
 
     return (
         <>
-            {
-                loading ? <div className="d-flex justify-content-center">
-                    <Spinner className="text-center" />
-                </div> : !!cart ? (
-                    <>
+        loading ? <div className="d-flex justify-content-center">
+            < Spinner className="text-center" />
+        </div > : !!cart ? (
                         <div className='backNav'></div>
                         <table className="table container-fluid">
                             <thead>
@@ -116,16 +114,12 @@ export default function Cart() {
                                 <button className="btn btn-success" onClick={goToPayment}>{t('pay')}</button>
                             </div>
                         </div>
-                    </>
-                    <>
                         <div className='backNav'></div>
 
                     <div className="text-center p-5">
                         <img className="img-fluid" src="../assets/img/cartClear.png" alt="StockClear" width="300px" />
                         <h1>{t('shop_cart_found')}</h1>
                     </div>
-                )
-            }
-        </>
-    )
+                    </>
+        )
 }
