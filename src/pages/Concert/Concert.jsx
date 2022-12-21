@@ -25,6 +25,7 @@ export default function Concert() {
 
    useEffect(()=>{
       getData(id)
+      // eslint-disable-next-line
    },[])
    
 

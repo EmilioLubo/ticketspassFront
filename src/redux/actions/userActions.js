@@ -13,7 +13,7 @@ const login = createAsyncThunk('login', async (datos) => {
     } catch (error) {
         return {
             success: false,
-            response: error.response.data.message
+            response: error.response ? error.response.data.message : error.message
         }
     }
 })
@@ -53,12 +53,28 @@ const logout = createAsyncThunk('logout', async (token) => {
         }
     }
 })
-
-
+const updateUser = createAsyncThunk('updateUser', async (info) => {
+    let {data, userId} = info
+    console.log(data)
+    console.log(userId)
+    try {
+        let user = await axios.patch(`${BASE_URL}/api/auth/me/${userId}`, data)
+        return {
+            success: true,
+            response: user
+        }
+    } catch (error) {
+        return {
+            success: false,
+            response: error
+        }
+    }
+})
 
 const userActions = {
     login,
     reLogin,
+    updateUser,
     logout,
 }
 

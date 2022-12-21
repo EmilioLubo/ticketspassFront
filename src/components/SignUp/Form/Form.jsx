@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
 import Swal from 'sweetalert2';
 import axios from 'axios'
-import {BASE_URL} from '../../../api/url'
+import { BASE_URL } from '../../../api/url'
 import './Form.css'
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function Form() {
+    const navigate = useNavigate()
+
     const nameRef = useRef()
     const lastNameRef = useRef()
     const photoRef = useRef()
@@ -27,7 +30,7 @@ export default function Form() {
         }
         try {
             let res = await axios.post(`${BASE_URL}/api/auth/sign-up`, userValue)
-            if (res.data.success) {
+            if (res.response.data.success) {
                 Swal.fire({
                     icon: 'success',
                     title: t('alert_create'),
@@ -36,26 +39,24 @@ export default function Form() {
                 formRef.current.reset()
             }
             else {
-                console.log(res)
                 Swal.fire({
                     icon: 'error',
-                    title: 'We found an error...',
-                    text: `Errors: ${res.response.data.message}`,
+                    title: 'Error',
+                    text: res.response.data.message,
                 })
             }
-        }catch(error){
-            if(Array.isArray(error.response.data.message)){
-                console.log(error.response.data.message)
+        } catch (error) {
+            if (Array.isArray(error.response.data.message)) {
                 Swal.fire({
                     icon: "error",
-                    title: error.response.data.message.join(' <br> '),
+                    title: "Errors:",
+                    html: error.response.data.message.join(' <br> '),
                     showConfirmButton: true,
                 });
-            }else{
-                console.log(error.response.data.message)
+            } else {
                 Swal.fire({
                     icon: "error",
-                    title: error.response.data.message,
+                    title: error.response ? error.response.data.message : error.message,
                     showConfirmButton: true,
                 });
             }
@@ -64,73 +65,52 @@ export default function Form() {
 
     return (
         <>
-            <form ref={formRef} className="formSign" id="miFormulario">
-                <div className="form-shadows-content">
-                    <div className="form-title-div">
-                    <h2 className="title2Sign">{t('sign_up')}</h2>
-                    </div>
-                <div className="form-bodySign">
-                    <label htmlFor="">{t('name')}</label>
-                    <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="John"
-                        className="form__input"
-                        ref={nameRef}
-                        required
-                    />
-                        <label htmlFor="">{t('Lname')}</label>
-                    <input
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        placeholder="Doe"
-                        className="form__input"
-                        ref={lastNameRef}
-                        required
-                    />
-                        <label htmlFor="">{t('photo')}</label>
-                    <input
-                        className="form__input"
-                        type='text'
-                        id='photoInput'
-                        placeholder="https://yourphoto.com"
-                        ref={photoRef}
-                        required
-                    />
-                        <label htmlFor="">{t('birth')}</label>
-                    <input
-                        className="form__input"
-                        type='date'
-                        id='age'
-                        ref={ageRef}
-                        required
-                    />
-                        <label htmlFor="">{t('email')}</label>
-                    <input
-                        id="Email"
-                        type="email"
-                        placeholder="YourEmail@mail.com"
-                        className="form__input"
-                        ref={emailRef}
-                        required
-                    />
-                        <label htmlFor="">{t('pass')}</label>
-                    <input
-                        id="Password"
-                        type="password"
-                        placeholder="*********"
-                        className="form__input"
-                        ref={passwordRef}
-                        required
-                    />
-                    <div className="submitSign">
-                        <input onClick={saveData} className="submit2Sign" type='button' value={t('register')} />
+            <div className="full-container-fluid d-flex container-login">
+                <div className="w-100">
+                    <form ref={formRef} className="formSign pb-5" >
+                        <div className="form-shadows-content pb-3">
+                            <div className="form-title-div pt-5 pb-3 text-center">
+                                <h2 className="title2Sign">Register Your Account</h2>
+                            </div>
+                        </div>
+                        <div className="form-bodySign pt-3 w-50">
+                            <div className="inputGroup">
+                                <input id="name" type="text" required autoComplete="off" ref={nameRef} />
+                                <label htmlFor="name">Name</label>
+                            </div>
+                            <div className="inputGroup">
+                                <input id="lastName" type="text" required autoComplete="off" ref={lastNameRef} />
+                                <label htmlFor="lastName">LastName</label>
+                            </div>
+                            <div className="inputGroup">
+                                <input id="photo" type="text" required autoComplete="off" ref={photoRef} />
+                                <label htmlFor="photo">Photo Url</label>
+                            </div>
+                            <div className="inputGroup">
+                                <input id="age" type="date" required autoComplete="off" ref={ageRef} />
+                            </div>
+                            <div className="inputGroup">
+                                <input id="email" type="email" required autoComplete="off" ref={emailRef} />
+                                <label htmlFor="email">Email</label>
+                            </div>
+                            <div className="inputGroup">
+                                <input id="password" type="password" required autoComplete="off" ref={passwordRef} />
+                                <label htmlFor="password">Password</label>
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <button onClick={saveData} className="submit2Sign">Sign Up</button>
+                            </div>
+                        </div>
+                    </form>              
+                </div>
+                <div className="right">
+                    <div className="right-content-title text-center">
+                        <h1 className="title">Do you already have an account ?</h1>
+                        <h5 className="subTitle">Sign in to get started!</h5>
+                        <button className="submit2SignUp" onClick={() => navigate('/signin')}>Sign In</button>
                     </div>
                 </div>
-                </div>
-            </form>
+            </div >
         </>
     );
 }
