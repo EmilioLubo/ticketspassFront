@@ -2,25 +2,32 @@ import React, { useEffect } from "react";
 import { SocialIcon } from "react-social-icons";
 import './Profile.css'
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
-import axios from "axios";
-import { BASE_URL } from "../../api/url";
+
+
+import { useTranslation } from "react-i18next";
+import userActions from "../../redux/actions/userActions";
 
 // Hay un error con la funcion fetchData. Se accede correctamente a la información, siempre y cuando la pagina no sea recargada. Si la pagina no se recarga esta se muestra adecuadamente al usuario junto a los datos traidos correctamente. Sin embargo, si la pagina se recarga, las propiedades aparecen como undefined, dando un error en la consola y crasheando el componente entero. Mi teoria, el return devuelve los objetos antes de que las funciones se ejecuten. I dont know why.
 
 export default function Profile() {
-    let store = useSelector((store) => store.user.id)
-    let token = store
-    const [user, setUser] = useState()
-    useEffect(() => {
-        fetchData()
-    }, [])
-    async function fetchData() {
-        const response = await axios.get(`${BASE_URL}/api/auth/me/${token}`)
-        const data = response.data.data
-        setUser(data)
-    }
+
+    let dispatch = useDispatch()
+    let {reLogin} = userActions
+    const {t} = useTranslation()
+    let {user,token} = useSelector(store=>store.user)
+
+    useEffect(()=>{
+        dispatch(reLogin(token))
+        // eslint-disable-next-line
+    },[])
+
+    
+
+    console.log(user)
+
+ 
     const [state, setState] = useState("details")
     return (
         <div className="Profile-Background">
@@ -29,7 +36,7 @@ export default function Profile() {
                     <div className="Profile-Options">
                         <div className="Profile-Block-Container-1">
                             <div className="Profile-Internal-Block0">
-                                <h3>MY PROFILE</h3>
+                                <h3>{t('profile')}</h3>
                             </div>
                             <div className="Profile-Internal-Block1">
                                 <div className="Profile-Block1-Photo">
@@ -57,19 +64,19 @@ export default function Profile() {
                     </div>
                     <div className="Profile-Block-Container-2">
                         <div className="Profile-Internal-Block2">
-                            <h6 onClick={e => setState("details")}>PERSONAL DETAILS</h6>
+                            <h6 onClick={e => setState("details")}>{t('user_p')}</h6>
                         </div>
                         <div className="Profile-Internal-Block2">
-                            <h6 onClick={e => setState("billing")}>BILLING ADDRESS</h6>
+                            <h6 onClick={e => setState("billing")}>{t('user_ad')}</h6>
                         </div>
                         <div className="Profile-Internal-Block2">
-                            <h6 onClick={e => setState("changePwd")}>CHANGE PASSWORD</h6>
+                            <h6 onClick={e => setState("changePwd")}>{t('user_pass')}</h6>
                         </div>
                         <div className="Profile-Internal-Block2">
-                            <h6 onClick={e => setState("activity")}>MY ACTIVITY</h6>
+                            <h6 onClick={e => setState("activity")}>{t('user_ac')}</h6>
                         </div>
                         <div className="Profile-Internal-Block2">
-                            <h6 onClick={e => setState("orders")}>MY ORDERS</h6>
+                            <h6 onClick={e => setState("orders")}>{t('user_or')}</h6>
                         </div>
                     </div>
                 </div>
@@ -82,9 +89,9 @@ export default function Profile() {
                                     <h2 className="Alert">AVISO IMPORTANTE DEVS: Partes del codigo se encuentran comentadas por un error. Se dejo tambien comentado el error en el codigo.</h2>
                                 </div>
                                 <div className="personal-data">
-                                    {/* <input type="text" disabled value={user.name} />
+                                    <input type="text" disabled value={user.name} />
                                     <input type="text" disabled value={user.lastName} />
-                                    <input type="text" disabled value={user.birthDate} /> */}
+                                    <input type="text" disabled value={user.birthDate} />
                                     <div>
                                         <h3>TicketPass TV Suscription</h3>
                                         <span>Inactiva</span>
@@ -95,10 +102,8 @@ export default function Profile() {
                                         <h3>Creditos TP+:</h3>
                                         <p>21.002 creditos</p>
                                     </div>
-
                                 </div>
                             </>
-
                         }
                         {state === "billing" &&
                             <>
