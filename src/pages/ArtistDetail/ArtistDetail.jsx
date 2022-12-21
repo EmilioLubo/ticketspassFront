@@ -28,6 +28,7 @@ const ArtistDetail = () => {
 
       axios.get(`${BASE_URL}/api/concerts?artistId=${id}`)
          .then(res => setConcerts(res.data.response))
+         .catch(err => console.log(err.message))
    }, [id])
    return (
       <>
