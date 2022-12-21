@@ -16,8 +16,7 @@ export default function Form() {
     const formRef = useRef()
 
     const {t} = useTranslation()
-
-
+    
     async function saveData(e) {
         e.preventDefault()
         let userValue = {
@@ -44,7 +43,7 @@ export default function Form() {
                     Swal.fire({
                         icon: 'error',
                         title: 'Errors: ',
-                        text: text,
+                        html: text,
                     })
                 } else{
                     Swal.fire({
@@ -100,7 +99,7 @@ export default function Form() {
                                 <label for="password">Password</label>
                             </div>
                             <div className="d-flex justify-content-center">
-                                <p onClick={saveData} className="submit2Sign">Sign In</p>
+                                <button onClick={saveData} className="submit2Sign">Sign In</button>
                             </div>
                         </div>
                     </form>
