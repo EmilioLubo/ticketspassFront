@@ -5,6 +5,7 @@ import { BASE_URL } from '../../../api/url'
 import './Form.css'
 import { useNavigate } from "react-router-dom";
 import { SocialIcon } from 'react-social-icons';
+import { useTranslation } from "react-i18next";
 
 export default function Form() {
     const navigate = useNavigate()
@@ -16,6 +17,7 @@ export default function Form() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const formRef = useRef()
+    const {t} = useTranslation()
 
     async function saveData(e) {
         e.preventDefault()
@@ -29,12 +31,11 @@ export default function Form() {
         }
         try {
             let res = await axios.post(`${BASE_URL}/api/auth/sign-up`, userValue)
-            console.log(res.data)
             if (res.data.success) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'The user has been created successfully!',
-                    text: `Activate your account login in your email.`,
+                    title: t('alert_create'),
+                    text: t('alert_verify'),
                 })
                 formRef.current.reset()
             }

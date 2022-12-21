@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import userActions from "../../../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
 import { SocialIcon } from 'react-social-icons';
+import { useTranslation } from "react-i18next";
 
 export default function Form() {
     const navigate = useNavigate()
@@ -14,6 +15,10 @@ export default function Form() {
     const passwordRef = useRef()
     const formRef = useRef()
 
+    const {t} = useTranslation()
+    const submitRef = useRef()
+
+
     async function saveData(e) {
         e.preventDefault()
         let userValue = {
@@ -21,41 +26,49 @@ export default function Form() {
             password: passwordRef.current.value,
         }
         try {
-            let response = await dispatch(login(userValue)).unwrap()
-            let res = response.res
-            if (res.success) {
+            let res = await dispatch(login(userValue)).unwrap()
+            let {response, success, message} = res
+            if(success){
                 Swal.fire({
-                    title: res.message,
-                    html: "We're redirecting you to Home Page...",
+                    title: '¡Success!',
+                    html: message,
                     timer: 2200,
                     timerProgressBar: true,
                     willClose: () => {
                         navigate('/')
                     }
                 })
-            }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'We found an error...',
-                    text: `Errors: `,
-                })
+            } else {
+
+                if(Array.isArray(response)){
+                    let text = response.join('<br>')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Errors: ',
+                        text: text,
+                    })
+                } else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Errors: ',
+                        text: response,
+                    })
+                }
             }
         } catch (error) {
-            console.log(error);
-            if (Array.isArray(error)) {
-                Swal.fire({
-                    icon: "error",
-                    title: error,
-                    showConfirmButton: true,
-                });
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Wrong email or password.",
-                    showConfirmButton: true,
-                });
-            }
+            Swal.fire({
+                icon: "error",
+                title: error.message,
+                showConfirmButton: true,
+            });
+            
+
+        }
+    }
+
+    let keySend = (e) => {
+        if(e.key === 'Enter'){
+            submitRef.current.click()
         }
     }
     return (
