@@ -1,19 +1,12 @@
-import React, { useEffect } from "react";
-import { SocialIcon } from "react-social-icons";
-import './Profile.css'
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
-
-
-export default function Profile() {
-
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import userActions from "../../redux/actions/userActions";
 import { BASE_URL } from "../../api/url";
 import Swal from "sweetalert2";
-import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SocialIcon } from "react-social-icons";
+import { useRef, useState,useEffect } from "react";
+import './Profile.css'
 
 export default function Profile() {
 
