@@ -52,8 +52,8 @@ export default function NavbarBS() {
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
         confirmButtonText: 'Yes, log out!'
     })
         .then((result) => {
@@ -88,6 +88,9 @@ export default function NavbarBS() {
                         </Link>
                         <Link className="nav-btn" to="/concerts">
                             {t("concert")}
+                        </Link>
+                        <Link className="nav-btn" to="/chat">
+                            Live
                         </Link>
                         {!online ? (
                             <div className="navDrop">
