@@ -89,6 +89,9 @@ export default function NavbarBS() {
                         <Link className="nav-btn" to="/concerts">
                             {t("concert")}
                         </Link>
+                        <Link className="nav-btn" to="/chat">
+                            Live
+                        </Link>
                         {!online ? (
                             <div className="navDrop">
                                 <ButtonNav ku={(e) => (e.key === "Escape" ? setOpen(false) : "")} fx={() => setOpen(!open)} />

@@ -10,7 +10,7 @@ import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 import "./Chat.css";
 import { Link } from "react-router-dom";
 
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect(BASE_URL);
 export default function Chat() {
   const colors = ["#1E87D1", "#DAA532", "#3EC96E", "#FD0074", "#AB6CAD", "#FF0009", "#8B64DB"];
   const [messages, setMessages] = useState([]);
@@ -22,6 +22,7 @@ export default function Chat() {
     socket.on("message", data => {
       setMessages(value => [...value, { message: data.message, name: data.name, color: data.color }]);
     });
+    // eslint-disable-next-line
   }, [socket]);
 
   const sendMessage = e => {
@@ -44,7 +45,7 @@ export default function Chat() {
   return (
     <div className="d-flex Stream-container">
       <div className="iframe-container">
-      <iframe className="Chat-iframe" src="https://www.youtube.com/embed/qZcir2K__l8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <iframe className="Chat-iframe" src="https://www.youtube.com/embed/9adJU83rkJc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       <div>
         <Link to="/concerts">
         <Button variant="main" className="m-3">Go to Concerts</Button>
