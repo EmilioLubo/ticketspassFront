@@ -18,7 +18,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div className="footer-col-2">
-                    <h3 className="footer-title-navg">{t('sponsor')} </h3>
+                    <h3 className="footer-title-navg">{t('sponsor')}  </h3>
                     <div className="container-btns-footer">
                         <button className="sponsor-btn-footer"><img className="img-footer" src="https://images.squarespace-cdn.com/content/v1/53cebe13e4b0e8c9c90dd5b7/1574468994977-2DGLV7NCTGFNZ5OV281T/CMA_Foundation_NoTag_1C_Black-2.png?format=1000w" alt="" /></button>
                         <button className="sponsor-btn-footer"><img className="img-footer" src="https://images.squarespace-cdn.com/content/v1/57e008179de4bbf2fdde01ef/1614449418283-98ISATZNMX51YD3D5KSK/BT-ROCmusic-transparent-logo+%283%29.png?format=1500w" alt="" /></button>
