@@ -55,13 +55,12 @@ const logout = createAsyncThunk('logout', async (token) => {
 })
 const updateUser = createAsyncThunk('updateUser', async (info) => {
     let {data, userId} = info
-    console.log(data)
-    console.log(userId)
     try {
         let user = await axios.patch(`${BASE_URL}/api/auth/me/${userId}`, data)
+        console.log(user)
         return {
             success: true,
-            response: user
+            response: user.data.data
         }
     } catch (error) {
         return {

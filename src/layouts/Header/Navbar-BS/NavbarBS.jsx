@@ -1,16 +1,16 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './NavbarBS.css'
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import ButtonNav from '../../../components/ButtonNav/ButtonNav';
-import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import userActions from '../../../redux/actions/userActions';
-import { useTranslation } from 'react-i18next';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./NavbarBS.css";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import ButtonNav from "../../../components/ButtonNav/ButtonNav";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
+import userActions from "../../../redux/actions/userActions";
+import { useTranslation } from "react-i18next";
 
 export default function NavbarBS() {
   let { online, name, photo, token, role } = useSelector(state => state.user)
@@ -23,18 +23,18 @@ export default function NavbarBS() {
   let collapseRef = useRef(null)
   const [isHome, setIsHome] = useState(true);
 
-  useEffect(() => {
-    document.addEventListener('mouseup', e => {
-      e.stopPropagation()
-        if(typeof e.target.className === 'string'){
-          if(!e.target.className.includes('navColapse') && !e.target.className.includes('navDrop') && !e.target.className.includes('navbar-toggler') && !e.target.className.includes('navbar-toggler-icon')){
-            setOpen(false)
-            if(collapseRef.current.classList.contains('show')){
-              togglerRef.current.click()
-            }     
+    useEffect(() => {
+        document.addEventListener("mouseup", (e) => {
+            e.stopPropagation();
+            if (typeof e.target.className === "string") {
+                if (!e.target.className.includes("navColapse") && !e.target.className.includes("navDrop") && !e.target.className.includes("navbar-toggler") && !e.target.className.includes("navbar-toggler-icon")) {
+                    setOpen(false);
+                    if (collapseRef.current.classList.contains("show")) {
+                        togglerRef.current.click();
+                    }
+                }
             }
-          }
-        })
+          })
     setOpen(false)
     if(collapseRef.current.classList.contains('show')){
       togglerRef.current.click()
@@ -52,21 +52,17 @@ export default function NavbarBS() {
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
         confirmButtonText: 'Yes, log out!'
     })
         .then((result) => {
             if (result.isConfirmed) {
-                dispatch(logout(token))
-                Swal.fire(
-                    'Logged out!',
-                    'You have been logged out',
-                    'success'
-                )
+                dispatch(logout(token));
+                Swal.fire("Logged out!", "You have been logged out", "success");
             }
-        })
-}
+        });
+    }
 
   return (
  <Navbar collapseOnSelect className={`navBar ${isHome ? 'Navbar-transparent' : 'Navbar-solid' }`} expand="lg" variant="dark">
@@ -88,6 +84,9 @@ export default function NavbarBS() {
                         </Link>
                         <Link className="nav-btn" to="/concerts">
                             {t("concert")}
+                        </Link>
+                        <Link className="nav-btn" to="/chat">
+                            Live
                         </Link>
                         {!online ? (
                             <div className="navDrop">

@@ -5,6 +5,7 @@ import { BASE_URL } from '../../api/url'
 import { Button, Spinner } from 'react-bootstrap'
 import { SocialIcon } from 'react-social-icons';
 import './ArtistDetail.css'
+import { useTranslation } from 'react-i18next'
 
 const ArtistDetail = () => {
    let { id } = useParams()
@@ -13,6 +14,7 @@ const ArtistDetail = () => {
    let [load, setLoad] = useState(true)
    let [error, setError] = useState('')
    let navigate = useNavigate()
+   const { t } = useTranslation()
    useEffect(() => {
       axios.get(`${BASE_URL}/api/artists/${id}`)
          .then(res => {
@@ -39,11 +41,6 @@ const ArtistDetail = () => {
                   artist.name ?
                      <div className='w-100 pb-4'>
                         <div className='detail__image--container' style={{ backgroundImage: `url(${artist.photo})` }}>
-                           <div className='p-5'>
-                              <h4 className='text-warning'>upcoming concerts</h4>
-                              {concerts.length > 0 ?
-                              concerts.map(el => <div className='concert-link' onClick={() => navigate(`/concerts/${el._id}`)} key={el._id} to={`/concerts/${el._id}`}>+{el.name}</div>) : <></>}
-                           </div>
                            <h2 className='text-light text-detail text-center'>{artist.name}</h2>
                         </div>
 
@@ -51,17 +48,22 @@ const ArtistDetail = () => {
                            <div className='pt-5 d-flex container-details'>
                               <div className='d-flex flex-column px-4 '>
                                  <p>{artist.description}</p>
-                                 <p><span className='genre__key'>Genre:</span> {artist.genre.join(", ")}</p>
-                                 <span className='genre__key text-center fs-5'>Social Media</span>
+                                 <p><span className='genre__key'>{t('genre')}:</span> {artist.genre.join(", ")}</p>
+                                 <div className='d-flex flex-column justify-content-center align-items-center gap-2'>
+                                    <h4 className='text-up'>{t('incom_c')}</h4>
+                                    {concerts.length > 0 ?
+                                       concerts.map(el => <div className='concert-link text-black' onClick={() => navigate(`/concerts/${el._id}`)} key={el._id} to={`/concerts/${el._id}`}>+{el.name}</div>) : <></>}
+                                 </div>
+                                 <span className='genre__key text-center fs-5 pt-3'>{t('social')}</span>
                                  <div className='d-flex justify-content-center gap-5 p-5'>
                                     <div className='d-flex flex-column align-items-center gap-2'>
-                                          <SocialIcon label='YouTube Channel' url={artist.youtubeChannel} className="icon-social" network="youtube" fgColor="#ffffff" style={{ height: 40, width: 40 }} /> 
+                                       <SocialIcon label='YouTube Channel' url={artist.youtubeChannel} className="icon-social" network="youtube" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
                                        <a href={artist.youtubeChannel} style={{ textDecoration: 'none' }}>
                                           Youtube Channel
                                        </a>
                                     </div>
                                     <div className='d-flex flex-column align-items-center gap-2'>
-                                          <SocialIcon label='Spotify Playlist' url={artist.spotifyPlaylist} className="icon-social" network="spotify" fgColor="#ffffff" style={{ height: 40, width: 40 }} /> 
+                                       <SocialIcon label='Spotify Playlist' url={artist.spotifyPlaylist} className="icon-social" network="spotify" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
                                        <a href={artist.spotifyPlaylist} style={{ textDecoration: 'none' }}>
                                           Spotify Playlist
                                        </a>
@@ -77,7 +79,7 @@ const ArtistDetail = () => {
                      </div> :
                      <h2 className='text-center'>{error}</h2>
             }
-            <Button variant='outline-danger' onClick={() => navigate('/artists')}>Go back to Artists</Button>
+            <Button variant='outline-danger' onClick={() => navigate('/artists')}>{t('artist_back')}</Button>
          </div>
       </>
    )

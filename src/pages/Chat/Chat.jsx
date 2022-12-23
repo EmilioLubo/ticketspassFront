@@ -8,6 +8,7 @@ import io from "socket.io-client";
 import { BASE_URL } from "../../api/url";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 import "./Chat.css";
+import { Link } from "react-router-dom";
 
 const socket = io.connect(BASE_URL);
 export default function Chat() {
@@ -21,6 +22,7 @@ export default function Chat() {
     socket.on("message", data => {
       setMessages(value => [...value, { message: data.message, name: data.name, color: data.color }]);
     });
+    // eslint-disable-next-line
   }, [socket]);
 
   const sendMessage = e => {
@@ -41,38 +43,48 @@ export default function Chat() {
   };
 
   return (
-    <div className="Chat-container my-5 mx-auto border p-3">
-      <div className="Chat d-flex flex-column justify-content-end">
-        {messages.map((message, index) => (
-          <p className="text-white" key={index}>
-            <span style={{ color: message.color, fontWeight: "bold" }}>{message.name}: </span>
-            {message.message}
-          </p>
-        ))}
+    <div className="d-flex Stream-container">
+      <div className="iframe-container">
+      <iframe className="Chat-iframe" src="https://www.youtube.com/embed/9adJU83rkJc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <div>
+        <Link to="/concerts">
+        <Button variant="main" className="m-3">Go to Concerts</Button>
+        </Link>
       </div>
-      <form ref={formRef} className="d-flex flex-column" onSubmit={sendMessage}>
-        <div className="d-flex">
-          <input
-            autoComplete="off"
-            name="message"
-            placeholder="Send Message"
-            className="border-0 text-white p-2 Chat-input"
-            maxLength={100}
-          />
-          <button type="button" onClick={togglePicker} className="Picker-button">
-            <FontAwesomeIcon className="fs-5 text-white" icon={faFaceSmile} />
-          </button>
+      </div>
+      <div className="Chat-container p-3">
+        <div className="Chat d-flex flex-column justify-content-end">
+          {messages.map((message, index) => (
+            <p className="text-white" key={index}>
+              <span style={{ color: message.color, fontWeight: "bold" }}>{message.name}: </span>
+              {message.message}
+            </p>
+          ))}
         </div>
-        {openPicker && (
-          <div className="Chat-picker">
-            <Picker onEmojiClick={addEmoji} native />
+        <form ref={formRef} className="d-flex flex-column" onSubmit={sendMessage}>
+          <div className="d-flex">
+            <input
+              autoComplete="off"
+              name="message"
+              placeholder="Send Message"
+              className="border-0 text-white p-2 Chat-input"
+              maxLength={100}
+            />
+            <button type="button" onClick={togglePicker} className="Picker-button">
+              <FontAwesomeIcon className="fs-5 text-white" icon={faFaceSmile} />
+            </button>
           </div>
-        )}
+          {openPicker && (
+            <div className="Chat-picker">
+              <Picker onEmojiClick={addEmoji} native />
+            </div>
+          )}
 
-        <Button type="submit" variant="main" className="ms-auto">
-          Chat
-        </Button>
-      </form>
+          <Button type="submit" variant="main" className="ms-auto">
+            Chat
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }
