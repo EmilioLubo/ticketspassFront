@@ -23,7 +23,6 @@ export const Artists = () => {
     const {t} = useTranslation()
     let [isOpen, setIsOpen] = useState(false)
 
-
     useEffect(() => {
         axios.get(`${BASE_URL}/api/artists`)
             .then(res => {

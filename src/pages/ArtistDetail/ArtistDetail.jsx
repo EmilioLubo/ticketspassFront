@@ -5,6 +5,7 @@ import { BASE_URL } from '../../api/url'
 import { Button, Spinner } from 'react-bootstrap'
 import { SocialIcon } from 'react-social-icons';
 import './ArtistDetail.css'
+import { useTranslation } from 'react-i18next'
 
 const ArtistDetail = () => {
    let { id } = useParams()
@@ -13,6 +14,7 @@ const ArtistDetail = () => {
    let [load, setLoad] = useState(true)
    let [error, setError] = useState('')
    let navigate = useNavigate()
+   const {t} = useTranslation()
    useEffect(() => {
       axios.get(`${BASE_URL}/api/artists/${id}`)
          .then(res => {
@@ -40,7 +42,7 @@ const ArtistDetail = () => {
                      <div className='w-100 pb-4'>
                         <div className='detail__image--container' style={{ backgroundImage: `url(${artist.photo})` }}>
                            <div className='p-5'>
-                              <h4 className='text-warning'>upcoming concerts</h4>
+                              <h4 className='text-warning'>{t('incom_c')}</h4>
                               {concerts.length > 0 ?
                               concerts.map(el => <div className='concert-link' onClick={() => navigate(`/concerts/${el._id}`)} key={el._id} to={`/concerts/${el._id}`}>+{el.name}</div>) : <></>}
                            </div>
@@ -51,8 +53,8 @@ const ArtistDetail = () => {
                            <div className='pt-5 d-flex container-details'>
                               <div className='d-flex flex-column px-4 '>
                                  <p>{artist.description}</p>
-                                 <p><span className='genre__key'>Genre:</span> {artist.genre.join(", ")}</p>
-                                 <span className='genre__key text-center fs-5'>Social Media</span>
+                                 <p><span className='genre__key'>{t('genre')}:</span> {artist.genre.join(", ")}</p>
+                                 <span className='genre__key text-center fs-5'>{t('social')}</span>
                                  <div className='d-flex justify-content-center gap-5 p-5'>
                                     <div className='d-flex flex-column align-items-center gap-2'>
                                           <SocialIcon label='YouTube Channel' url={artist.youtubeChannel} className="icon-social" network="youtube" fgColor="#ffffff" style={{ height: 40, width: 40 }} /> 
@@ -77,7 +79,7 @@ const ArtistDetail = () => {
                      </div> :
                      <h2 className='text-center'>{error}</h2>
             }
-            <Button variant='outline-danger' onClick={() => navigate('/artists')}>Go back to Artists</Button>
+            <Button variant='outline-danger' onClick={() => navigate('/artists')}>{t('artist_back')}</Button>
          </div>
       </>
    )

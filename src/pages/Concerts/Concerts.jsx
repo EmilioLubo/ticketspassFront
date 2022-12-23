@@ -13,7 +13,6 @@ export default function Concerts() {
     const { concerts, name,type, initial, loading, message } = useSelector(store => store.concerts);
     const {t} = useTranslation()
 
-
   useState(() => {
     if (initial) {
       dispatch(getInitialData());
@@ -65,5 +64,4 @@ const onSearch = e => {
       </div>
     </>
   );
-
 }

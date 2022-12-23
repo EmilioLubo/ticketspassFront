@@ -22,13 +22,11 @@ export default function Concert() {
    const navigate = useNavigate()
    const {t} = useTranslation()
 
-
    useEffect(()=>{
       getData(id)
       // eslint-disable-next-line
    },[])
    
-
    const getData = async concertId => {
       try {
          const res = await axios.get(`${BASE_URL}/api/concerts/${concertId}`);
