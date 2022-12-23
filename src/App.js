@@ -72,7 +72,7 @@ let isLoading = async() => {
         <Route path="*" element={<NotFound/>} />
           <Route index element={<Home/>}/>
           <Route path="concerts" element={<Concerts />} />
-          <Route path="work-with-us" element={<WorkWithUs />} />
+          <Route path="about-us" element={<WorkWithUs />} />
           <Route element={<ProtectedRoute isAllowed={!!online} reDirect={'/'}/> }>
             <Route path="cart" element={<Cart />} />
             <Route path="profile" element={<Profile/>} />

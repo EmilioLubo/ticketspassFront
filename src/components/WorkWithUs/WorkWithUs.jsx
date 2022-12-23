@@ -13,7 +13,7 @@ export default function ModuleOne() {
     <>
       <div className='wwu-general-container'>
         <div className="wwu-background-presentation">
-          <h2 className='presentation-h2'>Work with Us</h2>
+          <h2 className='presentation-h2'>About Us</h2>
         </div>
         <div className='ww-our-presentation'>
           <h2 className='wwu-our-h2'>We're more than only Ticket's Seller's</h2>
@@ -56,7 +56,7 @@ export default function ModuleOne() {
                   <h2>Emilio Lubo</h2>
                   <p>Programador MERN</p>
                   <div className='wwu-social-icons'>
-                  <a href="#" target="_blank">
+                  <a href="https://www.linkedin.com/in/emilio-daniel-lubo-83a444220/" target="_blank">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
                     </a>
                     <a href="https://github.com/EmilioLubo" target="_blank">

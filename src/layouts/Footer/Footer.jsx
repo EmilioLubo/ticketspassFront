@@ -12,9 +12,9 @@ function Footer() {
                 <div className="footer-col-1">
                     <h3 className="footer-title-navg">{t("info")}</h3>
                     <ul className="footer-ul">
-                        <li className="footer-li">{t("about_us")}</li>
-                        <Link className="footer-li  navDrop " to={"/admin"}>{t("work_us")}
+                        <Link className="footer-li  navDrop " to={"/about-us"}>{t("about_us")}
                         </Link>
+                        <li className="footer-li">{t("work_us")}</li>
                     </ul>
                 </div>
                 <div className="footer-col-2">
