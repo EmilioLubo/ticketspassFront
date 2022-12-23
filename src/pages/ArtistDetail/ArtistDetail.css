@@ -9,6 +9,11 @@
 .concert-link{
    color: aliceblue;
 }
+
+.text-up{
+   color: purple;
+}
+
 .concert-link:hover{
    cursor: pointer;
    color: var(--main-color);
