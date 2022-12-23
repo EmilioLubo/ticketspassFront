@@ -111,6 +111,10 @@ input[type="file"] {
 .Profile-Internal-Block2 > h6{
     color: white
 }
+.Profile-Internal-Block2 > h6:hover{
+    color: #8d07ff;
+    cursor: pointer;
+}
 .personal-data{
     display: flex;
     flex-direction: column;

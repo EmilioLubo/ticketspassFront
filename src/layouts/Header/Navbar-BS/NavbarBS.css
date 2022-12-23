@@ -1,3 +1,10 @@
+.user__img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .user__img:hover{
     cursor: pointer;
     transform: scale(1.2);
