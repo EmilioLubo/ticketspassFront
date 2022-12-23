@@ -8,6 +8,9 @@ import { BASE_URL } from '../../api/url'
 import './Artists.css'
 import filterArtistActions from '../../redux/actions/fiterArtistActions'
 import Search from '../../utils/search/Search'
+import { useTranslation } from 'react-i18next'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleDown, faCircleUp } from '@fortawesome/free-solid-svg-icons'
 
 export const Artists = () => {
 
@@ -17,6 +20,8 @@ export const Artists = () => {
     let { getArtists, getFilteredArtists } = artistsActions
     let { setChecked, setSearched } = filterArtistActions
     let [genres, setGenres] = useState([])
+    const {t} = useTranslation()
+    let [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         axios.get(`${BASE_URL}/api/artists`)
@@ -56,12 +61,12 @@ export const Artists = () => {
 
     return (
         <>
-            <div className='backNav'></div>
             <div className='full-container-fluid pt-4'>
-                <h1 className='text-center'>Artists</h1>
+                <h1 className='text-center'>{t('artist')}</h1>
                 <div className="d-flex justify-content-between flex-wrap gap-4 px-5">
                     <fieldset className='d-flex flex-column'>
-                        <legend className='fs-5'>Search by genre:</legend>
+                        <legend className='fs-5'>{t('search_g')} {isOpen ? <FontAwesomeIcon className='arrow-icon' onClick={(e) => {setIsOpen(false)}} icon={faCircleUp} /> : <FontAwesomeIcon className='arrow-icon' onClick={(e) => {setIsOpen(true)}} icon={faCircleDown} />}</legend>
+                        {isOpen ?
                         <div className='d-flex gap-5 align-items-center justify-content-center flex-wrap mb-3'>
                             {
                                 genres.length > 0 ?
@@ -72,9 +77,10 @@ export const Artists = () => {
                                     ) :
                                     <p>Cannot get genres</p>
                             }
-                        </div>
+                        </div> : <></>
+                        }
                     </fieldset>
-                    <Search placeholder="Search by artist" onChange={searchHandler} defaultValue={filter.name} />
+                    <Search placeholder={t('search_a')} onChange={searchHandler} defaultValue={filter.name} />
                 </div>
                 <div className='d-flex w-100 justify-content-around gap-3 align-items-center p-5 flex-wrap'>
                     {

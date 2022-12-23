@@ -7,8 +7,10 @@ import { Link } from 'react-router-dom';
 //Styles
 import './TopArtist.css'
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 export default function TopArtist() {
+    const {t} = useTranslation()
     const navigate = useNavigate()
     const [data, setData] = useState([])
     useEffect(() => {
@@ -25,7 +27,7 @@ export default function TopArtist() {
     return (
         <>
             <div className='module2-artist-container'>
-                <h2 className='module2-h2'>Our Trending Artists</h2>
+                <h2 className='module2-h2'>{t('artis')}</h2>
                 <div className='module2-cards-artist'>
                     {data.map((artist) => {
                         return (
@@ -43,7 +45,7 @@ export default function TopArtist() {
                     }
                     )}
                 </div>
-                <button className='module2-btn-artist-text' onClick={e => navigate('/artists')}>See More</button>
+                <button className='module2-btn-artist-text' onClick={e => navigate('/artists')}>{t('see_m')}</button>
             </div>
         </>
     )
