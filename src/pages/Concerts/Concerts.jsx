@@ -19,7 +19,7 @@ export default function Concerts() {
     }
   }, []);
 
-  const onSearch = e => {
+const onSearch = e => {
     let query = { params: { name: e.target.value, type } };
     dispatch(getQuery({ query }));
   };
@@ -30,7 +30,6 @@ export default function Concerts() {
   };
   return (
     <>
-      <div className="backNav"></div>
       <div className="pt-4 container">
         <h1 className="text-center">{t('concert')}</h1>
         <div className="d-flex justify-content-between flex-wrap-reverse mb-5">

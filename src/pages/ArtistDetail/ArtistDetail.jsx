@@ -30,10 +30,10 @@ const ArtistDetail = () => {
 
       axios.get(`${BASE_URL}/api/concerts?artistId=${id}`)
          .then(res => setConcerts(res.data.response))
+         .catch(err => console.log(err.message))
    }, [id])
    return (
       <>
-         <div className='backNav'></div>
          <div className='w-100 mb-2 d-flex flex-column justify-content-center align-items-center'>
             {
                load ?

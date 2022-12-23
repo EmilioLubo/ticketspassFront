@@ -24,6 +24,7 @@ export default function Concert() {
 
    useEffect(()=>{
       getData(id)
+      // eslint-disable-next-line
    },[])
    
    const getData = async concertId => {
@@ -90,10 +91,9 @@ export default function Concert() {
       </div>
    ) : !!concert ? (
       <>
-         <div className='backNav'></div>
          <div className="w-100 pb-4">
             <div className="Concert-banner" style={{ backgroundImage: `url(${concert.banner})` }}>
-               <h2 className="text-light text-detail text-center">{concert.name}</h2>
+               <h2 className="text-light text-detail text-center text-capitalize">{concert.name}</h2>
             </div>
             <div className="row ps-5 pe-5 pt-5 pb-5 w-100">
                <div className="col-md col-lg-8 pe-5 d-flex flex-column gap-4 pb-5">
@@ -108,9 +108,11 @@ export default function Concert() {
                         hrs.
                      </p>
                   </div>
+
+
                   <div className="d-flex flex-column flex-lg-row justify-content-between">
                      <div className="d-flex gap-2 align-items-center flex-wrap">
-                        <h4 className="text-main fw-bold">{concert.type === "festival" ? "Lineup:" : t('art') + ":"}</h4>
+                        <h4 className="text-main fw-bold">{concert.type === "festival" ? "Lineup:" :  t('art') + ":"}</h4>
                         {concert.artists.map(artist => (
                            <Link to={`/artists/${artist._id}`} key={artist._id} className="fs-6 mb-0">
                               <FontAwesomeIcon icon={faMusic} /> {artist.name}

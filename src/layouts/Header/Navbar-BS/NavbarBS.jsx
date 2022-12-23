@@ -13,14 +13,15 @@ import userActions from "../../../redux/actions/userActions";
 import { useTranslation } from "react-i18next";
 
 export default function NavbarBS() {
-    let { online, name, photo, token, role } = useSelector((state) => state.user);
-    const [open, setOpen] = useState(false);
-    const location = useLocation();
-    const dispatch = useDispatch();
-    const { logout } = userActions;
-    let togglerRef = useRef(null);
-    let collapseRef = useRef(null);
-    const { t } = useTranslation();
+  let { online, name, photo, token, role } = useSelector(state => state.user)
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { logout } = userActions;
+  const {t} = useTranslation()
+  let togglerRef = useRef(null)
+  let collapseRef = useRef(null)
+  const [isHome, setIsHome] = useState(true);
 
     useEffect(() => {
         document.addEventListener("mouseup", (e) => {
@@ -33,23 +34,29 @@ export default function NavbarBS() {
                     }
                 }
             }
-        });
-        setOpen(false);
-        if (collapseRef.current.classList.contains("show")) {
-            togglerRef.current.click();
-        }
-    }, [location]);
+          })
+    setOpen(false)
+    if(collapseRef.current.classList.contains('show')){
+      togglerRef.current.click()
+    }  
+    if(location.pathname === "/") {
+        setIsHome(true);
+    } else {
+        setIsHome(false);
+    }
+  }, [location])
 
-    function signOut() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, log out!",
-        }).then((result) => {
+  function signOut() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, log out!'
+    })
+        .then((result) => {
             if (result.isConfirmed) {
                 dispatch(logout(token));
                 Swal.fire("Logged out!", "You have been logged out", "success");
@@ -57,13 +64,15 @@ export default function NavbarBS() {
         });
     }
 
-    return (
-        <Navbar collapseOnSelect className="navBar" bg="transparent" expand="lg" variant="dark">
+  return (
+ <Navbar collapseOnSelect className={`navBar ${isHome ? 'Navbar-transparent' : 'Navbar-solid' }`} expand="lg" variant="dark">
             <Container className="nav-flex2" style={{ alignItems: "center", display: "flex" }}>
-                <Navbar.Brand href="../assets/img/logo.png" style={{ margin: "0" }}>
+                <Link to="/" style={{textDecoration: 'none'}}>
+                <Navbar.Brand style={{ margin: "0" }}>
                     <img className="navbar-logo pb-2 pe-2" src="../assets/img/logo.png" alt="Logo" />
                     TicketsPass
                 </Navbar.Brand>
+                </Link>
                 <Navbar.Toggle ref={togglerRef} aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse ref={collapseRef} id="responsive-navbar-nav" className="navColapse">
                     <Nav className="me-auto nav-flex1">
@@ -75,6 +84,9 @@ export default function NavbarBS() {
                         </Link>
                         <Link className="nav-btn" to="/concerts">
                             {t("concert")}
+                        </Link>
+                        <Link className="nav-btn" to="/chat">
+                            Live
                         </Link>
                         {!online ? (
                             <div className="navDrop">
@@ -120,5 +132,5 @@ export default function NavbarBS() {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-    );
+  );
 }
