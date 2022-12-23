@@ -139,6 +139,13 @@
   font-size: 14px;
   color: white;
 }
+.navDrop{
+  color: white;
+  text-decoration: none;
+}
+.navDrop:hover{
+color: white;
+}
 .img-qr{
   width: 13rem;
   align-self: center;

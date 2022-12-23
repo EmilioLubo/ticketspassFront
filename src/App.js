@@ -28,6 +28,7 @@ import ProcessPayment from "./pages/ProcessPayment/ProcessPayment";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from "./pages/MyProfile/MyProfile";
 import Chat from "./pages/Chat/Chat";
+import WorkWithUs from "./pages/WorkWithUs/WorkWithUs";
 
 export default function App() {
   const dispatch = useDispatch()
@@ -71,6 +72,7 @@ let isLoading = async() => {
         <Route path="*" element={<NotFound/>} />
           <Route index element={<Home/>}/>
           <Route path="concerts" element={<Concerts />} />
+          <Route path="work-with-us" element={<WorkWithUs />} />
           <Route element={<ProtectedRoute isAllowed={!!online} reDirect={'/'}/> }>
             <Route path="cart" element={<Cart />} />
             <Route path="profile" element={<Profile/>} />
