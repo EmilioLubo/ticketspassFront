@@ -19,13 +19,13 @@ export default function ModuleOne() {
           <h2 className='wwu-our-h2'>We're more than only Ticket's Seller's</h2>
           <div className='ww-images-state-container'>
             <div className={`image-container-state ${presentation === "ivan" ? "image-container-state-selected" : ""}`}>
-              <img className='staff-images-state' src="https://avatars.githubusercontent.com/u/37640593?v=4" alt="Ivan" onClick={e => setPresentation("ivan")} />
+              <img className='staff-images-state' src="https://avatars.githubusercontent.com/u/37635593?v=4" alt="Ivan" onClick={e => setPresentation("ivan")} />
             </div>
             <div className={`image-container-state ${presentation === "emilio" ? "image-container-state-selected" : ""}`}>
-              <img onClick={e => setPresentation("emilio")} className='staff-images-state' src="https://i.ibb.co/BfgbD4Y/unnamed.jpg" alt="Emilio" />
+              <img onClick={e => setPresentation("emilio")} className='staff-images-state' src="https://imageup.me/images/183a02e7-0f4d-4db5-9ffe-827770010171.jpeg" alt="Emilio" />
             </div>
             <div className={`image-container-state ${presentation === "esteban" ? "image-container-state-selected" : ""}`}>
-              <img onClick={e => setPresentation("esteban")} className='staff-images-state' src="https://yt3.ggpht.com/Rw6PT02Ds3UKQi0AEpfwZ74ZlmBuRJX5DKkzTT_4AFLfEynEPm5k3g_DypLwEzGS6iCcyk1LYx4=s900-c-k-c0x00ffffff-no-rj" alt="Esteban" />
+              <img onClick={e => setPresentation("esteban")} className='staff-images-state' src="https://firebasestorage.googleapis.com/v0/b/photos-app-ticketspasss.appspot.com/o/FB_IMG_1671797306287.jpg?alt=media&token=76268249-0517-4139-9ac3-e5ea11619342" alt="Esteban" />
             </div>
             <div className={`image-container-state ${presentation === "bruno" ? "image-container-state-selected" : ""}`}>
               <img onClick={e => setPresentation("bruno")} className='staff-images-state' src="https://avatars.githubusercontent.com/u/108221247?v=4" alt="Bruno" />
@@ -41,7 +41,7 @@ export default function ModuleOne() {
                   <h2>Iván Gutiérrez</h2>
                   <p>Programador MERN</p>
                   <div className='wwu-social-icons'>
-                    <a href="#" target="_blank">
+                    <a href="https://www.linkedin.com/in/ivan-gutierrez-castro/" target="_blank">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
                     </a>
                    
@@ -59,7 +59,7 @@ export default function ModuleOne() {
                   <a href="#" target="_blank">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
                     </a>
-                    <a href="#" target="_blank">
+                    <a href="https://github.com/EmilioLubo" target="_blank">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
                     </a>
                   </div>
@@ -70,9 +70,6 @@ export default function ModuleOne() {
                   <h2>Esteban Fonseca</h2>
                   <p>Programador MERN</p>
                   <div className='wwu-social-icons'>
-                  <a href="#" target="_blank">
-                      <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
-                    </a>
                     <a href="https://github.com/Estebanfonseca" target="_blank">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
                     </a>
@@ -98,10 +95,10 @@ export default function ModuleOne() {
                   <h2>Alejandro Sanchez</h2>
                   <p>Programador MERN</p>
                   <div className='wwu-social-icons'>
-                  <a href="#" target="_blank">
+                  <a href="https://www.linkedin.com/in/alejandro-sanchez-22a19b250/" target="_blank">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
                     </a>
-                    <a href="#" target="_blank">
+                    <a href="https://github.com/AleeDario" target="_blank">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
                     </a>
                   </div>
@@ -120,19 +117,19 @@ export default function ModuleOne() {
           </h2>
           <div className='ww-job-offers-container'>
             <div className='ww-job-offer'>
-              <h3 className='ww-job-offer-h3'>System Administrator</h3>
+              <h3 className='ww-job-offer-h3'>FullStack Developer</h3>
               {state0 ? <button className={`ww-job-offer-button ${state0 ? "applied" : ""}`} disabled>Applied</button> : <button className='ww-job-offer-button' onClick={e => setState0(true)}>Apply</button>}
             </div>
             <div className='ww-job-offer'>
-              <h3 className='ww-job-offer-h3'>System Administrator</h3>
+              <h3 className='ww-job-offer-h3'>Customer Support</h3>
               {state1 ? <button className={`ww-job-offer-button ${state1 ? "applied" : ""}`} disabled>Applied</button> : <button className='ww-job-offer-button' onClick={e => setState1(true)}>Apply</button>}
             </div>
             <div className='ww-job-offer'>
-              <h3 className='ww-job-offer-h3'>System Administrator</h3>
+              <h3 className='ww-job-offer-h3'>Social Content Creator</h3>
               {state2 ? <button className={`ww-job-offer-button ${state2 ? "applied" : ""}`} disabled>Applied</button> : <button className='ww-job-offer-button' onClick={e => setState2(true)}>Apply</button>}
             </div>
             <div className='ww-job-offer'>
-              <h3 className='ww-job-offer-h3'>System Administrator</h3>
+              <h3 className='ww-job-offer-h3'>Digital Graphic Designer</h3>
               {state3 ? <button className={`ww-job-offer-button ${state3 ? "applied" : ""}`} disabled>Applied</button> : <button className='ww-job-offer-button' onClick={e => setState3(true)}>Apply</button>}
             </div>
             <div className='ww-job-offer'>

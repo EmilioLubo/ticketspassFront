@@ -2,7 +2,7 @@ import React from "react"
 import './Footer.css'
 import { SocialIcon } from 'react-social-icons';
 import { useTranslation } from "react-i18next";
-
+import { Link } from "react-router-dom";
 
 function Footer() {
     const {t,i18n} = useTranslation()
@@ -13,7 +13,8 @@ function Footer() {
                     <h3 className="footer-title-navg">{t("info")}</h3>
                     <ul className="footer-ul">
                         <li className="footer-li">{t("about_us")}</li>
-                        <li className="footer-li">{t("work_us")}</li>
+                        <Link className="footer-li  navDrop " to={"/admin"}>{t("work_us")}
+                        </Link>
                     </ul>
                 </div>
                 <div className="footer-col-2">
@@ -47,10 +48,12 @@ function Footer() {
                         <SocialIcon className="icon-social" network="youtube" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
                         <h6 className="footer-social-text">Youtube</h6>
                     </button>
+                    <a href="https://www.instagram.com/ticketspass/" target="_blank">
                     <button className="footer-social-btns">
                         <SocialIcon className="icon-social" network="instagram" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
                         <h6 className="footer-social-text">Instagram</h6>
                     </button>
+                            </a>
                     <button className="footer-social-btns">
                         <SocialIcon className="icon-social" network="tiktok" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
                         <h6 className="footer-social-text">TikTok</h6>
@@ -60,6 +63,7 @@ function Footer() {
                         <h6 className="footer-social-text">Twitter</h6>
                     </button>
                     <button className="footer-social-btns">
+                       
                         <SocialIcon className="icon-social" network="facebook" bgColor="#9F00FF" fgColor="#ffffff" style={{ height: 40, width: 40 }} />
                         <h6 className="footer-social-text">Facebook</h6>
                     </button>
