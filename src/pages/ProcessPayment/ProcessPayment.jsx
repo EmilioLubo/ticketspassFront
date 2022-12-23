@@ -12,7 +12,7 @@ export default function ProcessPayment() {
   const { token } = useSelector(store => store.user);
 
   useEffect(() => {
-    processPayment();//eslint-disable-next-line
+    processPayment(); //eslint-disable-next-line
   }, []);
 
   const processPayment = async () => {
@@ -61,15 +61,14 @@ export default function ProcessPayment() {
       <h1 className="text-center mt-5 ">Payment</h1>
       {loading ? (
         <>
-          <h3>Processing...</h3>{" "}
+          <h3 className="text-center mt-5 ">Processing...</h3>{" "}
           <div className="d-flex justify-content-center">
             <Spinner className="text-center mt-5" />
           </div>
         </>
       ) : (
         <div className="mt-5">
-          <h3 className="text-center">Processed</h3>
-          <p className="text-center">{message}</p>
+          <h3 className="text-center">{message}</h3>
         </div>
       )}
     </div>

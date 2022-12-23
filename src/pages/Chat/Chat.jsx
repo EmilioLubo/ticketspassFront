@@ -45,7 +45,7 @@ export default function Chat() {
   return (
     <div className="d-flex Stream-container">
       <div className="iframe-container">
-      <iframe className="Chat-iframe" src="https://www.youtube.com/embed/9adJU83rkJc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <iframe className="Chat-iframe" src="https://www.youtube.com/embed/live_stream?channel=UCV1bFDCAXSAUSjyYSROH2TA&autoplay=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       <div>
         <Link to="/concerts">
         <Button variant="main" className="m-3">Go to Concerts</Button>
