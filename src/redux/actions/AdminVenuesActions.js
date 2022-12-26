@@ -4,7 +4,7 @@ import { BASE_URL } from "../../api/url";
 
 const getInitialData = createAsyncThunk("getInitialData", async data => {
   try {
-    const res = await axios.get(`${process.env.REACT_APP_URL || BASE_URL}/api/venues`);
+    const res = await axios.get(`${BASE_URL}/api/venues`);
     return {
       success: res.data.success,
       response: res.data.response,
@@ -19,7 +19,7 @@ const getInitialData = createAsyncThunk("getInitialData", async data => {
 const deleteVenue = createAsyncThunk("deleteVenue", async data => {
   const { id, headers } = data;
   try {
-    const res = await axios.delete(`${process.env.REACT_APP_URL || BASE_URL}/api/venues/${id}`, headers);
+    const res = await axios.delete(`${BASE_URL}/api/venues/${id}`, headers);
     return {
       success: true,
       id: res.data.response,
