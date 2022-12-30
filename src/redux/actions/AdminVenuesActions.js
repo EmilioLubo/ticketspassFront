@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../../api/url";
 
-const getInitialData = createAsyncThunk("getInitialData", async data => {
+const getInitialVenues = createAsyncThunk("getInitialVenues", async data => {
   try {
     const res = await axios.get(`${BASE_URL}/api/venues`);
     return {
@@ -32,7 +32,7 @@ const deleteVenue = createAsyncThunk("deleteVenue", async data => {
 });
 
 const adminVenuesActions = {
-  getInitialData,
+  getInitialVenues,
   deleteVenue
 };
 

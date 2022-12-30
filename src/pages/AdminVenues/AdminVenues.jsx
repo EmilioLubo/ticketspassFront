@@ -11,11 +11,11 @@ import "./AdminVenues.css";
 export default function AdminVenues() {
   const dispatch = useDispatch();
   const { token } = useSelector(store => store.user);
-  const { getInitialData, deleteVenue } = adminVenuesActions;
+  const { getInitialVenues, deleteVenue } = adminVenuesActions;
   const { venues, message, loading } = useSelector(store => store.adminVenues);
 
   useEffect(() => {
-    dispatch(getInitialData());
+    dispatch(getInitialVenues());
     // eslint-disable-next-line
   }, []);
 
