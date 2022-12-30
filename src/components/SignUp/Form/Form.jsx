@@ -70,24 +70,25 @@ export default function Form() {
                     <form ref={formRef} className="formSign pb-5" >
                         <div className="form-shadows-content pb-3">
                             <div className="form-title-div pt-5 pb-3 text-center">
-                                <h2 className="title2Sign">Register Your Account</h2>
+                                <h2 className="title2Sign">{t("register_your_account")}</h2>
                             </div>
                         </div>
                         <div className="form-bodySign pt-3 w-50">
                             <div className="inputGroup">
                                 <input id="name" type="text" required autoComplete="off" ref={nameRef} />
-                                <label htmlFor="name">Name</label>
+                                <label htmlFor="name">{t("name")}</label>
                             </div>
                             <div className="inputGroup">
                                 <input id="lastName" type="text" required autoComplete="off" ref={lastNameRef} />
-                                <label htmlFor="lastName">LastName</label>
+                                <label htmlFor="lastName">{t("Lname")}</label>
                             </div>
                             <div className="inputGroup">
                                 <input id="photo" type="text" required autoComplete="off" ref={photoRef} />
-                                <label htmlFor="photo">Photo Url</label>
+                                <label htmlFor="photo">{t("photo_url")}</label>
                             </div>
-                            <div className="inputGroup">
+                            <div className="inputGroup inputGroup-active">
                                 <input id="age" type="date" required autoComplete="off" ref={ageRef} />
+                                <label htmlFor="photo">{t("birth")}</label>
                             </div>
                             <div className="inputGroup">
                                 <input id="email" type="email" required autoComplete="off" ref={emailRef} />
@@ -98,16 +99,16 @@ export default function Form() {
                                 <label htmlFor="password">Password</label>
                             </div>
                             <div className="d-flex justify-content-center">
-                                <button onClick={saveData} className="submit2Sign">Sign Up</button>
+                                <button onClick={saveData} className="submit2Sign">{t("sign_up")}</button>
                             </div>
                         </div>
                     </form>              
                 </div>
                 <div className="right">
                     <div className="right-content-title text-center">
-                        <h1 className="title">Do you already have an account ?</h1>
-                        <h5 className="subTitle">Sign in to get started!</h5>
-                        <button className="submit2SignUp" onClick={() => navigate('/signin')}>Sign In</button>
+                        <h1 className="title">{t("already_account")}</h1>
+                        <h5 className="subTitle">{t("sign_in_get_started")}</h5>
+                        <button className="submit2SignUp" onClick={() => navigate('/signin')}>{t("sign_in")}</button>
                     </div>
                 </div>
             </div >

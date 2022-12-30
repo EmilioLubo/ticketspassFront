@@ -1,7 +1,9 @@
 import './WorkWithUs.css'
 import { useState } from 'react';
 import { SocialIcon } from 'react-social-icons';
+import { useTranslation } from 'react-i18next';
 export default function ModuleOne() {
+  const {t} = useTranslation();
   // DRY? No LMAO.
   const [state0, setState0] = useState(false);
   const [state1, setState1] = useState(false);
@@ -13,25 +15,25 @@ export default function ModuleOne() {
     <>
       <div className='wwu-general-container'>
         <div className="wwu-background-presentation">
-          <h2 className='presentation-h2'>About Us</h2>
+          <h2 className='presentation-h2'>{t("about_us")}</h2>
         </div>
         <div className='ww-our-presentation'>
-          <h2 className='wwu-our-h2'>We're more than only Ticket's Seller's</h2>
+          <h2 className='wwu-our-h2'>{t("about_us_presentation")}</h2>
           <div className='ww-images-state-container'>
             <div className={`image-container-state ${presentation === "ivan" ? "image-container-state-selected" : ""}`}>
-              <img className='staff-images-state' src="https://avatars.githubusercontent.com/u/37635593?v=4" alt="Ivan" onClick={e => setPresentation("ivan")} />
+              <img className='staff-images-state' src="https://avatars.githubusercontent.com/u/37635593?v=4" alt="Ivan" onMouseEnter={e => setPresentation("ivan")} />
             </div>
             <div className={`image-container-state ${presentation === "emilio" ? "image-container-state-selected" : ""}`}>
-              <img onClick={e => setPresentation("emilio")} className='staff-images-state' src="https://imageup.me/images/183a02e7-0f4d-4db5-9ffe-827770010171.jpeg" alt="Emilio" />
+              <img onMouseEnter={e => setPresentation("emilio")} className='staff-images-state' src="https://imageup.me/images/183a02e7-0f4d-4db5-9ffe-827770010171.jpeg" alt="Emilio" />
             </div>
             <div className={`image-container-state ${presentation === "esteban" ? "image-container-state-selected" : ""}`}>
-              <img onClick={e => setPresentation("esteban")} className='staff-images-state' src="https://firebasestorage.googleapis.com/v0/b/photos-app-ticketspasss.appspot.com/o/FB_IMG_1671797306287.jpg?alt=media&token=76268249-0517-4139-9ac3-e5ea11619342" alt="Esteban" />
+              <img onMouseEnter={e => setPresentation("esteban")} className='staff-images-state' src="https://firebasestorage.googleapis.com/v0/b/photos-app-ticketspasss.appspot.com/o/FB_IMG_1671797306287.jpg?alt=media&token=76268249-0517-4139-9ac3-e5ea11619342" alt="Esteban" />
             </div>
             <div className={`image-container-state ${presentation === "bruno" ? "image-container-state-selected" : ""}`}>
-              <img onClick={e => setPresentation("bruno")} className='staff-images-state' src="https://avatars.githubusercontent.com/u/108221247?v=4" alt="Bruno" />
+              <img onMouseEnter={e => setPresentation("bruno")} className='staff-images-state' src="https://avatars.githubusercontent.com/u/108221247?v=4" alt="Bruno" />
             </div>
             <div className={`image-container-state ${presentation === "alejandro" ? "image-container-state-selected" : ""}`}>
-              <img onClick={e => setPresentation("alejandro")} className='staff-images-state' src="https://avatars.githubusercontent.com/u/99702721?v=4" alt="Alejandro" />
+              <img onMouseEnter={e => setPresentation("alejandro")} className='staff-images-state' src="https://avatars.githubusercontent.com/u/99702721?v=4" alt="Alejandro" />
             </div>
           </div>
           <div>
@@ -39,7 +41,7 @@ export default function ModuleOne() {
               {presentation === "ivan" &&
                 <>
                   <h2>Iván Gutiérrez</h2>
-                  <p>Programador MERN</p>
+                  <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
                     <a href="https://www.linkedin.com/in/ivan-gutierrez-castro/" target="_blank">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
@@ -54,7 +56,7 @@ export default function ModuleOne() {
               {presentation === "emilio" &&
                 <>
                   <h2>Emilio Lubo</h2>
-                  <p>Programador MERN</p>
+                  <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
                   <a href="https://www.linkedin.com/in/emilio-daniel-lubo-83a444220/" target="_blank">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
@@ -68,7 +70,7 @@ export default function ModuleOne() {
               {presentation === "esteban" &&
                 <>
                   <h2>Esteban Fonseca</h2>
-                  <p>Programador MERN</p>
+                  <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
                     <a href="https://github.com/Estebanfonseca" target="_blank">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
@@ -79,7 +81,7 @@ export default function ModuleOne() {
               {presentation === "bruno" &&
                 <>
                   <h2>Bruno Buonassisa</h2>
-                  <p>Programador MERN</p>
+                  <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
                   <a href="https://www.linkedin.com/in/bruno-buonassisa-9b8691230/" target="_blank">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
@@ -93,7 +95,7 @@ export default function ModuleOne() {
               {presentation === "alejandro" &&
                 <>
                   <h2>Alejandro Sanchez</h2>
-                  <p>Programador MERN</p>
+                  <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
                   <a href="https://www.linkedin.com/in/alejandro-sanchez-22a19b250/" target="_blank">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />

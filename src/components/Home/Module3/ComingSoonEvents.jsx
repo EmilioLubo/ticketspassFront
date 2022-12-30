@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import '../Module2/TopArtist.css'
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 export default function ComingSoonEvents() {
     const {t} = useTranslation()
@@ -18,12 +19,11 @@ export default function ComingSoonEvents() {
         getConcerts()
     }, [])
     async function getConcerts() {
-        const response = await fetch(`${BASE_URL}/api/concerts`)
-        const data = await response.json()
-        // Here you can manage the total of artists you want to show - BB
-        const artists = data.response.slice(0, 6)
-        // Avoid promise setting a state after component unmount - BB
-        setData(artists)
+        try {
+            const response = await axios.get(`${BASE_URL}/api/concerts?limit=6`)
+            const artists = response.data.response;
+            setData(artists)
+        } catch {}
     }
     return (
         <>
