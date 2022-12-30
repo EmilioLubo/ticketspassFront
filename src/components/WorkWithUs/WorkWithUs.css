@@ -43,6 +43,7 @@
     height: 100%;
     filter: blur(2.1px) grayscale(100%);
     display: flex;
+    transition: all 0.3s linear;
 }
 .image-container-state-selected{
     filter: blur(0) grayscale(0);

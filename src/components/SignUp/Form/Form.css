@@ -133,6 +133,14 @@
     border-color: rgb(150, 150, 200);
 }
 
+.inputGroup-active label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    background-color: white
+}
+
 .bar{
     width: 200px;
 }

@@ -18,16 +18,17 @@ export default function Profile() {
     // Redux
     let dispatch = useDispatch()
     let { reLogin, updateUser } = userActions
-    let { user, token, photo } = useSelector(store => store.user)
+    let { user, token } = useSelector(store => store.user)
     let userId = user.id
 
     // Orders
     const [orders, setOrders] = useState([])
 
     async function getOrdersData(id, token) {
-        let data = await axios.get(`${BASE_URL}/api/orders?id=${id}`, { headers: { 'Authorization': `Bearer ${token}` } })
-        setOrders(data.data.response)
-        console.log(orders)
+        try {
+            let data = await axios.get(`${BASE_URL}/api/orders?id=${id}`, { headers: { 'Authorization': `Bearer ${token}` } })
+            setOrders(data.data.response)
+        }catch {}
     }
 
     // Refs
@@ -75,7 +76,7 @@ export default function Profile() {
 
         // Alert
         Swal.fire({
-            title: 'Perfil Actualizado!',
+            title: 'Profile updated',
             icon: 'success',
             confirmButtonText: 'OK'
         })
@@ -102,7 +103,7 @@ export default function Profile() {
 
         // Alert
         Swal.fire({
-            title: 'Contraseña Actualizada!',
+            title: 'Password Updated',
             icon: 'success',
             confirmButtonText: 'OK'
         })
@@ -141,11 +142,11 @@ export default function Profile() {
                                                 userId,
                                             }
 
-                                            let update = await dispatch(updateUser(data))   
-                                            setPhotoState(update.payload.response.photo)
+                                            let update = await dispatch(updateUser(data)).unwrap()  
+                                            setPhotoState(update.response.photo)
 
                                             Swal.fire({
-                                                title: 'Photo Updated!',
+                                                title: t("photo_updated"),
                                                 icon: 'success',
                                                 confirmButtonText: 'OK'
                                             })
@@ -169,16 +170,16 @@ export default function Profile() {
                         </div>
                         <div className="Profile-Block-Container-2">
                             <div className="Profile-Internal-Block2">
-                                <h6 onClick={e => setState("details")}>User Details</h6>
+                                <h6 onClick={e => setState("details")}>{t("profile_details")}</h6>
                             </div>
                             <div className="Profile-Internal-Block2">
-                                <h6 onClick={e => setState("changePwd")}>Change Password</h6>
+                                <h6 onClick={e => setState("changePwd")}>{t("user_pass")}</h6>
                             </div>
+                            {/* <div className="Profile-Internal-Block2">
+                                <h6 onClick={e => setState("activity")}>{t("user_ac")}</h6>
+                            </div> */}
                             <div className="Profile-Internal-Block2">
-                                <h6 onClick={e => setState("activity")}>Activity</h6>
-                            </div>
-                            <div className="Profile-Internal-Block2">
-                                <h6 onClick={e => setState("orders")}>Orders</h6>
+                                <h6 onClick={e => setState("orders")}>{t("user_or")}</h6>
                             </div>
                         </div>
                     </div>
@@ -187,59 +188,59 @@ export default function Profile() {
                             {state === "details" &&
                                 <>
                                     <div className="title-profile pb-5">
-                                        <h2>Profile Details</h2>
+                                        <h2>{t("profile_details")}</h2>
                                     </div>
                                     <div className="personal-data gap-2">
                                         <p className="personal-data-p"> <HiOutlineMail /> {user.email}</p>
                                         <p className="personal-data-p"> <FaRegUser /> {user.name} {user.lastName}</p>
                                         <p className="personal-data-p"><FaBirthdayCake /> {user.birthDate.split("T")[0]}</p>
-                                        <button className='btn-design-profile' onClick={e => setState("editprofile")}>Edit profile</button>
+                                        <button className='btn-design-profile' onClick={e => setState("editprofile")}>{t("edit_profile")}</button>
                                     </div>
                                 </>
                             }
                             {state === "editprofile" &&
                                 <>
                                     <div className="title-profile">
-                                        <h2>Profile Details</h2>
+                                        <h2>{t("profile_details")}</h2>
                                     </div>
                                     <div className="personal-data">
                                         <label htmlFor="">
-                                            Name:
+                                            {t("name")}:
                                             <input type="text" ref={refName} defaultValue={user.name} placeholder={user.name} />
                                         </label>
                                         <label htmlFor="">
-                                            Last Name:
+                                            {t("Lname")}:
                                             <input type="text" ref={refLastName} defaultValue={user.lastName} placeholder={user.lastName} />
                                         </label>
                                         <label htmlFor="">
-                                            Email:
+                                            {t("email")}:
                                             <input type="text" ref={refEmail} defaultValue={user.email} placeholder={user.email} />
                                         </label>
                                         <label htmlFor="">
-                                            Birth Date:
+                                            {t("birth")}:
                                             <input type="date" ref={refBirthDate} defaultValue={user.birthDate} placeholder={user.birthDate} />
                                         </label>
                                         <div>
-                                            <button className='btn-design-profile' onClick={e => setState("details")}>Cancel</button>
-                                            <button className='btn-design-profile' onClick={e => handleEditProfile(e)}>Confirm Changes</button>
+                                            <button className='btn-design-profile' onClick={e => setState("details")}>{t("cancel")}</button>
+                                            <button className='btn-design-profile' onClick={e => handleEditProfile(e)}>{t("confirm_changes")}</button>
                                         </div>
                                     </div>
                                 </>
                             }
                             {state === "changePwd" &&
                                 <div className="title-profile">
-                                    <h2>Profile Details</h2>
+                                    <h2>{t("user_pass")}</h2>
                                     <label htmlFor="">
-                                        Old Password
+                                        {t("old_password")}
                                         <input type="password" />
                                     </label>
                                     <label htmlFor="">
-                                        New Password
-                                        <input type="password" ref={refPassword} placeholder="Example!1552" />
+                                        {t("new_password")}
+                                        <input type="password" ref={refPassword} placeholder="******" />
                                     </label>
                                     <label htmlFor="">
-                                        Repeat the New Password
-                                        <input type="password" ref={refPassword2} placeholder="Example!1552" />
+                                        {t("repeat_new_password")}
+                                        <input type="password" ref={refPassword2} placeholder="******" />
                                     </label>
                                     <div>
                                         <button className='btn-design-profile' onClick={e => {
@@ -251,7 +252,7 @@ export default function Profile() {
                                                 })
                                             }
                                         }}
-                                        >Save new Password
+                                        >{t("save_new_password")}
                                         </button>
                                     </div>
                                 </div>
@@ -288,7 +289,7 @@ export default function Profile() {
                             {state === "orders" &&
                                 <>
                                     <div className="title-profile">
-                                        <h2>My Orders</h2>
+                                        <h2>{t("user_or")}</h2>
                                     </div>
                                     <div className="scroll-orders">
                                         {orders.map((order) => {
