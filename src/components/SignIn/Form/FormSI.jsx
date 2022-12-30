@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import '../../SignUp/Form/Form.css'
 import { useDispatch } from 'react-redux'
 import userActions from "../../../redux/actions/userActions";
+import cartActions from "../../../redux/actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import { SocialIcon } from 'react-social-icons';
 import { useTranslation } from "react-i18next";
@@ -11,6 +12,7 @@ export default function Form() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { login } = userActions
+    const { getCart } = cartActions
     const emailRef = useRef()
     const passwordRef = useRef()
     const formRef = useRef()
@@ -27,6 +29,8 @@ export default function Form() {
             let res = await dispatch(login(userValue)).unwrap()
             let {response, success, message} = res
             if(success){
+                let headers = { headers: { Authorization: `Bearer ${response.token}` } };
+                dispatch(getCart({ headers }));
                 Swal.fire({
                     title: '¡Success!',
                     html: message,

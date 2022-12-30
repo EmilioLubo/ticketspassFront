@@ -7,20 +7,23 @@ import { faCartShopping, faCalendar, faMapSigns, faMusic } from "@fortawesome/fr
 import { BASE_URL } from "../../api/url";
 import "./Concert.css";
 import { Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import cartActions from "../../redux/actions/cartActions";
 
 export default function Concert() {
   const { id } = useParams();
   const [concert, setConcert] = useState(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-  const [items, setItems] = useState([]);
   const { online, token } = useSelector(state => state.user);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { cart } = useSelector(store => store.cart);
+  const dispatch = useDispatch();
+  const { addToCart: addToCartAction } = cartActions;
 
   useEffect(() => {
     getData(id);
@@ -36,32 +39,17 @@ export default function Concert() {
     } finally {
       setLoading(false);
     }
-    await getCart();
-  };
-
-  const getCart = async () => {
-    if (online) {
-      let headers = { headers: { Authorization: `Bearer ${token}` } };
-      try {
-        let res = await axios.get(`${BASE_URL}/api/carts`, headers);
-        console.log(res);
-        setItems(res.data.response.items);
-      } catch {
-        setItems([]);
-      }
-    }
   };
 
   const addToCart = async data => {
     if (online) {
       let headers = { headers: { Authorization: `Bearer ${token}` } };
-      try {
-        let res = await axios.post(`${BASE_URL}/api/carts`, { concertId: data._id, quantity: 1 }, headers);
-        setItems(res.data.response.items);
-      } catch (error) {
+      let body = { concertId: data._id, quantity: 1 };
+      let res = await dispatch(addToCartAction({ body, headers })).unwrap();
+      if (!res.success) {
         Swal.fire({
           title: "Error",
-          text: error.response ? error.response.data.message || error.response.data : error.message,
+          text: res.message,
           icon: "error",
         });
       }
@@ -129,12 +117,12 @@ export default function Concert() {
               <Button
                 variant="main"
                 onClick={() => addToCart(concert)}
-                disabled={items.some(
+                disabled={cart?.items.some(
                   product => product.categoryName === concert.category.name && product.concertId === concert._id
                 )}
               >
                 <FontAwesomeIcon icon={faCartShopping} />{" "}
-                {items.some(
+                {cart?.items.some(
                   product => product.categoryName === concert.category.name && product.concertId === concert._id
                 )
                   ? t("added")

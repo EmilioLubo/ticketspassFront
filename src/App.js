@@ -12,6 +12,7 @@ import NewArtist from "./pages/NewArtist/NewArtist";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./components/SignIn/Form/FormSI";
 import userActions from "./redux/actions/userActions";
+import cartActions from "./redux/actions/cartActions";
 import Concert from "./pages/Concert/Concert"
 import AdminLayout from "./layouts/Admin/AdminLayout/AdminLayout";
 import AdminHome from "./pages/AdminHome/AdminHome";
@@ -33,6 +34,7 @@ import WorkWithUs from "./pages/WorkWithUs/WorkWithUs";
 export default function App() {
   const dispatch = useDispatch()
   const { reLogin } = userActions
+  const { getCart } = cartActions
   const {online, role} = useSelector(state => state.user)
   const [loading, setLoading] = useState(true)
 
@@ -44,7 +46,11 @@ export default function App() {
 let isLoading = async() => {
   const token = JSON.parse(localStorage.getItem("token"))
       if (token) {
-          await dispatch(reLogin(token.token.user)).unwrap()
+          let res = await dispatch(reLogin(token.token.user)).unwrap()
+          if(res.success) {
+            let headers = { headers: { Authorization: `Bearer ${res.response.token}` } };
+              await dispatch(getCart({ headers })).unwrap();
+          }
       }
       setLoading(false)
 }

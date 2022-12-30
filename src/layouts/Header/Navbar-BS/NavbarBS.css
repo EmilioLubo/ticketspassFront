@@ -141,6 +141,15 @@
     }
 }
 
+.Nabvar-number-cart {
+    background-color: var(--main-color);
+    color: whitesmoke;
+    font-weight: bold;
+    border-radius: 100%;
+    font-size: 14px;
+    padding: 0px 7px;
+}
+
 @media screen and (max-width: 400px) {
     .menu{
         top: 320px;

@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import adminVenuesActions from "../actions/AdminVenuesActions";
-const { getInitialData, deleteVenue } = adminVenuesActions;
+const { getInitialVenues, deleteVenue } = adminVenuesActions;
 
 const initialState = {
   venues: [],
@@ -10,7 +10,7 @@ const initialState = {
 
 const adminVenuesReducer = createReducer(initialState, builder => {
   builder
-    .addCase(getInitialData.fulfilled, (state, action) => {
+    .addCase(getInitialVenues.fulfilled, (state, action) => {
       if (action.payload.success) {
         return { ...state, venues: action.payload.response, loading: false };
       } else {

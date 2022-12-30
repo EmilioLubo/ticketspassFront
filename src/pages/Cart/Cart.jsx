@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Product from "../../components/Product/Product";
 import Swal from "sweetalert2";
 import { Link as Navlink } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../api/url";
-import { useSelector } from "react-redux";
-import { Spinner, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import "./Cart.css"
+import cartActions from "../../redux/actions/cartActions";
+import "./Cart.css";
 
 export default function Cart() {
   const { t } = useTranslation();
   const { token } = useSelector(store => store.user);
-  const [loading, setLoading] = useState(true);
-  const [cart, setCart] = useState(null);
-
-  useEffect(() => {
-    getCart();
-    // eslint-disable-next-line
-  }, []);
-
-  const getCart = async () => {
-    let headers = { headers: { Authorization: `Bearer ${token}` } };
-    try {
-      let res = await axios.get(`${BASE_URL}/api/carts`, headers);
-      setCart(res.data.response);
-      setLoading(false);
-    } catch {
-      setLoading(false);
-    }
-  };
+  const { cart } = useSelector(store => store.cart);
+  const dispatch = useDispatch();
+  const { emptyCart } = cartActions;
 
   const goToPayment = async () => {
     try {
@@ -54,16 +40,18 @@ export default function Cart() {
     }).then(result => {
       if (result.isConfirmed) {
         let headers = { headers: { Authorization: `Bearer ${token}` } };
-        axios
-          .delete(`${BASE_URL}/api/carts/${cart._id}`, headers)
+        dispatch(emptyCart({ cartId: cart._id, headers }))
           .then(res => {
-            Swal.fire("Deleted!", "Your cart has been cleared.", "success");
-            setCart(null);
+            if (res.payload.success) {
+              Swal.fire("Deleted!", "Your cart has been cleared.", "success");
+            } else {
+              Swal.fire("Error", res.payload.message, "error");
+            }
           })
           .catch(error => {
             Swal.fire(
               "Error",
-              error.response ? error.response.data.message || error.resonse.data : error.message,
+              error.message,
               "error"
             );
           });
@@ -71,15 +59,9 @@ export default function Cart() {
     });
   }
 
-  return loading ? (
-    <div className="d-flex justify-content-center">
-      <Spinner className="text-center" />
-    </div>
-  ) : !!cart ? (
+  return cart ? (
     <>
-      <h1 className="text-black text-center fs-1 fw-bold mt-5">
-        {t("shop_cart")}
-      </h1>
+      <h1 className="text-black text-center fs-1 fw-bold mt-5">{t("shop_cart")}</h1>
       <Table className="mt-3" responsive="md">
         <thead>
           <tr>
@@ -92,7 +74,7 @@ export default function Cart() {
         </thead>
         <tbody>
           {cart.items.map(item => (
-            <Product setCart={setCart} item={item} key={item._id} />
+            <Product item={item} key={item._id} />
           ))}
           <tr>
             <td className="text-main text-center fw-semibold" colSpan="4">
@@ -102,18 +84,19 @@ export default function Cart() {
           </tr>
         </tbody>
       </Table>
-        <div className="d-flex justify-content-around mt-4 mb-5 flex-wrap flex-column flex-md-row gap-3 align-items-center">
-          <button style={{width: "200px"}} className="btn btn-danger mx-3" onClick={clearCart}>
-            {t("cart_emp")}
+      <div className="d-flex justify-content-around mt-4 mb-5 flex-wrap flex-column flex-md-row gap-3 align-items-center">
+        <button style={{ width: "200px" }} className="btn btn-danger mx-3" onClick={clearCart}>
+          {t("cart_emp")}
+        </button>
+        <Navlink to="/">
+          <button style={{ width: "200px" }} className="btn btn-primary mx-3">
+            {t("cart_ke")}
           </button>
-          <Navlink to="/">
-            <button  style={{width: "200px"}}className="btn btn-primary mx-3">{t("cart_ke")}</button>
-          </Navlink>
-          <button style={{width: "200px"}} className="btn btn-success mx-3" onClick={goToPayment}>
-            {t("pay")}
-          </button>
-        </div>
-      
+        </Navlink>
+        <button style={{ width: "200px" }} className="btn btn-success mx-3" onClick={goToPayment}>
+          {t("pay")}
+        </button>
+      </div>
     </>
   ) : (
     <div className="text-center p-5">
