@@ -22,6 +22,7 @@ export default function NavbarBS() {
   let togglerRef = useRef(null)
   let collapseRef = useRef(null)
   const [isHome, setIsHome] = useState(true);
+  const {cart} = useSelector(store => store.cart)
 
     useEffect(() => {
         document.addEventListener("mouseup", (e) => {
@@ -104,8 +105,9 @@ export default function NavbarBS() {
                             </div>
                         ) : (
                             <>
-                                <Link className="nav-btn-cart" to="cart">
-                                    <img src="../assets/img/cart.png" alt="cart" width="40px" />
+                                <Link className="nav-btn-cart position-relative" to="cart">
+                                    <img src="../assets/img/cart.png" alt="cart" width="40px"  />
+                                    {cart?.items?.length && <div className="position-absolute top-0 end-0 Nabvar-number-cart">{cart.items.length}</div>}
                                 </Link>
                                 <div className="navDrop d-flex flex-column align-items-center justify-content-center gap-1 pt-4">
                                     <img className="navDrop user__img" src={photo} width="40" alt="userLoged" onKeyUp={(e) => (e.key === "Escape" ? setOpen(false) : "")} onClick={() => setOpen(!open)} />
