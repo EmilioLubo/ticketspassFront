@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -32,6 +33,7 @@ import Chat from "./pages/Chat/Chat";
 import WorkWithUs from "./pages/WorkWithUs/WorkWithUs";
 
 export default function App() {
+  dotenv.config();
   const dispatch = useDispatch()
   const { reLogin } = userActions
   const { getCart } = cartActions

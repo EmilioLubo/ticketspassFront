@@ -30,8 +30,10 @@ export default function NavbarBS() {
             if (typeof e.target.className === "string") {
                 if (!e.target.className.includes("navColapse") && !e.target.className.includes("navDrop") && !e.target.className.includes("navbar-toggler") && !e.target.className.includes("navbar-toggler-icon")) {
                     setOpen(false);
-                    if (collapseRef.current.classList.contains("show")) {
-                        togglerRef.current.click();
+                    if(collapseRef){
+                        if (collapseRef.current.classList.contains("show")) {
+                            togglerRef.current.click();
+                        }
                     }
                 }
             }

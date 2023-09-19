@@ -24,7 +24,7 @@ export default function ModuleOne() {
               <img className='staff-images-state' src="https://avatars.githubusercontent.com/u/37635593?v=4" alt="Ivan" onMouseEnter={e => setPresentation("ivan")} />
             </div>
             <div className={`image-container-state ${presentation === "emilio" ? "image-container-state-selected" : ""}`}>
-              <img onMouseEnter={e => setPresentation("emilio")} className='staff-images-state' src="https://imageup.me/images/183a02e7-0f4d-4db5-9ffe-827770010171.jpeg" alt="Emilio" />
+              <img onMouseEnter={e => setPresentation("emilio")} className='staff-images-state' src="https://i.ibb.co/c6VCNBX/Emilio-Lubo.jpg" alt="Emilio" />
             </div>
             <div className={`image-container-state ${presentation === "esteban" ? "image-container-state-selected" : ""}`}>
               <img onMouseEnter={e => setPresentation("esteban")} className='staff-images-state' src="https://firebasestorage.googleapis.com/v0/b/photos-app-ticketspasss.appspot.com/o/FB_IMG_1671797306287.jpg?alt=media&token=76268249-0517-4139-9ac3-e5ea11619342" alt="Esteban" />
