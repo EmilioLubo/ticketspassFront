@@ -43,11 +43,11 @@ export default function ModuleOne() {
                   <h2>Iván Gutiérrez</h2>
                   <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
-                    <a href="https://www.linkedin.com/in/ivan-gutierrez-castro/" target="_blank">
+                    <a href="https://www.linkedin.com/in/ivan-gutierrez-castro/" target="_blank" rel="noreferrer">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
                     </a>
                    
-                    <a href="https://github.com/ivangutierrez92" target="_blank">
+                    <a href="https://github.com/ivangutierrez92" target="_blank" rel="noreferrer">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
                     </a>
                   </div>
@@ -58,10 +58,10 @@ export default function ModuleOne() {
                   <h2>Emilio Lubo</h2>
                   <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
-                  <a href="https://www.linkedin.com/in/emilio-daniel-lubo-83a444220/" target="_blank">
+                  <a href="https://www.linkedin.com/in/emilio-daniel-lubo-83a444220/" target="_blank" rel="noreferrer">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
                     </a>
-                    <a href="https://github.com/EmilioLubo" target="_blank">
+                    <a href="https://github.com/EmilioLubo" target="_blank" rel="noreferrer">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
                     </a>
                   </div>
@@ -72,7 +72,7 @@ export default function ModuleOne() {
                   <h2>Esteban Fonseca</h2>
                   <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
-                    <a href="https://github.com/Estebanfonseca" target="_blank">
+                    <a href="https://github.com/Estebanfonseca" target="_blank" rel="noreferrer">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
                     </a>
                   </div>
@@ -83,10 +83,10 @@ export default function ModuleOne() {
                   <h2>Bruno Buonassisa</h2>
                   <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
-                  <a href="https://www.linkedin.com/in/bruno-buonassisa-9b8691230/" target="_blank">
+                  <a href="https://www.linkedin.com/in/bruno-buonassisa-9b8691230/" target="_blank" rel="noreferrer">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
                     </a>
-                    <a href="https://github.com/BrunoBuona" target="_blank">
+                    <a href="https://github.com/BrunoBuona" target="_blank" rel="noreferrer">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
                     </a>
                   </div>
@@ -97,10 +97,10 @@ export default function ModuleOne() {
                   <h2>Alejandro Sanchez</h2>
                   <p>{t("mern_developer")}</p>
                   <div className='wwu-social-icons'>
-                  <a href="https://www.linkedin.com/in/alejandro-sanchez-22a19b250/" target="_blank">
+                  <a href="https://www.linkedin.com/in/alejandro-sanchez-22a19b250/" target="_blank" rel="noreferrer">
                       <SocialIcon className="icon-social" network="linkedin" bgColor="lightblue" fgColor="black" style={{ height: 40, width: 40 }} />
                     </a>
-                    <a href="https://github.com/AleeDario" target="_blank">
+                    <a href="https://github.com/AleeDario" target="_blank" rel="noreferrer">
                     <SocialIcon className="icon-social" network="github" bgColor="#a9a9a9" fgColor="white" style={{ height: 40, width: 40 }} />
                     </a>
                   </div>
